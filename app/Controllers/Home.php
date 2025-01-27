@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\UserModel;
 
 class Home extends BaseController
 {
     public function index(): string
     {
-        //return view('welcome_message');
-        return view('home/index');
+        $data = [
+            'loginmessage' => ''
+        ];
+
+        return view('home/index', $data);
     }
+
+
 
 
     // TESTS
@@ -16,7 +22,13 @@ class Home extends BaseController
 
     // general test
     public function testgeneral() {
-        return WRITEPATH.'database\core.db';
+        //return WRITEPATH.'database\core.db';
+        $data = [
+            'name' => "Mohamad Shahrim",
+        ];
+
+
+        return var_dump($data);
     }
 
     // just to test reading from db
@@ -45,5 +57,17 @@ class Home extends BaseController
         }
 
         $db->close();       
+    }
+
+    // just to tell model
+    public function testmodel() {
+        $userModel = new UserModel();
+        $result = $userModel->where('username', 'bane')->find();
+        echo $result[0]['username'];
+    }
+
+    // hash test
+    public function testhash() {
+        return password_hash("1234", PASSWORD_DEFAULT);
     }
 }
