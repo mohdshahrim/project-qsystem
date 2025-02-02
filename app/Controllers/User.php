@@ -91,9 +91,6 @@ class User extends BaseController
             $userModel = new UserModel();
             $data = $userModel->where('username', session('username'))->first();
             
-            //$session = \Config\Services::session();
-            //$session->setFlashdata('password_message', '...');
-
             echo view('header');
             echo view('user/account', $data);
             echo view('footer');

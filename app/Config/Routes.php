@@ -15,7 +15,15 @@ $routes->get('/user/home', 'User::pageHome');
 $routes->get('/user/account', 'User::pageUserAccount');
 $routes->post('/user/password/update', 'User::postPasswordUpdate'); //STANDARD
 
+// Claimmaker app
+$routes->get('/claimmaker', 'Claimmaker::index');
+$routes->post('/claimmaker/c', 'Claimmaker::postCreate');
+$routes->get('/claimmaker/r/{:num}', 'Claimmaker::pageRead/$1');
+$routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 
+
+// Qrat
+$routes->get('/qrat', 'Qrat::index');
 
 // TEST
 $routes->get('/testgeneral', 'Home::testgeneral');

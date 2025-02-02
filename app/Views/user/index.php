@@ -19,10 +19,17 @@
                 </div>
             </a>
 
-            <a class="div-app" href="/itdb">
+            <a class="div-app" href="/qrat">
                 <div class="app-info">
-                    <b>ITDB</b>
-                    <p class="app-info-p">IT inventory database & management</p>
+                    <b>Qrat</b>
+                    <p class="app-info-p">simple Remote Administration Tool</p>
+                </div>
+            </a>
+
+            <a class="div-app" href="/fragment">
+                <div class="app-info">
+                    <b>Fragment</b>
+                    <p class="app-info-p">IT inventory database</p>
                 </div>
             </a>
         </div>

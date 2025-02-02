@@ -3,6 +3,9 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 
+define('QSYSTEM_VERSION_NO', '0.1');
+define('QSYSTEM_VERSION_DATE', '01/02/2025');
+
 class Home extends BaseController
 {
     public function index(): string
@@ -23,12 +26,13 @@ class Home extends BaseController
     // general test
     public function testgeneral() {
         //return WRITEPATH.'database\core.db';
-        $data = [
-            'name' => "Mohamad Shahrim",
-        ];
+        $client = service('curlrequest');
+        //$response = $client->request('GET', 'http://172.16.17.22:226/c', ['json' => ['command' => 'cmd,/c,dir,C:\quartermaster']]);
+        //$response = $client->request('GET', 'http://172.16.17.22:226/c', ['json' => ['command' => 'cmd,/c,copy,\\\\172.16.17.172\\ftp_scan\\q3.exe,C:\\quartermaster\\tehee.exe']]);
+        $response = $client->request('GET', 'http://172.16.17.22:226/c', ['json' => ['command' => 'nircmd,changesysvolume,-3000']]);
 
-
-        return var_dump($data);
+        echo $response->getHeaderLine('Content-Type');
+        echo $response->getBody();
     }
 
     // just to test reading from db

@@ -68,15 +68,16 @@
 </head>
 <body>
     <div class="div-left">
-        <h4 style="text-align:center;">Qsystem</h4>
+        <h4 style="text-align:center;">Claimmaker</h4>
         <div class="div-menu">
-            <p><a href="/user/home">home</a></p>
-            <p><a href="/admin">admin</a></p>
-            <p><a href="/user/account">account</a></p>
-            <p><a href="/about">about</a></p>
+            <p><a href="/claimmaker">create claim</a></p>
+            <p><a href="/claimmaker/history">history</a></p>
+            <p><a href="/claimmaker/about">about</a></p>
 
             <div class="spacer"></div>
+            <div class="spacer"></div>
 
+            <p><a href="/user/home">return to Qsystem</a></p>
             <p><a href="/user/logout">logout</a></p>
         </div>
     </div>

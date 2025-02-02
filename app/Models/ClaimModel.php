@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
-class UserModel extends Model
+class ClaimModel extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'claims';
     protected $primaryKey       = 'rowid';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','username', 'email', 'password_hash','fullname','designation','telno','role'];
+    protected $allowedFields    = ['owner','no','name','designation','department','purpose','date','type_entertainment','type_travelling','type_miscellaneous','claim_items','created_at','updated_at','deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -22,7 +21,7 @@ class UserModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -44,6 +43,4 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    
 }

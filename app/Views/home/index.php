@@ -37,6 +37,6 @@
             </tr>
         </form>
     </table>
-    <p style="font-size:0.8em;">version <?php echo "version_no"; ?> (<?php echo "version_date"; ?>)</p>
+    <p style="font-size:0.8em;">version <?php echo QSYSTEM_VERSION_NO; ?> (<?php echo QSYSTEM_VERSION_DATE; ?>)</p>
 </body>
 </html>
