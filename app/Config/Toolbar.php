@@ -35,13 +35,13 @@ class Toolbar extends BaseConfig
      */
     public array $collectors = [
         Timers::class,
-        Database::class,
+        //Database::class,
         Logs::class,
         Views::class,
         // \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
         Files::class,
         Routes::class,
-        Events::class,
+        //Events::class,
     ];
 
     /**
