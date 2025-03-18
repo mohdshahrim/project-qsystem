@@ -19,6 +19,7 @@ $routes->post('/admin/user-accounts/update', 'Admin::postUserAccountsUpdate');
 $routes->get('/admin/user-accounts/confirm-delete/(:num)', 'Admin::pageUserAccountsConfirmDelete/$1');
 $routes->post('/admin/user-accounts/delete', 'Admin::postUserAccountsDelete');
 $routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');
+$routes->post('/admin/restore-db', 'Admin::postRestoreDB');
 
 
 // User operations

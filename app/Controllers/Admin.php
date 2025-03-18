@@ -5,17 +5,6 @@ use App\Models\UserModel;
 
 class Admin extends BaseController
 {
-    /*
-        if (session('role')!="admin")
-        {
-            return redirect()->to('/user/home');
-        }
-        else
-        {
-            
-        }
-    */
-
     public function index()
     {
         if (!session('username'))
@@ -312,6 +301,27 @@ class Admin extends BaseController
             {
                 log_message('debug', 'delete_files() failed');
                 $data['type'] = 'error';
+            }
+        }
+    }
+
+    // replace core.db with backup.db
+    public function postRestoreDB()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                helper('filesystem');
+                copy('../writable/database/backup.db', '../writable/database/core.db');
             }
         }
     }

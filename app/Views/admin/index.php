@@ -9,11 +9,25 @@
     <button onclick="clearAllSession()">clear</button>
 
     <div class="spacer"></div>
+
+    <h3>Restore DB</h3>
+    <p>CAREFUL. This feature is only to assist in testing.</p>
+    <p>The system will replace the current DB with backup DB.</p>
+    <p>Backup DB may not be up-to-date.</p>
+    <button onclick="restoreDB()">restore db</button>
+
+    <div class="spacer"></div>
 </div>
 
 <script>
 function clearAllSession() {
     fetch('/admin/clear-all-session', {
+        method: 'POST',
+    })
+}
+
+function restoreDB() {
+    fetch('/admin/restore-db', {
         method: 'POST',
     })
 }
