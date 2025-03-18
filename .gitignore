@@ -46,6 +46,12 @@ $RECYCLE.BIN/
 Vagrantfile
 
 #-------------------------
+# Database
+#-------------------------
+writable/database/*
+!writable/database/index.html
+
+#-------------------------
 # Temporary Files
 #-------------------------
 writable/cache/*
