@@ -19,6 +19,26 @@
             <td>email</td>
             <td><?php echo $email;?></td>
         </tr>
+        <tr>
+            <td>fullname</td>
+            <td><?php echo $fullname;?></td>
+        </tr>
+        <tr>
+            <td>department</td>
+            <td><?php echo $department;?></td>
+        </tr>
+        <tr>
+            <td>designation</td>
+            <td><?php echo $designation;?></td>
+        </tr>
+        <tr>
+            <td>telno</td>
+            <td><?php echo $telno;?></td>
+        </tr>
+        <tr>
+            <td>role</td>
+            <td><?php echo $role;?></td>
+        </tr>
     </table>
 
     <div class="spacer"></div>
