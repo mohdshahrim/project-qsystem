@@ -9,7 +9,7 @@
 
 var defaultData = {
     "userDetail": {
-        "name": "Lalang",
+        "name": "test",
         "designation": "Supervisor",
         "department": "Endorsement",
 		"purpose": "for Endorsement activity",
@@ -20,7 +20,7 @@ var defaultData = {
     },
     "claimDetail": [
 		{
-			"WONo": "SBU/2024/00255",
+			"WONo": "one",
 			"requireWO": true,
 			"departureDate": "2024-03-01",
 			"departureTime": "0800",
@@ -31,6 +31,17 @@ var defaultData = {
 				{"type": "subsistence", "quantity": 14.5, "rate": 5000, "value": 72500},
 				{"type": "ticket", "mode": "Express", "ticketno": "Q123", "origin": "Sibu", "destination": "Kapit", "or": false, "value": 3500},
 				{"type": "reload", "telco": "Celcom", "serialno": "111606020011440063", "telno": "0198390727", "monthyear": "2024-03", "value": 1000}
+			]
+		},
+		{
+			"WONo": "two",
+			"requireWO": true,
+			"departureDate": "2024-03-01",
+			"departureTime": "0800",
+			"returnDate": "2024-03-15",
+			"returnTime": "1700",
+			"items" : [
+				{"type": "lodging", "quantity": 13, "rate": 3000, "value": 39000},
 			]
 		},
 	],
@@ -84,43 +95,55 @@ function writeTableItems() {
     var tempItem = `` // to contain item
 
     const totalWO = defaultData.claimDetail.length
-    //totalWO=0 //TEST: to simulate 0 WO
+    //const totalWO=2 //TEST: to simulate 0 WO
 
-    if (totalWO>0) {
+    if (totalWO==0) {
+        middlePart = `<tr><td class="itemtable-td" colspan="5">please add WO first</td></tr>`
+    } else {
         for (var i=0; i<totalWO; i++) {
-            const totalItem = defaultData.claimDetail[i].items.length
-            //const totalItem = 1 //to simulate n items
+            var totalItem = defaultData.claimDetail[i].items.length
+            //const totalItem = 0 //to simulate n items
 
-            if (totalItem>0) {
-                // if the WO has at least 1 item
-                // WO part
-                tempSet += `<tr><td rowspan="` + (totalItem+1) + `" class="itemtable-td">` + defaultData.claimDetail[i].WONo + `</td></tr>`
-
-                    // first item part
-                    //tempItem += `<tr><td class="itemtable-td" colspan="4">` + writeDescription(i,0) + `</td></tr>`
-                    // index begin after 0 because the first item is above
-                    for (j=0; j<totalItem; j++) {
-                        tempItem += `<tr><td class="itemtable-td" colspan="4">` + writeDescription(i,j) + `</td></tr>`
-                    }
-
-                tempSet += tempItem
-            } else {
-                // NOTE: perfect
+            if (totalItem==0) {
                 // if the WO has no item
                 tempSet += `
                 <tr>
                     <td class="itemtable-td">` + defaultData.claimDetail[i].WONo + `</td>
-                    <td class="itemtable-td" colspan="4"> please add item </td>
+                    <td class="itemtable-td" colspan="4" style="text-align:center;"> please add item </td>
                 </tr>`
+            } else {
+                // if the WO has at least 1 item
+                // WO part
+                tempSet += `<tr><td rowspan="` + totalItem + `" class="itemtable-td">` + defaultData.claimDetail[i].WONo + `</td>`
+
+                // first item part
+                tempSet += `<td class="itemtable-td">` + writeDescription(i,0) + `</td>`
+                tempSet += `<td class="itemtable-td">` + writeQuantity(i,0) + `</td>`
+                tempSet += `<td class="itemtable-td itemtable-td-value">` + writeValue(i,0) + `</td>`
+                tempSet += `<td class="itemtable-td">` + writeOption(i,0) + `</td>`
+                tempSet += `</tr>`
+                // close the above first item altogether with its WO part
+
+                // index begin after 0 because the first item already covered
+                for (j=1; j<totalItem; j++) {
+                    tempItem += `<tr>`
+                    tempItem += `<td class="itemtable-td">` + writeDescription(i,j) + `</td>`
+                    tempItem += `<td class="itemtable-td">` + writeQuantity(i,j) + `</td>`
+                    tempItem += `<td class="itemtable-td itemtable-td-value">` + writeValue(i,j) + `</td>`
+                    tempItem += `<td class="itemtable-td">` + writeOption(i,j) + `</td>`
+                    tempItem += `</tr>`
+                }
+
+                tempSet += tempItem
+                tempItem = `` //reset
             }
 
-            // put all into middlePart
+            // flush into middlePart
             middlePart += tempSet
+            tempSet = `` // reset
         }
-    } else {
-        middlePart += `<tr><td class="itemtable-td" colspan="5">please add WO first</td></tr>`
     }
-    
+
     document.getElementById(tableid).innerHTML = upperPart + middlePart + lowerPart
 }
 
@@ -142,12 +165,59 @@ function writeDescription(WOIndex, itemIndex) {
         case "reload":
             description = writeReload(WOIndex, itemIndex)
             break
+        case "other":
+            description = defaultData.claimDetail[WOIndex].items[itemIndex].desc
+            break
         default:
             description = "NO DESCRIPTION FOR THIS TYPE (" + itemType + ")"
             break
     }
 
     return description
+}
+
+// generate quantity figure if any
+function writeQuantity(WOIndex, itemIndex) {
+    const itemType = defaultData.claimDetail[WOIndex].items[itemIndex].type
+    var quantity = ""
+
+    switch(itemType) {
+        case "subsistence":
+            quantity = defaultData.claimDetail[WOIndex].items[itemIndex].quantity + " days"
+            break
+        case "lodging":
+            quantity = defaultData.claimDetail[WOIndex].items[itemIndex].quantity + " nights"
+            break
+        case "ticket":
+            quantity = "-"
+            break
+        case "reload":
+            quantity = "-"
+            break
+        case "other":
+            quantity = "-"
+            break
+        default:
+            quantity = "NO DESCRIPTION FOR THIS TYPE (" + itemType + ")"
+            break
+    }
+
+    return quantity
+}
+
+// generate value figure if any
+function writeValue(WOIndex, itemIndex) {
+    const item = defaultData.claimDetail[WOIndex].items[itemIndex]
+    var val = ""
+
+    val = toRM(item.value)
+
+    return val
+}
+
+// generate option if any
+function writeOption(WOIndex, itemIndex) {
+    return "option"
 }
 
 // generate subsistence description
@@ -166,11 +236,33 @@ function writeLodging(WOIndex, itemIndex) {
 
 // generate ticket description
 function writeTicket(WOIndex, itemIndex) {
-    return ""
+    const item = defaultData.claimDetail[WOIndex].items[itemIndex]
+    var description = ""
+
+    switch(item.or) {
+        case true:
+            description = item.mode + " fare " + item.origin + " to " + item.destination + ", Official Receipt No. " + item.ticketno
+            break
+        case false:
+            description = item.mode + " fare " + item.origin + " to " + item.destination + ", Ticket No. " + item.ticketno
+            break
+    }
+    
+    return description
 }
 
 // generate reload description
 function writeReload(WOIndex, itemIndex) {
+    const item = defaultData.claimDetail[WOIndex].items[itemIndex]
+    var description = ""
+
+    description = "Being claim for " + item.telno + " reload coupon for " + item.monthyear + ", Receipt no. " + item.serialno + " " + item.telno
+
+    return description
+}
+
+// generate other description
+function writeOther(WOIndex, itemIndex) {
     return ""
 }
 
@@ -183,6 +275,22 @@ function toRM(value) {
 function toCent(value) {
 	return parseInt(value*100)
 }
+
+// below is functions dedicated to handle open dialog
+// purpose: CREATE (for new), READ (for updating)
+
+// WO dialog
+function dialogWO(purpose,woIndex,itemIndex) {
+    const id = "dwo"
+    switch(purpose) {
+        case "CREATE":
+            document.getElementById(id).show()
+            break
+        case "READ":
+            break
+    }
+}
+
 
 // TEST
 console.log("tehee")

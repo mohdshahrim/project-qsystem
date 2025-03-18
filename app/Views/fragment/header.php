@@ -68,11 +68,9 @@
 </head>
 <body>
     <div class="div-left">
-        <h4 style="text-align:center;">Claimmaker</h4>
+        <h4 style="text-align:center;">Fragment</h4>
         <div class="div-menu">
-            <p><a href="/claimmaker">create claim</a></p>
-            <p><a href="/claimmaker/history">history</a></p>
-            <p><a href="/claimmaker/about">about</a></p>
+            <p><a href="/fragment">home</a></p>
 
             <div class="spacer"></div>
             <div class="spacer"></div>

@@ -4,15 +4,30 @@
         border:1px solid black;
         padding:1em;
     }
+    /* for RM value alignment */
+    .itemtable-td-value {
+        text-align: right;
+    }
     .itemtable-tdlast {
         border:1px solid black;
         padding:1em; 
+    }
+    /* dialog for items */
+    .ditem[open] {
+        top:50%;
+        left:50%;
+        position:absolute;
+        transform: translate(-50%, -50%);
+        width:200px;
     }
 </style>
 
 
 <div class="div-right">
-    <h2>Create claim</h2>
+    <h2>Create Claim</h2>
+    <p>save no: -</p>
+
+    <div class="spacer"></div>
 
     <table>
         <!-- claimant's name -->
@@ -73,12 +88,12 @@
         <!-- the add buttons -->
         <tr>
             <td colspan="2">
-                <button onclick="addWo()" id="button-wo">add WO</button>
-                <button onclick="addSubsistence()" id="button-subsistence">add Subsistence</button>
-                <button onclick="addLodging()" id="button-lodging">add Lodging</button>
-                <button onclick="addTicket()" id="button-ticket">add Ticket</button>
-                <button onclick="addReload()" id="button-reload">add Reload</button>
-                <button onclick="addOther()" id="button-other">add Other</button>
+                <button onclick="dialogWO('CREATE',null,null)" id="button-wo">add WO</button>
+                <button onclick="dialogSubsistence()" id="button-subsistence">add Subsistence</button>
+                <button onclick="dialogLodging()" id="button-lodging">add Lodging</button>
+                <button onclick="dialogTicket()" id="button-ticket">add Ticket</button>
+                <button onclick="dialogReload()" id="button-reload">add Reload</button>
+                <button onclick="dialogOther()" id="button-other">add Other</button>
             </td>
         </tr>
 
@@ -92,14 +107,6 @@
                         <td class="itemtable-td">#</td>
                         <td class="itemtable-td">Value</td>
                         <td class="itemtable-td">Option</td>
-                    </tr>
-
-                    <tr>
-                        <td class="itemtable-td">SBU/0001/2024</td>
-                        <td class="itemtable-td">Subsistence allowance </td>
-                        <td class="itemtable-td">#</td>
-                        <td class="itemtable-td">75.00</td>
-                        <td class="itemtable-td">x =</td>
                     </tr>
 
                     <!-- last row, display grand total -->
@@ -139,3 +146,14 @@
     </table>
 
 </div>
+
+<div class="spacer"></div>
+<div class="spacer"></div>
+
+<!-- storing dialog elements below -->
+<dialog id="dwo" class="ditem">
+    <p>Greetings, one and all!</p>
+    <form method="dialog">
+        <button>OK</button>
+    </form>
+</dialog>

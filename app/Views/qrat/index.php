@@ -17,14 +17,15 @@
     <div class="spacer"></div>
 
     <div class="div-device">
-        <p class="device-ip">172.16.17.22 (Torchic)</p>
-        <a href="/qrat/device/torchic/nircmd">nircmd</a>
-        <form method="post" action="/qrat/device/torchic/custom">
-            <p>custom command <input type="text" name="command"></p>
+        <p class="device-ip">Custom command</p>
+        <p>use comma to separate argument</p>
+        <form method="post" action="/qrat/c">
+            <p>target <input type="text" name="target"></p>
+            <p>command <input type="text" name="command"></p>
+            <button type="submit">okay</button>
         </form>
     </div>
 
-    <div class="div-device">
-        <p class="device-ip">172.16.17.20</p>
-    </div>
+    <p><?php echo $getheader;?></p>
+    <p><?php echo $getbody;?></p>
 </div>
