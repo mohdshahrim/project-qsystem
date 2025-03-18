@@ -186,17 +186,20 @@ class Admin extends BaseController
                 if ($this->request->getMethod() === 'POST' && $this->validate([
                     'returnlink' => 'required',
                     'id' => 'required',
-                    'designation' => 'required',
                 ]))
                 {
                     $returnlink = $this->request->getPost('returnlink');
 
                     $id = $this->request->getPost('id');
-                    $designation = $this->request->getPost('designation');
 
                     $userModel = new UserModel();
                     $data = [
-                        'designation' => $designation,
+                        'email' => $this->request->getPost('email'),
+                        'fullname' => $this->request->getPost('fullname'),
+                        'department' => $this->request->getPost('department'),
+                        'designation' => $this->request->getPost('designation'),
+                        'telno' => $this->request->getPost('telno'),
+                        'role' => $this->request->getPost('role'),
                     ];
                     
                     if ($userModel->update($id, $data))
