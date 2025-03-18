@@ -222,6 +222,74 @@ class Admin extends BaseController
         }
     }
 
+    public function pageUserAccountsConfirmDelete($userid)
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                $userModel = new UserModel();
+                $user = $userModel->find($userid);
+                $data = ['user'=>$user];
+
+                echo view('admin/header');
+                echo view('admin/user-accounts-confirmdelete', $data);
+                echo view('admin/footer');
+            }
+        }
+    }
+
+
+    public function postUserAccountsDelete()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                if ($this->request->getMethod() === 'POST' && $this->validate([
+                    'id' => 'required',
+                ]))
+                {
+                    $id = $this->request->getPost('id');
+
+                    $userModel = new UserModel();
+                    
+                    if ($userModel->delete($id))
+                    {
+                        // delete success
+                        $successPage = [
+                            'message' => "delete success!",
+                            'returnlink' => "/admin/user-accounts/",
+                        ];
+
+                        //return redirect()->to($returnlink);
+                        echo view('admin/header');
+                        echo view('admin/user-accounts-success', $successPage);
+                        echo view('admin/footer');
+
+                    }
+
+                }
+            }
+        }
+    }
+
     // clear all session
     public function postClearAllSession()
     {

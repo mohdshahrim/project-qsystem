@@ -16,7 +16,10 @@ $routes->get('/admin/user-accounts/new', 'Admin::pageUserAccountsNew');
 $routes->post('/admin/user-accounts/create', 'Admin::postUserAccountsCreate');
 $routes->get('/admin/user-accounts/edit/(:num)', 'Admin::pageUserAccountsEdit/$1');
 $routes->post('/admin/user-accounts/update', 'Admin::postUserAccountsUpdate');
+$routes->get('/admin/user-accounts/confirm-delete/(:num)', 'Admin::pageUserAccountsConfirmDelete/$1');
+$routes->post('/admin/user-accounts/delete', 'Admin::postUserAccountsDelete');
 $routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');
+
 
 // User operations
 $routes->post('/user/login', 'User::postLogin');

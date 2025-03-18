@@ -1,7 +1,6 @@
 <div class="div-right">
-    <h2>Update user account</h2>
-
-    <p><?= $message;?></p>
+    <p>Status</p>
+    <h1><?= $message;?></h1>
     <p>Click <a href="<?= $returnlink;?>">here</a> to return</p>
     
 </div>

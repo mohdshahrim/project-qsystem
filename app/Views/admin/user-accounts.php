@@ -33,7 +33,7 @@
             <td class="acctable-td">created_at</td>
             <td class="acctable-td">updated_at</td>
             <td class="acctable-td">deleted_at</td>
-            <td class="acctable-td">edit</td>
+            <td class="acctable-td">options</td>
         </tr>
         <?php foreach ($accounts as $row):?>
             <tr>
@@ -49,7 +49,11 @@
                 <td class="acctable-td"><?= $row['created_at'] ?></td>
                 <td class="acctable-td"><?= $row['updated_at'] ?></td>
                 <td class="acctable-td"><?= $row['deleted_at'] ?></td>
-                <td class="acctable-td"><a href="/admin/user-accounts/edit/<?= $row['id'] ?>">edit</a></td>
+                <td class="acctable-td">
+                    <a href="/admin/user-accounts/edit/<?= $row['id'] ?>">edit</a>
+                    &nbsp;
+                    <a href="/admin/user-accounts/confirm-delete/<?= $row['id'] ?>">delete</a>
+                </td>
             </tr>
         <?php endforeach ?>
     </table>
