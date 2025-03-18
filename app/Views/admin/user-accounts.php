@@ -15,7 +15,7 @@
 
     <div class="spacer"></div>
 
-    <a href="/admin/user-accounts/create"><button>new account</button></a>
+    <a href="/admin/user-accounts/new"><button>new account</button></a>
 
     <div class="spacer"></div>
 

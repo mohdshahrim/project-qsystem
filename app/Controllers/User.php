@@ -3,6 +3,9 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 
+define('QSYSTEM_VERSION_NO', '0.1');
+define('QSYSTEM_VERSION_DATE', '01/02/2025');
+
 class User extends BaseController
 {
     // NOTE: FUNCTION NAMING
@@ -35,23 +38,24 @@ class User extends BaseController
                 {
                     // initialiaze a session
                     $session = \Config\Services::session();
-                    $session->set(['username'=>$username]);
+                    $role = $result['role'];
+                    $session->set(['username'=>$username, 'role'=>$role]);
 
                     return redirect()->to('/user/home');
                 }
                 else
                 {
-                    echo view('home/index', ['loginmessage' => 'Password is invalid']);
+                    echo view('home/login', ['loginmessage' => 'Password is invalid']);
                 }
             }
             else
             {
-                echo view('home/index', ['loginmessage' => 'Username is invalid']);
+                echo view('home/login', ['loginmessage' => 'Username is invalid']);
             }
         }
         else
         {
-            echo view('home/index', ['loginmessage' => 'Input is required']);
+            echo view('home/login', ['loginmessage' => 'Input is required']);
         }
     }
 
@@ -72,9 +76,9 @@ class User extends BaseController
         }
         else
         {
-            echo view('header');
+            echo view('user/header');
             echo view('user/index');
-            echo view('footer');
+            echo view('user/footer');
         }
     }
 
@@ -90,10 +94,10 @@ class User extends BaseController
         {
             $userModel = new UserModel();
             $data = $userModel->where('username', session('username'))->first();
-            
-            echo view('header');
+
+            echo view('user/header');
             echo view('user/account', $data);
-            echo view('footer');
+            echo view('user/footer');
         }
     }
 
@@ -119,6 +123,7 @@ class User extends BaseController
                 $username = session('username');
                 
                 // NOTE: don't forget rowid - always use select('rowid, *)
+                // NOTE: perhaps rowid is not that important, we can skip
                 $result = $userModel->select('rowid, *')->where('username', $username)->first();
 
                 // verify old password
@@ -135,7 +140,7 @@ class User extends BaseController
                             'password_hash' => password_hash($confirmpassword, PASSWORD_DEFAULT),
                         ];
                         
-                        if ($userModel->update($result['rowid'], $data))
+                        if ($userModel->update($result['id'], $data))
                         {
                             // password update successfully
                             $session->setFlashdata('password_message', 'password updated successfully');

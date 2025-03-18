@@ -12,7 +12,8 @@ $routes->get('/login', 'Home::pageLogin');
 // system admin operations
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/user-accounts', 'Admin::pageUserAccounts');
-$routes->get('/admin/user-accounts/create', 'Admin::pageUserAccountsCreate');
+$routes->get('/admin/user-accounts/new', 'Admin::pageUserAccountsNew');
+$routes->post('/admin/user-accounts/create', 'Admin::postUserAccountsCreate');
 $routes->get('/admin/user-accounts/edit/(:num)', 'Admin::pageUserAccountsEdit/$1');
 $routes->post('/admin/user-accounts/update', 'Admin::postUserAccountsUpdate');
 $routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');

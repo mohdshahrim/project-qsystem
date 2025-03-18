@@ -64,7 +64,7 @@ class Admin extends BaseController
         }
     }
 
-    public function pageUserAccountsCreate()
+    public function pageUserAccountsNew()
     {
         if (!session('username'))
         {
@@ -80,8 +80,65 @@ class Admin extends BaseController
             else
             {
                 echo view('admin/header');
-                echo view('admin/user-accounts-create');
+                echo view('admin/user-accounts-new');
                 echo view('admin/footer');
+            }
+        }
+    }
+
+    public function postUserAccountsCreate()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                if ($this->request->getMethod() === 'POST' && $this->validate([
+                    'username' => 'required',
+                    'email' => 'required',
+                    'role' => 'required',
+                ]))
+                {
+                    $userModel = new UserModel();
+
+                    $data = [
+                        'username' => $this->request->getPost('username'),
+                        'email' => $this->request->getPost('email'),
+                        'password_hash' => password_hash("1234", PASSWORD_DEFAULT),
+                        'fullname' => $this->request->getPost('fullname'),
+                        'department' => $this->request->getPost('department'),
+                        'designation' => $this->request->getPost('designation'),
+                        'telno' => $this->request->getPost('telno'),
+                        'role' => $this->request->getPost('role'),
+                    ];
+
+                    // Inserts data and returns inserted row's primary key
+                    $userModel->insert($data);
+
+                    // Returns inserted row's primary key
+                    $id = $userModel->getInsertID();
+
+                    // craft return link to user account edit
+                    $returnlink = "/admin/user-accounts/edit/".$id;
+
+                    // update success
+                    $successPage = [
+                        'message' => "create success!",
+                        'returnlink' => $returnlink,
+                    ];
+
+                    //return redirect()->to($returnlink);
+                    echo view('admin/header');
+                    echo view('admin/user-accounts-success', $successPage);
+                    echo view('admin/footer');
+                }
             }
         }
     }
@@ -145,7 +202,6 @@ class Admin extends BaseController
                     if ($userModel->update($id, $data))
                     {
                         // update success
-                        log_message('error', $returnlink);
                         $successPage = [
                             'message' => "update success!",
                             'returnlink' => $returnlink,
@@ -157,12 +213,6 @@ class Admin extends BaseController
                         echo view('admin/footer');
 
                     }
-
-                }
-                else
-                {
-                    // POST failed
-                    return redirect()->to($returnlink);
 
                 }
             }
