@@ -7,6 +7,15 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/', 'Home::index');
+$routes->get('/login', 'Home::pageLogin');
+
+// system admin operations
+$routes->get('/admin', 'Admin::index');
+$routes->get('/admin/user-accounts', 'Admin::pageUserAccounts');
+$routes->get('/admin/user-accounts/create', 'Admin::pageUserAccountsCreate');
+$routes->get('/admin/user-accounts/edit/(:num)', 'Admin::pageUserAccountsEdit/$1');
+$routes->post('/admin/user-accounts/update', 'Admin::postUserAccountsUpdate');
+$routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');
 
 // User operations
 $routes->post('/user/login', 'User::postLogin');
@@ -18,12 +27,15 @@ $routes->post('/user/password/update', 'User::postPasswordUpdate'); //STANDARD
 // Claimmaker app
 $routes->get('/claimmaker', 'Claimmaker::index');
 $routes->post('/claimmaker/c', 'Claimmaker::postCreate');
-$routes->get('/claimmaker/r/{:num}', 'Claimmaker::pageRead/$1');
+$routes->get('/claimmaker/r/(:alphanum)', 'Claimmaker::pageRead/$1');
 $routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 
+// Fragment system
+$routes->get('/fragment', 'Fragment::index');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
+$routes->post('/qrat/c', 'Qrat::postC');
 
 // TEST
 $routes->get('/testgeneral', 'Home::testgeneral');
