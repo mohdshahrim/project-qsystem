@@ -8,17 +8,19 @@ define('QSYSTEM_VERSION_DATE', '01/02/2025');
 
 class Home extends BaseController
 {
-    public function index(): string
+    public function index()
+    {
+        return view('home/index');
+    }
+
+    public function pageLogin()
     {
         $data = [
             'loginmessage' => ''
         ];
 
-        return view('home/index', $data);
+        return view('home/login', $data);
     }
-
-
-
 
     // TESTS
     // reserved for general testing only
