@@ -5,12 +5,14 @@
 
         <!-- div to contain array of app shortcuts -->
         <div class="div-appcontainer">
+            <?php if (env("ci_environment")==="production"): ?> 
             <a class="div-app" href="/claimmaker">
                 <div class="app-info">
                     <b>Claimmaker</b>
                     <p class="app-info-p">fast & easy way to create claim form</p>
                 </div>
             </a>
+            <?php endif ?>
 
             <?php if (session("role")=="admin"): ?>
             <a class="div-app" href="/claimmaker">
