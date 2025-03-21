@@ -1,6 +1,6 @@
 <main>
     <h3>Fragment</h3>
-    <p>Welcome to Fragment, painless IT inventory management</p>
+    <p>Welcome to Fragment, painless IT inventory database</p>
 
     <div class="spacer"></div>
 

@@ -14,7 +14,7 @@
             background-color: pink;
         }
         main {
-            padding: 0.5em;
+            padding: 0.5em 2em;
         }
 
         .spacer {
@@ -36,9 +36,13 @@
     <header>
         <a href="/user/home">< exit</a>
         &nbsp;
-        <a href="/user/home">main</a>
+        <a href="/fragment">main</a>
         &nbsp;
-        <a href="/user/home">office</a>
+        <a href="/fragment/pc">pc</a>
         &nbsp;
-        <a href="/user/home">about</a>
+        <a href="/fragment">device</a>
+        &nbsp;
+        <a href="/fragment">office</a>
+        &nbsp;
+        <a href="/fragment">about</a>
     </header>

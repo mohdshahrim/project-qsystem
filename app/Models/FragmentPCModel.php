@@ -5,9 +5,9 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 
-class FragmentDeviceModel extends Model
+class FragmentModel extends Model
 {
-    protected $table            = 'fragment_device';
+    protected $table            = 'fragment_pc';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -15,15 +15,18 @@ class FragmentDeviceModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id',
-        'type',
-        'serial_no',
-        'model',
-        'date_received',
-        'current_location',
-        'status',
-        'hosted_on',
-        'nickname',
+        'hostname',
+        'ip_address',
+        'os',
+        'cpu_model',
+        'cpu_no',
+        'monitor_model',
+        'monitor_no',
+        'hosted_devices',
+        'user',
+        'department',
         'notes',
+        'office',
         'created_at',
         'updated_at',
         'deleted_at'

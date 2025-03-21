@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
-class FragmentModel extends Model
+class FragmentOfficeModel extends Model
 {
-    protected $table            = 'fragment_pc';
+    protected $table            = 'fragment_office';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','hostname','ip_address','os','cpu_model','cpu_no','monitor_model','monitor_no','hosted_devices','user','department','notes','office','created_at','updated_at','deleted_at'];
+    protected $allowedFields    = [];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -44,6 +43,4 @@ class FragmentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    
 }

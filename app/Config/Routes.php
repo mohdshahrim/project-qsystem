@@ -36,7 +36,8 @@ $routes->get('/claimmaker/r/(:alphanum)', 'Claimmaker::pageRead/$1');
 $routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 
 // Fragment system
-$routes->get('/fragment', 'Fragment::index');
+$routes->get('/fragment', 'FragmentController::index');
+$routes->get('/fragment/pc', 'FragmentController::pagePC');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
