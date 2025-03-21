@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\FragmentPCModel;
 
 class FragmentController extends BaseController
 {
@@ -46,8 +47,12 @@ class FragmentController extends BaseController
             }
             else
             {
+                $fragmentPCModel = new FragmentPCModel();
+                $result = $fragmentPCModel->findAll();
+                $data = ['pc'=>$result];
+
                 echo view('fragment/header');
-                echo view('fragment/pc');
+                echo view('fragment/pc', $data);
                 echo view('fragment/footer');
             }
         }

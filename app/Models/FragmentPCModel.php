@@ -5,7 +5,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 
-class FragmentModel extends Model
+class FragmentPCModel extends Model
 {
     protected $table            = 'fragment_pc';
     protected $primaryKey       = 'id';
