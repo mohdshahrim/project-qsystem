@@ -10,7 +10,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::pageLogin');
 
 // system admin operations
-$routes->get('/admin', 'Admin::index');
+$routes->get('/admin', 'AdminController::index');
 $routes->get('/admin/user-accounts', 'Admin::pageUserAccounts');
 $routes->get('/admin/user-accounts/new', 'Admin::pageUserAccountsNew');
 $routes->post('/admin/user-accounts/create', 'Admin::postUserAccountsCreate');
