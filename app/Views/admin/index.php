@@ -17,6 +17,14 @@
     <button onclick="restoreDB()">restore db</button>
 
     <div class="spacer"></div>
+
+    <h3>Backup DB (opposite of Restore DB)</h3>
+    <p>CAREFUL. This feature is only to assist in testing.</p>
+    <p>The system will replace the backup DB with current DB.</p>
+    <p>Current DB may not be stable.</p>
+    <button onclick="backupDB()">backup db</button>
+
+    <div class="spacer"></div>
 </div>
 
 <script>
@@ -28,6 +36,12 @@ function clearAllSession() {
 
 function restoreDB() {
     fetch('/admin/restore-db', {
+        method: 'POST',
+    })
+}
+
+function backupDB() {
+    fetch('/admin/backup-db', {
         method: 'POST',
     })
 }

@@ -325,4 +325,24 @@ class Admin extends BaseController
             }
         }
     }
+
+    public function postBackupDB()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                helper('filesystem');
+                copy('../writable/database/core.db', '../writable/database/backup.db');
+            }
+        }
+    }
 }
