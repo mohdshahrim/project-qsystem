@@ -11,16 +11,16 @@ $routes->get('/login', 'Home::pageLogin');
 
 // system admin operations
 $routes->get('/admin', 'AdminController::index');
-$routes->get('/admin/user-accounts', 'Admin::pageUserAccounts');
-$routes->get('/admin/user-accounts/new', 'Admin::pageUserAccountsNew');
-$routes->post('/admin/user-accounts/create', 'Admin::postUserAccountsCreate');
-$routes->get('/admin/user-accounts/edit/(:num)', 'Admin::pageUserAccountsEdit/$1');
-$routes->post('/admin/user-accounts/update', 'Admin::postUserAccountsUpdate');
-$routes->get('/admin/user-accounts/confirm-delete/(:num)', 'Admin::pageUserAccountsConfirmDelete/$1');
-$routes->post('/admin/user-accounts/delete', 'Admin::postUserAccountsDelete');
-$routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');
-$routes->post('/admin/restore-db', 'Admin::postRestoreDB');
-$routes->post('/admin/backup-db', 'Admin::postBackupDB');
+$routes->get('/admin/user-accounts', 'AdminController::pageUserAccounts');
+$routes->get('/admin/user-accounts/new', 'AdminController::pageUserAccountsNew');
+$routes->post('/admin/user-accounts/create', 'AdminController::postUserAccountsCreate');
+$routes->get('/admin/user-accounts/edit/(:num)', 'AdminController::pageUserAccountsEdit/$1');
+$routes->post('/admin/user-accounts/update', 'AdminController::postUserAccountsUpdate');
+$routes->get('/admin/user-accounts/confirm-delete/(:num)', 'AdminController::pageUserAccountsConfirmDelete/$1');
+$routes->post('/admin/user-accounts/delete', 'AdminController::postUserAccountsDelete');
+$routes->post('/admin/clear-all-session', 'AdminController::postClearAllSession');
+$routes->post('/admin/restore-db', 'AdminController::postRestoreDB');
+$routes->post('/admin/backup-db', 'AdminController::postBackupDB');
 
 // User operations
 $routes->post('/user/login', 'User::postLogin');
