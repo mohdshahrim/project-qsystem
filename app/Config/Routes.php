@@ -22,7 +22,6 @@ $routes->post('/admin/clear-all-session', 'Admin::postClearAllSession');
 $routes->post('/admin/restore-db', 'Admin::postRestoreDB');
 $routes->post('/admin/backup-db', 'Admin::postBackupDB');
 
-
 // User operations
 $routes->post('/user/login', 'User::postLogin');
 $routes->get('/user/logout', 'User::postLogout');
@@ -39,6 +38,10 @@ $routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 // Fragment system
 $routes->get('/fragment', 'FragmentController::index');
 $routes->get('/fragment/pc', 'FragmentController::pagePC');
+$routes->get('/fragment/pc/view/(:num)', 'FragmentController::pagePCView/$1');
+$routes->get('/fragment/pc/edit/(:num)', 'FragmentController::pagePCEdit/$1');
+$routes->post('/fragment/pc/update', 'FragmentController::postPCUpdate');
+$routes->post('/fragment/pc/delete', 'FragmentController::postPCDelete');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');

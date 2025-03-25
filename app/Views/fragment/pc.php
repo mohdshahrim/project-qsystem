@@ -9,16 +9,19 @@
     padding: 0.2em;
     border: 1px solid black;
 }
+.table-pc tr:hover {
+    background-color: lightgray;
+}
 </style>
 <main>
-    <h3>PC</h3>
-    <p>list of all PC</p>
+    <h3>PC (all)</h3>
 
     <table class="table-pc">
         <tr>
             <th>id</th>
             <th>hostname</th>
             <th>ip address</th>
+            <th>os</th>
             <th>cpu model</th>
             <th>cpu no</th>
             <th>monitor model</th>
@@ -27,12 +30,14 @@
             <th>user</th>
             <th>department</th>
             <th>notes</th>
+            <th>options</th>
         </tr>
         <?php foreach ($pc as $row):?>
             <tr>
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['hostname'] ?></td>
                 <td><?= $row['ip_address'] ?></td>
+                <td><?= $row['os'] ?></td>
                 <td><?= $row['cpu_model'] ?></td>
                 <td><?= $row['cpu_no'] ?></td>
                 <td><?= $row['monitor_model'] ?></td>
@@ -41,7 +46,11 @@
                 <td><?= $row['user'] ?></td>
                 <td><?= $row['department'] ?></td>
                 <td><?= $row['notes'] ?></td>
-
+                <td>
+                    <a href="/fragment/pc/view/<?= $row['id'] ?>">view</a>
+                    &nbsp;
+                    <a href="/fragment/pc/edit/<?= $row['id'] ?>">edit</a>
+                </td>
             </tr>
         <?php endforeach ?>
     </table>
