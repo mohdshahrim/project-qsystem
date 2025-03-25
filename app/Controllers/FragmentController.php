@@ -58,6 +58,85 @@ class FragmentController extends BaseController
         }
     }
 
+    public function pagePCNew()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                echo view('fragment/header');
+                echo view('fragment/pc-new');
+                echo view('fragment/footer');
+            }
+        }
+    }
+
+    public function postPCCreate()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                if ($this->request->getMethod() === 'POST' && $this->validate([
+                    'cpu_no' => 'required',
+                ]))
+                {
+                    $fragmentPCModel = new FragmentPCModel();
+
+                    $data = [
+                        'hostname' => $this->request->getPost('hostname'),
+                        'ip_address' => $this->request->getPost('ip_address'),
+                        'os' => $this->request->getPost('os'),
+                        'cpu_model' => $this->request->getPost('cpu_model'),
+                        'cpu_no' => $this->request->getPost('cpu_no'),
+                        'monitor_model' => $this->request->getPost('monitor_model'),
+                        'monitor_no' => $this->request->getPost('monitor_no'),
+                        'hosted_devices' => $this->request->getPost('hosted_devices'),
+                        'user' => $this->request->getPost('user'),
+                        'department' => $this->request->getPost('department'),
+                        'notes' => $this->request->getPost('notes'),
+                        'office' => $this->request->getPost('office'),
+                    ];
+
+                    // Inserts data and returns inserted row's primary key
+                    $fragmentPCModel->insert($data);
+
+                    // Returns inserted row's primary key
+                    $id = $fragmentPCModel->getInsertID();
+
+                    // craft return link to pc view page
+                    $returnlink = "/fragment/pc/edit/".$id;
+
+                    // update success
+                    $successPage = [
+                        'message' => "PC create success!",
+                        'returnlink' => $returnlink,
+                    ];
+
+                    echo view('fragment/header');
+                    echo view('fragment/fragment-success', $successPage);
+                    echo view('fragment/footer');
+                }
+            }
+        }
+    }
+
     public function pagePCView($pcid)
     {
         if (!session('username'))

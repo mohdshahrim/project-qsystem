@@ -16,6 +16,8 @@
 <main>
     <h3>PC (all)</h3>
 
+    <p><a href="/fragment/pc/new"><button>new PC</button></a></p>
+
     <table class="table-pc">
         <tr>
             <th>id</th>

@@ -38,6 +38,8 @@ $routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 // Fragment system
 $routes->get('/fragment', 'FragmentController::index');
 $routes->get('/fragment/pc', 'FragmentController::pagePC');
+$routes->get('/fragment/pc/new', 'FragmentController::pagePCNew');
+$routes->post('/fragment/pc/create', 'FragmentController::postPCCreate');
 $routes->get('/fragment/pc/view/(:num)', 'FragmentController::pagePCView/$1');
 $routes->get('/fragment/pc/edit/(:num)', 'FragmentController::pagePCEdit/$1');
 $routes->post('/fragment/pc/update', 'FragmentController::postPCUpdate');

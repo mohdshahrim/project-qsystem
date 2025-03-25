@@ -29,7 +29,7 @@ class FragmentPCModel extends Model
         'office',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected bool $allowEmptyInserts = false;
