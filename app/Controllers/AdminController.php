@@ -305,6 +305,28 @@ class AdminController extends BaseController
         }
     }
 
+    public function pageDatabase()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+            return redirect()->to('/');
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                echo view('admin/header');
+                echo view('admin/database');
+                echo view('admin/footer');
+            }
+        } 
+    }
+
     // replace core.db with backup.db
     public function postRestoreDB()
     {

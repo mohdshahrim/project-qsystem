@@ -19,8 +19,9 @@ $routes->post('/admin/user-accounts/update', 'AdminController::postUserAccountsU
 $routes->get('/admin/user-accounts/confirm-delete/(:num)', 'AdminController::pageUserAccountsConfirmDelete/$1');
 $routes->post('/admin/user-accounts/delete', 'AdminController::postUserAccountsDelete');
 $routes->post('/admin/clear-all-session', 'AdminController::postClearAllSession');
-$routes->post('/admin/restore-db', 'AdminController::postRestoreDB');
-$routes->post('/admin/backup-db', 'AdminController::postBackupDB');
+$routes->get('/admin/database', 'AdminController::pageDatabase');
+$routes->post('/admin/database/restore-db', 'AdminController::postRestoreDB');
+$routes->post('/admin/database/backup-db', 'AdminController::postBackupDB');
 
 // User operations
 $routes->post('/user/login', 'User::postLogin');

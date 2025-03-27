@@ -72,6 +72,7 @@
         <div class="div-menu">
             <p><a href="/admin">main</a></p>
             <p><a href="/admin/user-accounts">user accounts</a></p>
+            <p><a href="/admin/database">database</a></p>
 
             <div class="spacer"></div>
             <div class="spacer"></div>
