@@ -44,6 +44,10 @@ $routes->get('/fragment/pc/view/(:num)', 'FragmentController::pagePCView/$1');
 $routes->get('/fragment/pc/edit/(:num)', 'FragmentController::pagePCEdit/$1');
 $routes->post('/fragment/pc/update', 'FragmentController::postPCUpdate');
 $routes->post('/fragment/pc/delete', 'FragmentController::postPCDelete');
+$routes->get('/fragment/office', 'FragmentController::pageOffice');
+$routes->get('/fragment/office/edit/(:num)', 'FragmentController::pageOfficeEdit/$1');
+$routes->post('/fragment/office/update', 'FragmentController::postOfficeUpdate');
+
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');

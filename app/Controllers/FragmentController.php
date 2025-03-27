@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\FragmentPCModel;
+use App\Models\FragmentOfficeModel;
 
 class FragmentController extends BaseController
 {
@@ -241,4 +242,107 @@ class FragmentController extends BaseController
             }
         }
     }
+
+    // Fragment Office CRUD
+
+    public function pageOffice()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                $fragmentOfficeModel = new FragmentOfficeModel();
+                $result = $fragmentOfficeModel->findAll();
+                $data = ['office' => $result];
+
+                echo view('fragment/header');
+                echo view('fragment/office', $data);
+                echo view('fragment/footer');
+            }
+        }
+    }
+
+    public function pageOfficeEdit($id)
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                $fragmentOfficeModel = new FragmentOfficeModel();
+                $result = $fragmentOfficeModel->find($id);
+                $data = ['office' => $result];
+
+                echo view('fragment/header');
+                echo view('fragment/office-edit', $data);
+                echo view('fragment/footer');
+            }
+        }
+    }
+
+    public function postOfficeUpdate()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                if ($this->request->getMethod() === 'POST' && $this->validate([
+                    'id' => 'required',
+                ]))
+                {
+                    $fragmentOfficeModel = new FragmentOfficeModel();
+                    $id = $this->request->getPost('id');
+                    $returnlink = $this->request->getPost('returnlink');
+
+                    $data = [
+                        'id' => $id,
+                        'office_name' => $this->request->getPost('office_name'),
+                        'address' => $this->request->getPost('address'),
+                        'manager' => $this->request->getPost('manager'),
+                        'total_employee' => $this->request->getPost('total_employee'),
+                        'office_type' => $this->request->getPost('office_type'),
+                    ];
+
+                    if ($fragmentOfficeModel->update($id, $data))
+                    {
+                        // update success
+                        $successPage = [
+                            'message' => "Office update success!",
+                            'returnlink' => $returnlink,
+                        ];
+
+                        echo view('fragment/header');
+                        echo view('fragment/fragment-success', $successPage);
+                        echo view('fragment/footer');
+
+                    }
+                }
+            }
+        }
+    }
+
+
 }
