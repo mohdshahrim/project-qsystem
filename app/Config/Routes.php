@@ -49,6 +49,13 @@ $routes->get('/fragment/office', 'FragmentController::pageOffice');
 $routes->get('/fragment/office/edit/(:num)', 'FragmentController::pageOfficeEdit/$1');
 $routes->post('/fragment/office/update', 'FragmentController::postOfficeUpdate');
 
+$routes->get('/fragment/device', 'FragmentController::pageDevice');
+$routes->get('/fragment/device/new', 'FragmentController::pageDeviceNew');
+$routes->post('/fragment/device/create', 'FragmentController::postDeviceCreate');
+$routes->get('/fragment/device/view/(:num)', 'FragmentController::pageDeviceView/$1');
+$routes->get('/fragment/device/edit/(:num)', 'FragmentController::pageDeviceEdit/$1');
+$routes->post('/fragment/device/update', 'FragmentController::postDeviceUpdate');
+$routes->post('/fragment/device/delete', 'FragmentController::postDeviceDelete');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');

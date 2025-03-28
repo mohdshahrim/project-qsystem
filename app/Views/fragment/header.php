@@ -40,7 +40,7 @@
         &nbsp;
         <a href="/fragment/pc">pc</a>
         &nbsp;
-        <a href="/fragment">device</a>
+        <a href="/fragment/device">device</a>
         &nbsp;
         <a href="/fragment/office">office</a>
         &nbsp;

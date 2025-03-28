@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\FragmentPCModel;
 use App\Models\FragmentOfficeModel;
+use App\Models\FragmentDeviceModel;
 
 class FragmentController extends BaseController
 {
@@ -345,4 +346,127 @@ class FragmentController extends BaseController
     }
 
 
+    // Fragment Device CRUD
+
+    public function pageDevice()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                $fragmentDeviceModel = new FragmentDeviceModel();
+                $result = $fragmentDeviceModel->findAll();
+                $data = ['device' => $result];
+
+                echo view('fragment/header');
+                echo view('fragment/device', $data);
+                echo view('fragment/footer');
+            }
+        }
+    }
+
+    public function pageDeviceNew()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                echo view('fragment/header');
+                echo view('fragment/device-new');
+                echo view('fragment/footer'); 
+            }
+        }
+    }
+
+    public function postDeviceCreate()
+    {
+        if (!session('username'))
+        {
+            session()->destroy();
+        }
+        else
+        {
+            if (session('role')!="admin")
+            {
+                return redirect()->to('/user/home');
+            }
+            else
+            {
+                if ($this->request->getMethod() === 'POST' && $this->validate([
+                    'serial_no' => 'required',
+                ]))
+                {
+                    $fragmentDeviceModel = new FragmentDeviceModel();
+                    $fragmentPCModel = new FragmentPCModel();
+
+                    $data = [
+                        'type' => $this->request->getPost('type'),
+                        'serial_no' => $this->request->getPost('serial_no'),
+                        'model' => $this->request->getPost('model'),
+                        'date_received' => $this->request->getPost('date_received'),
+                        'current_location' => $this->request->getPost('current_location'),
+                        'status' => $this->request->getPost('status'),
+                        'hosted_on' => $this->request->getPost('hosted_on'),
+                        'nickname' => $this->request->getPost('nickname'),
+                        'notes' => $this->request->getPost('notes'),
+                    ];
+
+                    // Inserts data and returns inserted row's primary key
+                    $fragmentDeviceModel->insert($data);
+
+                    // Returns inserted row's primary key
+                    $id = $fragmentDeviceModel->getInsertID();
+
+                    // craft return link to pc view page
+                    $returnlink = "/fragment/device/edit/".$id;
+
+                    // update success
+                    $successPage = [
+                        'message' => "Device create success!",
+                        'returnlink' => $returnlink,
+                    ];
+
+                    echo view('fragment/header');
+                    echo view('fragment/fragment-success', $successPage);
+                    echo view('fragment/footer');
+                }    
+            }
+        }
+    }
+
+    public function pageDeviceView($id)
+    {
+
+    }
+
+    public function pageDeviceEdit($id)
+    {
+
+    }
+
+    public function postDeviceUpdate()
+    {
+
+    }
+
+    public function postDeviceDelete()
+    {
+
+    }
 }
