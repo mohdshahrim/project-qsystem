@@ -8,10 +8,6 @@ use App\Models\FragmentDeviceModel;
 
 class FragmentController extends BaseController
 {
-    // in the future, only specific admin role may access Fragment, example:
-    // "admin-1" instead of just "admin"
-    private $allowedRole = "admin";
-
     public function index()
     {
         echo view('fragment/header');
