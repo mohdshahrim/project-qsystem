@@ -375,23 +375,9 @@ class FragmentController extends BaseController
 
     public function pageDeviceNew()
     {
-        if (!session('username'))
-        {
-            session()->destroy();
-        }
-        else
-        {
-            if (session('role')!="admin")
-            {
-                return redirect()->to('/user/home');
-            }
-            else
-            {
-                echo view('fragment/header');
-                echo view('fragment/device-new');
-                echo view('fragment/footer'); 
-            }
-        }
+        echo view('fragment/header');
+        echo view('fragment/device-new');
+        echo view('fragment/footer');
     }
 
     public function postDeviceCreate()
