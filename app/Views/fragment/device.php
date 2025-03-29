@@ -25,6 +25,7 @@
             <th>serial no</th>
             <th>model</th>
             <th>date received</th>
+            <th>office</th>
             <th>current location</th>
             <th>status</th>
             <th>hosted on</th>
@@ -41,6 +42,7 @@
                 <td><?= $row['serial_no'] ?></td>
                 <td><?= $row['model'] ?></td>
                 <td><?= $row['date_received'] ?></td>
+                <td><?= $row['office'] ?></td>
                 <td><?= $row['current_location'] ?></td>
                 <td><?= $row['status'] ?></td>
                 <td><?= $row['hosted_on'] ?></td>

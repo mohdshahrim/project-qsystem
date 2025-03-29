@@ -44,6 +44,14 @@
                 </td>
             </tr>
 
+            <!-- office -->
+            <tr>
+                <td>office</td>
+                <td>
+                    <input type="text" name="office" value="<?= $device['office'] ?>"/>
+                </td>
+            </tr>
+
             <!-- current location -->
             <tr>
                 <td>current location</td>

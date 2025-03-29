@@ -53,6 +53,14 @@
             </td>
         </tr>
 
+        <!-- office -->
+        <tr>
+            <td>office</td>
+            <td>
+                <?= $device['office']?>
+            </td>
+        </tr>
+
         <!-- current location -->
         <tr>
             <td>current location</td>

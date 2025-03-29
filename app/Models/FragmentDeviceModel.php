@@ -20,6 +20,7 @@ class FragmentDeviceModel extends Model
         'model',
         'date_received',
         'current_location',
+        'office',
         'status',
         'hosted_on',
         'codename',
