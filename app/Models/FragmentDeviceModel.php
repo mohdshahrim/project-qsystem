@@ -22,7 +22,7 @@ class FragmentDeviceModel extends Model
         'current_location',
         'status',
         'hosted_on',
-        'nickname',
+        'codename',
         'notes',
         'created_at',
         'updated_at',

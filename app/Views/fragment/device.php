@@ -28,7 +28,7 @@
             <th>current location</th>
             <th>status</th>
             <th>hosted on</th>
-            <th>nickname</th>
+            <th>codename</th>
             <th>notes</th>
             <th>created at</th>
             <th>updated at</th>
@@ -44,7 +44,7 @@
                 <td><?= $row['current_location'] ?></td>
                 <td><?= $row['status'] ?></td>
                 <td><?= $row['hosted_on'] ?></td>
-                <td><?= $row['nickname'] ?></td>
+                <td><?= $row['codename'] ?></td>
                 <td><?= $row['notes'] ?></td>
                 <td><?= $row['created_at'] ?></td>
                 <td><?= $row['updated_at'] ?></td>

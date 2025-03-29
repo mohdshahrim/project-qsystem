@@ -1,25 +1,22 @@
-<style>
-.table-form {
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-.table-form tr th,td {
-    padding: 0.2em;
-}
-.table-form tr:hover {
-    background-color: lightgray;
-}
-</style>
 <main>
-    <h3>New Device</h3>
+    <h2>Update Device</h2>
 
-    <form method="post" action="/fragment/device/create">
-        <table class="table-form">
+    <form method="post" action="/fragment/device/update">
+        <table>
+            <tr>
+                <td>id</td>
+                <td>
+                    <?= $device['id']?>
+                    <input type="hidden" name="id" value="<?= $device['id']?>"/>
+                    <input type="hidden" name="returnlink" value="<?php echo $_SERVER['REQUEST_URI'];?>"/>
+                </td>
+            </tr>
+
             <!-- type -->
             <tr>
                 <td>type</td>
                 <td>
-                    <input type="text" name="type" value="" placeholder="printer, scanner"/>
+                    <input type="text" name="type" value="<?= $device['type'] ?>"/>
                 </td>
             </tr>
 
@@ -27,7 +24,7 @@
             <tr>
                 <td>serial no</td>
                 <td>
-                    <input type="text" name="serial_no" value=""/>
+                    <input type="text" name="serial_no" value="<?= $device['serial_no'] ?>"/>
                 </td>
             </tr>
 
@@ -35,7 +32,7 @@
             <tr>
                 <td>model</td>
                 <td>
-                    <input type="text" name="model" value=""/>
+                    <input type="text" name="model" value="<?= $device['model'] ?>"/>
                 </td>
             </tr>
 
@@ -43,7 +40,7 @@
             <tr>
                 <td>date received</td>
                 <td>
-                    <input type="date" name="date_received" value=""/>
+                    <input type="text" name="date_received" value="<?= $device['date_received'] ?>"/>
                 </td>
             </tr>
 
@@ -51,15 +48,15 @@
             <tr>
                 <td>current location</td>
                 <td>
-                    <input type="text" name="current_location" value=""/>
+                    <input type="text" name="current_location" value="<?= $device['current_location'] ?>"/>
                 </td>
             </tr>
 
-            <!-- status -->
+            <!--status -->
             <tr>
                 <td>status</td>
                 <td>
-                    <input type="text" name="status" value=""/>
+                    <input type="text" name="status" value="<?= $device['status'] ?>"/>
                 </td>
             </tr>
 
@@ -67,7 +64,7 @@
             <tr>
                 <td>hosted on</td>
                 <td>
-                    <input type="text" name="hosted_on" value=""/>
+                    <input type="text" name="hosted_on" value="<?= $device['hosted_on'] ?>"/>
                 </td>
             </tr>
 
@@ -75,7 +72,7 @@
             <tr>
                 <td>codename</td>
                 <td>
-                    <input type="text" name="codename" value=""/>
+                    <input type="text" name="codename" value="<?= $device['codename'] ?>"/>
                 </td>
             </tr>
 
@@ -83,15 +80,15 @@
             <tr>
                 <td>notes</td>
                 <td>
-                    <input type="text" name="notes" value=""/>
+                    <input type="text" name="user" value="<?= $device['notes'] ?>"/>
                 </td>
             </tr>
         </table>
 
         <br>
-
         <a href="/fragment/device/">cancel</a>
         &nbsp;
         <button type="submit">Okay</button>
     </form>
+    
 </main>

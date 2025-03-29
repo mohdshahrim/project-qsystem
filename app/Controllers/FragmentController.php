@@ -264,17 +264,62 @@ class FragmentController extends BaseController
 
     public function pageDeviceView($id)
     {
+        $fragmentDeviceModel = new FragmentDeviceModel();
+        $device = $fragmentDeviceModel->find($id);
+        $data = ['device'=>$device];
 
+        echo view('fragment/header');
+        echo view('fragment/device-view', $data);
+        echo view('fragment/footer');
     }
 
     public function pageDeviceEdit($id)
     {
+        $fragmentDeviceModel = new FragmentDeviceModel();
+        $device = $fragmentDeviceModel->find($id);
+        $data = ['device'=>$device];
 
+        echo view('fragment/header');
+        echo view('fragment/device-edit', $data);
+        echo view('fragment/footer');
     }
 
     public function postDeviceUpdate()
     {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $fragmentDeviceModel = new FragmentDeviceModel();
+            $id = $this->request->getPost('id');
+            $returnlink = $this->request->getPost('returnlink');
 
+            $data = [
+                'id' => $id,
+                'type' => $this->request->getPost('type'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'date_received' => $this->request->getPost('date_received'),
+                'current_location' => $this->request->getPost('current_location'),
+                'status' => $this->request->getPost('status'),
+                'hosted_on' => $this->request->getPost('hosted_on'),
+                'codename' => $this->request->getPost('codename'),
+                'notes' => $this->request->getPost('notes'),
+            ];
+
+            if ($fragmentDeviceModel->update($id, $data))
+            {
+                // update success
+                $successPage = [
+                    'message' => "Device update success!",
+                    'returnlink' => $returnlink,
+                ];
+
+                echo view('fragment/header');
+                echo view('fragment/fragment-success', $successPage);
+                echo view('fragment/footer');
+            }
+        }
     }
 
     public function postDeviceDelete()
