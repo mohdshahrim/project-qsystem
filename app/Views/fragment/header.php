@@ -11,7 +11,7 @@
         }
         header {
             padding: 0.5em;
-            background-color: pink;
+            background-color: buttonface;
         }
         main {
             padding: 0.5em 2em;
@@ -34,7 +34,7 @@
 </head>
 <body>
     <header>
-        <a href="/user/home">< exit</a>
+        <a href="/user/home">(x)</a>
         &nbsp;
         <a href="/fragment">main</a>
         &nbsp;
