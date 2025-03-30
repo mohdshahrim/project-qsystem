@@ -19,6 +19,13 @@ class FragmentController extends BaseController
     {
         $fragmentPCModel = new FragmentPCModel();
         $result = $fragmentPCModel->findAll();
+        
+        // convert hosted device into device name
+        foreach($result as $row)
+        {
+            $row['hosted_devices'] = $this->parseDeviceId($row['hosted_devices']);
+        }
+
         $data = ['pc'=>$result];
 
         echo view('fragment/header');
@@ -28,8 +35,18 @@ class FragmentController extends BaseController
 
     public function pagePCNew()
     {
+        $fragmentDeviceModel = new FragmentDeviceModel();
+
+        // get the office
+        $office = $this->request->getGet('office');
+
+        $data = [
+            'office'=>$office,
+            'device'=>$fragmentDeviceModel->where('office',$office)->findAll(),
+        ];
+
         echo view('fragment/header');
-        echo view('fragment/pc-new');
+        echo view('fragment/pc-new', $data);
         echo view('fragment/footer');
     }
 
@@ -235,9 +252,10 @@ class FragmentController extends BaseController
                 'model' => $this->request->getPost('model'),
                 'date_received' => $this->request->getPost('date_received'),
                 'current_location' => $this->request->getPost('current_location'),
+                'office' => $this->request->getPost('office'),
                 'status' => $this->request->getPost('status'),
                 'hosted_on' => $this->request->getPost('hosted_on'),
-                'nickname' => $this->request->getPost('nickname'),
+                'codename' => $this->request->getPost('codename'),
                 'notes' => $this->request->getPost('notes'),
             ];
 
@@ -301,6 +319,7 @@ class FragmentController extends BaseController
                 'model' => $this->request->getPost('model'),
                 'date_received' => $this->request->getPost('date_received'),
                 'current_location' => $this->request->getPost('current_location'),
+                'office' => $this->request->getPost('office'),
                 'status' => $this->request->getPost('status'),
                 'hosted_on' => $this->request->getPost('hosted_on'),
                 'codename' => $this->request->getPost('codename'),
@@ -325,5 +344,33 @@ class FragmentController extends BaseController
     public function postDeviceDelete()
     {
 
+    }
+
+
+    // parse device id
+    private function parseDeviceId($deviceId)
+    {
+        $deviceNames = "";
+
+        if (empty($deviceId))
+        {
+            return "";
+        }
+
+        $arr = explode($devideId, ",");
+        $fragmentDeviceModel = new FragmentDeviceModel();
+
+        foreach($arr as $id)
+        {
+            $device = $fragmentDeviceModel->find($id);
+
+            $model = $device->model;
+            $serialNo = $device->serial_no;
+            $codename = $device->codename;
+
+            $deviceNames += "{$model} ({$serialNo}) ";
+        }
+
+        return $deviceNames;
     }
 }

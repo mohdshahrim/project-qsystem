@@ -16,7 +16,19 @@
 <main>
     <h3>PC (all)</h3>
 
-    <p><a href="/fragment/pc/new"><button>new PC</button></a></p>
+    <p><button id="button-newpc" onclick="showOfficeSelection()">new PC</button>&nbsp;<span id="span-newpc" style="display:none;">new PC for which office?</span></p>
+
+    <div id="div-office" style="display:none;">
+        <p>
+            <a href="/fragment/pc/new?office=sibu"><button>Sibu</button></a>
+            &nbsp;
+            <a href="/fragment/pc/new?office=kapit"><button>Kapit</button></a>
+            &nbsp;
+            <a href="/fragment/pc/new?office=sarikei"><button>Sarikei</button></a>
+            &nbsp;
+            <a href="/fragment/pc/new?office=tgmanis"><button>Tg. Manis</button></a>
+        </p>
+    </div>
 
     <table class="table-pc">
         <tr>
@@ -57,3 +69,11 @@
         <?php endforeach ?>
     </table>
 </main>
+
+<script>
+    function showOfficeSelection() {
+        document.getElementById('div-office').style.display='block';
+        document.getElementById('button-newpc').disabled = true;
+        document.getElementById('span-newpc').style.display = "inline";
+    }
+</script>

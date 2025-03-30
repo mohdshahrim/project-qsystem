@@ -75,7 +75,10 @@
             <tr>
                 <td>hosted devices</td>
                 <td>
-                    <input type="text" name="hosted_devices" value=""/>
+                    <?php foreach ($device as $row):?>
+                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices" value="<?= $row['id'] ?>">
+                        <label for="<?= $row['id'] ?>"><?= $row['model'] ?> (<?= $row['serial_no'] ?>)</label><br>
+                    <?php endforeach ?>
                 </td>
             </tr>
 
@@ -107,7 +110,8 @@
             <tr>
                 <td>office</td>
                 <td>
-                    <input type="text" name="office" value=""/>
+                    <?= $office ?>
+                    <input type="hidden" name="office" value="<?= $office ?>"/>
                 </td>
             </tr>
         </table>
