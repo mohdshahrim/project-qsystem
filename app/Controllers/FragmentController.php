@@ -42,7 +42,7 @@ class FragmentController extends BaseController
 
         $data = [
             'office'=>$office,
-            'device'=>$fragmentDeviceModel->where('office',$office)->findAll(),
+            'device'=>$fragmentDeviceModel->where('office',$office)->where('hosted_on', '')->findAll(),
         ];
 
         echo view('fragment/header');
