@@ -15,6 +15,8 @@ class FragmentOfficeModel extends Model
     protected $allowedFields    = [
         'id',
         'office_name',
+        'shortname',
+        'codename',
         'address',
         'manager',
         'total_employee',
