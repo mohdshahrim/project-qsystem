@@ -72,7 +72,10 @@
             <tr>
                 <td>hosted devices</td>
                 <td>
-                    <input type="text" name="hosted_devices" value="<?= $pc['hosted_devices'] ?>"/>
+                    <?php foreach ($device as $row):?>
+                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices" value="<?= $row['id'] ?>">
+                        <label for="<?= $row['id'] ?>"><?= $row['model'] ?> (<?= $row['serial_no'] ?>)</label><br>
+                    <?php endforeach ?>
                 </td>
             </tr>
 
@@ -103,8 +106,22 @@
             <!-- office -->
             <tr>
                 <td>office</td>
-                <td>
-                    <input type="text" name="office" value="<?= $pc['office'] ?>"/>
+                <td style="position: relative;">
+                    <?= $pc['office'] ?>
+                    <input type="hidden" name="office" value="<?= $pc['office'] ?>">
+                    <button style="" type="button" id="button-changeoffice" onclick="toggleChangeOffice()">change</button>
+                    <div id="div-changeoffice" style="display:none;">
+                        <p>
+                            <a href="/fragment/pc/x-transfer/<?= $pc['id'] ?>/sibu">sibu</a>
+                            &nbsp;
+                            <a href="/fragment/pc/x-transfer/<?= $pc['id'] ?>/kapit">kapit</a>
+                            &nbsp;
+                            <a href="/fragment/pc/x-transfer/<?= $pc['id'] ?>/sarikei">sarikei</a>
+                            &nbsp;
+                            <a href="/fragment/pc/x-transfer/<?= $pc['id'] ?>/tgmanis">tgmanis</a>
+                        </p>
+                        <p style="font-size:small">changing office will drop all unsaved inputs & all its current hosted devices</p>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -116,3 +133,15 @@
     </form>
     
 </main>
+
+<script>
+function toggleChangeOffice() {
+    if (document.getElementById('div-changeoffice').style.display=="block") {
+        document.getElementById('button-changeoffice').innerHTML = "change";
+        document.getElementById('div-changeoffice').style.display='none';
+    } else {
+        document.getElementById('button-changeoffice').innerHTML = "cancel";
+        document.getElementById('div-changeoffice').style.display='block';
+    }
+}
+</script>

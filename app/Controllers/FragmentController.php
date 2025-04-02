@@ -108,8 +108,29 @@ class FragmentController extends BaseController
     public function pagePCEdit($pcid)
     {
         $fragmentPCModel = new FragmentPCModel();
+        $fragmentDeviceModel = new FragmentDeviceModel();
+
         $pc = $fragmentPCModel->find($pcid);
-        $data = ['pc'=>$pc];
+
+        $office = "sibu"; // default
+
+        // if "office" (URL) is empty, get the "office" from DB
+        if (empty($this->request->getGet('office'))) {
+            // if "office" DB is also empty, assign default value
+            if (empty($pc['office'])) {
+                $office = "sibu";
+            } else {
+                $office = $pc['office'];
+            }
+        } else {
+            $office = $this->request->getGet('office');
+        }
+
+        $data = [
+            'pc' => $pc,
+            'device' => $fragmentDeviceModel->where('office', $office)->where('hosted_on', '')->findAll(),
+        ];
+
 
         echo view('fragment/header');
         echo view('fragment/pc-edit', $data);
@@ -155,6 +176,32 @@ class FragmentController extends BaseController
 
             }
         }
+    }
+
+    // special case
+    // to handle PC transfer from office to office
+    public function xPCTransfer($pcid, $newoffice)
+    {
+        $fragmentPCModel = new FragmentPCModel();
+        $fragmentDeviceModel = new FragmentDeviceModel();
+
+        // get current hosted_devices
+        $c_hd = $fragmentPCModel->select('hosted_devices')->find($pcid)['hosted_devices'];
+
+        // if hosted_devices is not empty, iterate each of the hosted_devices and clear their "hosted_on"
+        if (!empty($c_hd)) {
+            $arr = explode($c_hd, ",");
+            foreach($arr as $deviceid)
+            {
+                $fragmentDeviceModel->update($deviceid, ['hosted_on'=>'']);
+            }
+        }
+
+        // clear all current hosted_devices of the PC, and update office
+        $fragmentPCModel->update($pcid, ['hosted_devices'=>'', 'office'=>$newoffice]);
+
+        // redirect back to PC edit page
+        return redirect()->to('fragment/pc/edit/'.$pcid.'?office='.$newoffice);
     }
 
     // Fragment Office CRUD

@@ -45,6 +45,7 @@ $routes->get('/fragment/pc/view/(:num)', 'FragmentController::pagePCView/$1');
 $routes->get('/fragment/pc/edit/(:num)', 'FragmentController::pagePCEdit/$1');
 $routes->post('/fragment/pc/update', 'FragmentController::postPCUpdate');
 $routes->post('/fragment/pc/delete', 'FragmentController::postPCDelete');
+$routes->get('/fragment/pc/x-transfer/(:num)/(:alpha)', 'FragmentController::xPCTransfer/$1/$2'); // special case
 $routes->get('/fragment/office', 'FragmentController::pageOffice');
 $routes->get('/fragment/office/edit/(:num)', 'FragmentController::pageOfficeEdit/$1');
 $routes->post('/fragment/office/update', 'FragmentController::postOfficeUpdate');
@@ -62,6 +63,7 @@ $routes->get('/qrat', 'Qrat::index');
 $routes->post('/qrat/c', 'Qrat::postC');
 
 // TEST
+$routes->get('/testme', 'Home::testme');
 $routes->get('/testgeneral', 'Home::testgeneral');
 $routes->get('/testdb', 'Home::testdb');
 $routes->get('/testforge', 'Home::testforge');
