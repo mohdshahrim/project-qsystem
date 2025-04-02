@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\FragmentPCModel;
 
 define('QSYSTEM_VERSION_NO', '0.1');
 define('QSYSTEM_VERSION_DATE', '01/02/2025');
@@ -24,6 +25,18 @@ class Home extends BaseController
 
     // TESTS
     // reserved for general testing only
+    public function testme()
+    {
+        $pcid = 1;
+        $fragmentPCModel = new FragmentPCModel();
+        $target = $fragmentPCModel->select('ip_address')->find($pcid)['ip_address'];
+        
+        echo view('fragment/header');
+        //echo $target['ip_address'];
+        echo $target;
+        echo view('fragment/footer');
+    }
+
 
     // general test
     public function testgeneral() {
