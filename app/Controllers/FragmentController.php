@@ -84,6 +84,9 @@ class FragmentController extends BaseController
             // Returns inserted row's primary key
             $id = $fragmentPCModel->getInsertID();
 
+            // update Fragment Device table too
+            $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+
             // craft return link to pc view page
             $returnlink = "/fragment/pc/edit/".$id;
 
@@ -442,5 +445,16 @@ class FragmentController extends BaseController
         $codename = $device['codename'];
 
         return "{$model} ({$serialNo}), ";
+    }
+
+    // update Fragment Device table too
+    // suitable for PC create and update
+    // $deviceID is array
+    private function updateFragmentDevice($pcID, $deviceID)
+    {
+        $fragmentDeviceModel = new FragmentDeviceModel();
+        foreach($deviceID as $id) {
+            $fragmentDeviceModel->update($id, ['hosted_on'=>$pcID]);
+        }
     }
 }
