@@ -74,12 +74,12 @@
                 <td>
                     <!-- for devices hosted on this PC -->
                     <?php foreach ($hosted as $row):?>
-                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices" value="<?= $row['id'] ?>" checked>
+                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices[]" value="<?= $row['id'] ?>" checked>
                         <label for="<?= $row['id'] ?>"><?= $row['model'] ?> (<?= $row['serial_no'] ?>)</label><br>
                     <?php endforeach ?>
                     <!-- for devices without host -->
                     <?php foreach ($device as $row):?>
-                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices" value="<?= $row['id'] ?>">
+                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices[]" value="<?= $row['id'] ?>">
                         <label for="<?= $row['id'] ?>"><?= $row['model'] ?> (<?= $row['serial_no'] ?>)</label><br>
                     <?php endforeach ?>
                 </td>

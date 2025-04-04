@@ -158,22 +158,23 @@ class FragmentController extends BaseController
             $returnlink = $this->request->getPost('returnlink');
 
             $data = [
-                'id' => $id,
                 'hostname' => $this->request->getPost('hostname'),
                 'ip_address' => $this->request->getPost('ip_address'),
                 'os' => $this->request->getPost('os'),
                 'cpu_model' => $this->request->getPost('cpu_model'),
                 'cpu_no' => $this->request->getPost('cpu_no'),
                 'monitor_no' => $this->request->getPost('monitor_no'),
-                'hosted_devices' => $this->request->getPost('hosted_devices'),
+                'hosted_devices' => implode(' ', $this->request->getPost('hosted_devices[]')),
                 'user' => $this->request->getPost('user'),
                 'department' => $this->request->getPost('department'),
                 'notes' => $this->request->getPost('notes'),
                 'office' => $this->request->getPost('office'),
             ];
 
-            if ($fragmentPCModel->update($id, $data))
-            {
+            if ($fragmentPCModel->update($id, $data)) {
+                // update Fragment Device table too
+                $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+
                 // update success
                 $successPage = [
                     'message' => "PC update success!",
@@ -183,14 +184,8 @@ class FragmentController extends BaseController
                 echo view('fragment/header');
                 echo view('fragment/fragment-success', $successPage);
                 echo view('fragment/footer');
-
             }
-
-            // update the Fragment Device too
-
-
-            log_message('error', $this->request->getPost('hosted_devices'));
-
+            // TODO: what if the update is not successful?
         }
     }
 
@@ -452,9 +447,20 @@ class FragmentController extends BaseController
     // $deviceID is array
     private function updateFragmentDevice($pcID, $deviceID)
     {
+        // reset hosted_on for devices of the $pcID
+        $this->resetHostedonFragmentDevice($pcID);
+
         $fragmentDeviceModel = new FragmentDeviceModel();
         foreach($deviceID as $id) {
             $fragmentDeviceModel->update($id, ['hosted_on'=>$pcID]);
         }
+    }
+
+    // to be used with updateFragmentDevice
+    // resetting all hosted_on
+    private function resetHostedonFragmentDevice($pcID)
+    {
+        $fragmentDeviceModel = new FragmentDeviceModel();
+        $fragmentDeviceModel->set(['hosted_on' => ''])->where('hosted_on', $pcID)->update();
     }
 }
