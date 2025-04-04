@@ -44,6 +44,7 @@
             <th>user</th>
             <th>department</th>
             <th>notes</th>
+            <th>office</th>
             <th>options</th>
         </tr>
         <?php foreach ($pc as $row):?>
@@ -60,6 +61,7 @@
                 <td><?= $row['user'] ?></td>
                 <td><?= $row['department'] ?></td>
                 <td><?= $row['notes'] ?></td>
+                <td><?= $row['office'] ?></td>
                 <td>
                     <a href="/fragment/pc/view/<?= $row['id'] ?>">view</a>
                     &nbsp;

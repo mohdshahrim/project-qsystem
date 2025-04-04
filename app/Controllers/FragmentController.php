@@ -21,9 +21,14 @@ class FragmentController extends BaseController
         $result = $fragmentPCModel->findAll();
         
         // convert hosted device into device name
-        foreach($result as $row)
+        foreach($result as $key=>$row)
         {
-            $row['hosted_devices'] = $this->parseDeviceId($row['hosted_devices']);
+            //log_message('error', $result[$key]['hosted_devices']);
+            if (!empty($result[$key]['hosted_devices'])) {
+                $result[$key]['hosted_devices'] = $this->parseDeviceId($result[$key]['hosted_devices']);
+            } else {
+                $result[$key]['hosted_devices'] = "";
+            }
         }
 
         $data = ['pc'=>$result];
@@ -66,7 +71,7 @@ class FragmentController extends BaseController
                 'cpu_no' => $this->request->getPost('cpu_no'),
                 'monitor_model' => $this->request->getPost('monitor_model'),
                 'monitor_no' => $this->request->getPost('monitor_no'),
-                'hosted_devices' => $this->request->getPost('hosted_devices'),
+                'hosted_devices' => implode(' ', $this->request->getPost('hosted_devices[]')),
                 'user' => $this->request->getPost('user'),
                 'department' => $this->request->getPost('department'),
                 'notes' => $this->request->getPost('notes'),
@@ -82,11 +87,13 @@ class FragmentController extends BaseController
             // craft return link to pc view page
             $returnlink = "/fragment/pc/edit/".$id;
 
-            // update success
+            // create success
             $successPage = [
                 'message' => "PC create success!",
                 'returnlink' => $returnlink,
             ];
+
+            //log_message('error', $data['hosted_devices[]'][0]." ".$data['hosted_devices[]'][2]);
 
             echo view('fragment/header');
             echo view('fragment/fragment-success', $successPage);
@@ -128,9 +135,9 @@ class FragmentController extends BaseController
 
         $data = [
             'pc' => $pc,
+            'hosted' => $fragmentDeviceModel->where('hosted_on', $pcid)->findAll(), // for hosted device
             'device' => $fragmentDeviceModel->where('office', $office)->where('hosted_on', '')->findAll(),
         ];
-
 
         echo view('fragment/header');
         echo view('fragment/pc-edit', $data);
@@ -175,6 +182,12 @@ class FragmentController extends BaseController
                 echo view('fragment/footer');
 
             }
+
+            // update the Fragment Device too
+
+
+            log_message('error', $this->request->getPost('hosted_devices'));
+
         }
     }
 
@@ -395,29 +408,39 @@ class FragmentController extends BaseController
 
 
     // parse device id
-    private function parseDeviceId($deviceId)
+    private function parseDeviceId($deviceID)
     {
         $deviceNames = "";
 
-        if (empty($deviceId))
-        {
+        if (empty($deviceID)) {
             return "";
+        } else {
+            // check if deviceId is comprise only of single ID (because usually)
+            if (strlen($deviceID)==1) {
+                return $this->getDeviceNames($deviceID);
+            }
+            else {
+                $arr = explode(" ", $deviceID);
+                foreach($arr as $id)
+                {
+                    $deviceNames .= $this->getDeviceNames($id);
+                }
+        
+                return $deviceNames;
+            }
         }
+    }
 
-        $arr = explode($devideId, ",");
+    // return device model and serial no
+    private function getDeviceNames($id)
+    {
         $fragmentDeviceModel = new FragmentDeviceModel();
+        $device = $fragmentDeviceModel->find($id);
 
-        foreach($arr as $id)
-        {
-            $device = $fragmentDeviceModel->find($id);
+        $model = $device['model'];
+        $serialNo = $device['serial_no'];
+        $codename = $device['codename'];
 
-            $model = $device->model;
-            $serialNo = $device->serial_no;
-            $codename = $device->codename;
-
-            $deviceNames += "{$model} ({$serialNo}) ";
-        }
-
-        return $deviceNames;
+        return "{$model} ({$serialNo}), ";
     }
 }

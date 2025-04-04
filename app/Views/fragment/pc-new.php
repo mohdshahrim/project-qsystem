@@ -76,7 +76,7 @@
                 <td>hosted devices</td>
                 <td>
                     <?php foreach ($device as $row):?>
-                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices" value="<?= $row['id'] ?>">
+                        <input type="checkbox" id="<?= $row['id'] ?>" name="hosted_devices[]" value="<?= $row['id'] ?>">
                         <label for="<?= $row['id'] ?>"><?= $row['model'] ?> (<?= $row['serial_no'] ?>)</label><br>
                     <?php endforeach ?>
                 </td>
