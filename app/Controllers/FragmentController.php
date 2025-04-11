@@ -63,6 +63,13 @@ class FragmentController extends BaseController
         {
             $fragmentPCModel = new FragmentPCModel();
 
+            // to handle missing hosted_devices form value
+            $hosted_devices = $_POST['hosted_devices[]'] ?? '';
+
+            if (!empty($hosted_devices)) {
+                $hosted_devices = implode(' ', $this->request->getPost('hosted_devices[]'));
+            }
+
             $data = [
                 'hostname' => $this->request->getPost('hostname'),
                 'ip_address' => $this->request->getPost('ip_address'),
@@ -71,7 +78,7 @@ class FragmentController extends BaseController
                 'cpu_no' => $this->request->getPost('cpu_no'),
                 'monitor_model' => $this->request->getPost('monitor_model'),
                 'monitor_no' => $this->request->getPost('monitor_no'),
-                'hosted_devices' => implode(' ', $this->request->getPost('hosted_devices[]')),
+                'hosted_devices' => $hosted_devices,
                 'user' => $this->request->getPost('user'),
                 'department' => $this->request->getPost('department'),
                 'notes' => $this->request->getPost('notes'),
@@ -85,7 +92,10 @@ class FragmentController extends BaseController
             $id = $fragmentPCModel->getInsertID();
 
             // update Fragment Device table too
-            $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+            if (!empty($hosted_devices)) {
+                // update Fragment Device table too
+                $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+            }
 
             // craft return link to pc view page
             $returnlink = "/fragment/pc/edit/".$id;
@@ -157,6 +167,13 @@ class FragmentController extends BaseController
             $id = $this->request->getPost('id');
             $returnlink = $this->request->getPost('returnlink');
 
+            // to handle missing hosted_devices form value
+            $hosted_devices = $_POST['hosted_devices[]'] ?? '';
+
+            if (!empty($hosted_devices)) {
+                $hosted_devices = implode(' ', $this->request->getPost('hosted_devices[]'));
+            }
+
             $data = [
                 'hostname' => $this->request->getPost('hostname'),
                 'ip_address' => $this->request->getPost('ip_address'),
@@ -164,7 +181,7 @@ class FragmentController extends BaseController
                 'cpu_model' => $this->request->getPost('cpu_model'),
                 'cpu_no' => $this->request->getPost('cpu_no'),
                 'monitor_no' => $this->request->getPost('monitor_no'),
-                'hosted_devices' => implode(' ', $this->request->getPost('hosted_devices[]')),
+                'hosted_devices' => $hosted_devices,
                 'user' => $this->request->getPost('user'),
                 'department' => $this->request->getPost('department'),
                 'notes' => $this->request->getPost('notes'),
@@ -172,8 +189,10 @@ class FragmentController extends BaseController
             ];
 
             if ($fragmentPCModel->update($id, $data)) {
-                // update Fragment Device table too
-                $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+                if (!empty($hosted_devices)) {
+                    // update Fragment Device table too
+                    $this->updateFragmentDevice($id, $this->request->getPost('hosted_devices[]'));
+                }
 
                 // update success
                 $successPage = [
