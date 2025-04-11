@@ -1,4 +1,4 @@
-<div class="div-right">
+<main>
     <h2>Update user account</h2>
 
     <form method="post" action="/admin/user-accounts/update">
@@ -75,4 +75,4 @@
         <button type="submit">Okay</button>
     </form>
     
-</div>
+</main>

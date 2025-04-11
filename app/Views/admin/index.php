@@ -1,4 +1,4 @@
-<div class="div-right">
+<main>
     <h2>System Administration</h2>
     <p>dedicated section to manage system behavior</p>
 
@@ -9,7 +9,7 @@
     <button onclick="clearAllSession()">clear</button>
 
     <div class="spacer"></div>
-</div>
+</main>
 
 <script>
 function clearAllSession() {

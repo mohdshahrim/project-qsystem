@@ -1,4 +1,4 @@
-<div class="div-right">
+<main>
     <h2>New user account</h2>
 
     <form method="post" action="/admin/user-accounts/create">
@@ -73,4 +73,4 @@
         <button type="submit">Okay</button>
     </form>
     
-</div>
+</main>

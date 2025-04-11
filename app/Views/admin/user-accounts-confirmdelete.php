@@ -1,4 +1,4 @@
-<div class="div-right">
+<main>
     <h2>Are you sure you want to delete this user account?</h2>
 
     <form method="post" action="/admin/user-accounts/delete/">
@@ -42,4 +42,4 @@
         <button type="submit">Confirm delete</button>
     </form>
     
-</div>
+</main>

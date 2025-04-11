@@ -1,9 +1,4 @@
-<style>
-
-</style>
-
-
-<div class="div-right">
+<main>
     <h2>Account</h2>
     <p>profile & settings</p>
 
@@ -76,5 +71,4 @@
 
         <button type="submit">Okay</button>
     </form>
-
-</div>
+</main>

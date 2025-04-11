@@ -1,4 +1,4 @@
-<div class="div-right">
+<main>
     <h2>Database Administration</h2>
     <p>backup and restore</p>
 
@@ -19,7 +19,7 @@
     <button onclick="backupDB()">backup db</button>
 
     <div class="spacer"></div>
-</div>
+</main>
 
 <script>
 function restoreDB() {

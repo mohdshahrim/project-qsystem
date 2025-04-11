@@ -9,7 +9,7 @@
 }
 </style>
 
-<div class="div-right">
+<main>
     <h2>User Accounts</h2>
     <p>management and settings</p>
 
@@ -57,4 +57,4 @@
             </tr>
         <?php endforeach ?>
     </table>
-</div>
+</main>
