@@ -42,6 +42,7 @@
             <th>hostname</th>
             <th>ip address</th>
             <th>os</th>
+            <th>type</th>
             <th>cpu model</th>
             <th>cpu no</th>
             <th>monitor model</th>
@@ -59,6 +60,7 @@
                 <td><?= $row['hostname'] ?></td>
                 <td><?= $row['ip_address'] ?></td>
                 <td><?= $row['os'] ?></td>
+                <td><?= $row['type'] ?></td>
                 <td><?= $row['cpu_model'] ?></td>
                 <td><?= $row['cpu_no'] ?></td>
                 <td><?= $row['monitor_model'] ?></td>

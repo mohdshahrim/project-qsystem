@@ -46,6 +46,14 @@
                 </td>
             </tr>
 
+            <!-- type -->
+            <tr>
+                <td>type</td>
+                <td>
+                    <?= $pc['type']?>
+                </td>
+            </tr>
+
             <!-- cpu model -->
             <tr>
                 <td>cpu model</td>

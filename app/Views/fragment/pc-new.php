@@ -39,6 +39,14 @@
                 </td>
             </tr>
 
+            <!-- type: desktop, laptop, etc -->
+            <tr>
+                <td>type</td>
+                <td>
+                    <input type="text" name="type" value=""/>
+                </td>
+            </tr>
+
             <!-- cpu model -->
             <tr>
                 <td>cpu model</td>

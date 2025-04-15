@@ -18,6 +18,7 @@ class FragmentPCModel extends Model
         'hostname',
         'ip_address',
         'os',
+        'type',
         'cpu_model',
         'cpu_no',
         'monitor_model',
