@@ -14,7 +14,13 @@
 }
 </style>
 <main>
-    <h3>PC (all)</h3>
+    <h3>PC (<?php
+    if (isset($_GET['office'])) {
+        echo $_GET['office'];
+    } else {
+        echo "all";
+    }
+    ?>)</h3>
 
     <p><button id="button-newpc" onclick="showOfficeSelection()">new PC</button>&nbsp;<span id="span-newpc" style="display:none;">new PC for which office?</span></p>
 

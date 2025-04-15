@@ -14,7 +14,13 @@
 }
 </style>
 <main>
-    <h3>Device (all)</h3>
+    <h3>Device (<?php
+    if (isset($_GET['office'])) {
+        echo $_GET['office'];
+    } else {
+        echo "all";
+    }
+    ?>)</h3>
 
     <p><a href="/fragment/device/new"><button>new Device</button></a></p>
 
