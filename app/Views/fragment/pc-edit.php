@@ -133,9 +133,9 @@
         </table>
 
         <br>
-        <a href="/fragment/pc/">cancel</a>
-        &nbsp;
         <button type="submit">Okay</button>
+        <p><a href="/fragment/pc?office=<?= $pc['office']?>">go back to PC (<?= $pc['office']?>)</a></p>
+        <p><a href="/fragment/pc/">go back to PC (all)</a></p>
     </form>
     
 </main>
