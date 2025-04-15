@@ -56,6 +56,18 @@
             <?php endforeach ?>
         </tr>
         <tr>
+            <td>shortname</td>
+            <?php foreach ($office as $row):?>
+            <td><?= $row['shortname'] ?></td>
+            <?php endforeach ?>
+        </tr>
+        <tr>
+            <td>codename</td>
+            <?php foreach ($office as $row):?>
+            <td><?= $row['codename'] ?></td>
+            <?php endforeach ?>
+        </tr>
+        <tr>
             <td>Updated at</td>
             <?php foreach ($office as $row):?>
             <td><?= $row['updated_at'] ?></td>

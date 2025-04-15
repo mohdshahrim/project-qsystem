@@ -46,6 +46,20 @@
                     <input type="text" name="office_type" value="<?= $office['office_type'] ?>"/>
                 </td>
             </tr>
+
+            <tr>
+                <td>shortname</td>
+                <td>
+                    <input type="text" name="shortname" value="<?= $office['shortname'] ?>"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>codename</td>
+                <td>
+                    <input type="text" name="codename" value="<?= $office['codename'] ?>"/>
+                </td>
+            </tr>
         </table>
 
         <br>

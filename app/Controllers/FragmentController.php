@@ -281,6 +281,8 @@ class FragmentController extends BaseController
                 'manager' => $this->request->getPost('manager'),
                 'total_employee' => $this->request->getPost('total_employee'),
                 'office_type' => $this->request->getPost('office_type'),
+                'shortname' => $this->request->getPost('shortname'),
+                'codename' => $this->request->getPost('codename'),
             ];
 
             if ($fragmentOfficeModel->update($id, $data))
