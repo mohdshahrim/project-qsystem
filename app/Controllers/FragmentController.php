@@ -17,8 +17,17 @@ class FragmentController extends BaseController
 
     public function pagePC()
     {
+        $qoffice = ''; // query parameter
+        if (isset($_GET['office'])) {
+            $qoffice = $this->request->getGet('office');
+        }
+
         $fragmentPCModel = new FragmentPCModel();
-        $result = $fragmentPCModel->findAll();
+        if (strlen($qoffice)==0) {
+            $result = $fragmentPCModel->findAll();    
+        } else {
+            $result = $fragmentPCModel->where('office', $qoffice)->findAll();
+        }
         
         // convert hosted device into device name
         foreach($result as $key=>$row)

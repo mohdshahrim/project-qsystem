@@ -40,15 +40,15 @@
 
     <h3>Quick links</h3>
     <p>
-        <a href="/fragment/office/sibu">Sibu Regional Office</a>
+        <a href="/fragment/pc?office=sibu">Sibu Regional Office</a>
     </p>
     <p>
-        <a href="/fragment/office/sibu">Kapit Sub-Regional Office</a>
+        <a href="/fragment/pc?office=kapit">Kapit Sub-Regional Office</a>
     </p>
     <p>
-        <a href="/fragment/office/sibu">Sarikei Sub-Regional Office</a>
+        <a href="/fragment/pc?office=sarikei">Sarikei Sub-Regional Office</a>
     </p>
     <p>
-        <a href="/fragment/office/sibu">Tg. Manis Office</a>
+        <a href="/fragment/pc?office=tgmanis">Tg. Manis Office</a>
     </p>
 </main>
