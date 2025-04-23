@@ -151,4 +151,12 @@
             </tr>
         </table>
     </form>
+
+    <div class="spacer"></div>
+
+    <form method="post" action="/fragment/pc/delete">
+        <p style="color:red;">CAREFUL. This cannot be reversed.</p>
+        <input type="hidden" name="id" value="<?= $pc['id'] ?>"/>
+        <button type="submit">Delete permanently</button>
+    </form>
 </main>

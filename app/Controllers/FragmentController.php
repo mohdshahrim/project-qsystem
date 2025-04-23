@@ -226,6 +226,34 @@ class FragmentController extends BaseController
         }
     }
 
+    public function postPCDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $fragmentPCModel = new FragmentPCModel();
+            $id = $this->request->getPost('id');
+
+            if ($fragmentPCModel->delete($id)) {
+                
+                $this->resetHostedonFragmentDevice($id);
+
+                // update success
+                $successPage = [
+                    'message' => "PC delete success!",
+                    'returnlink' => "/fragment/pc",
+                ];
+
+                echo view('fragment/header');
+                echo view('fragment/fragment-success', $successPage);
+                echo view('fragment/footer');
+            } else {
+                return redirect()->to('/fragment/pc/');
+            }
+        }
+    }
+
     // special case
     // to handle PC transfer from office to office
     public function xPCTransfer($pcid, $newoffice)
