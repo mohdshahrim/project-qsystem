@@ -117,4 +117,12 @@
             </td>
         </tr>
     </table>
+
+    <div class="spacer"></div>
+
+    <form method="post" action="/fragment/device/delete">
+        <p style="color:red;">CAREFUL. This cannot be reversed.</p>
+        <input type="hidden" name="id" value="<?= $device['id'] ?>"/>
+        <button type="submit">Delete permanently</button>
+    </form>
 </main>

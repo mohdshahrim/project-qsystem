@@ -468,7 +468,38 @@ class FragmentController extends BaseController
 
     public function postDeviceDelete()
     {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $fragmentDeviceModel = new FragmentDeviceModel();
+            //$fragmentPCModel = new FragmentPCModel();
+            $id = $this->request->getPost('id');
 
+            // remove this device from its pc.hosted_device
+            // if is was hosted
+            // how do we know if it was hosted?
+            // by checking its device.hosted_on
+            $device = $fragmentDeviceModel->find($id);
+            // if hosted_on is not null
+
+            $this->removeHostedDeviceFromPC($device['hosted_on'], $device['id']);
+
+
+            if ($fragmentDeviceModel->delete($id)) {
+                // update success
+                $successPage = [
+                    'message' => "Device delete success!",
+                    'returnlink' => "/fragment/device",
+                ];
+
+                echo view('fragment/header');
+                echo view('fragment/fragment-success', $successPage);
+                echo view('fragment/footer');
+            } else {
+                return redirect()->to('/fragment/device/');
+            }
+        }
     }
 
 
@@ -529,5 +560,29 @@ class FragmentController extends BaseController
     {
         $fragmentDeviceModel = new FragmentDeviceModel();
         $fragmentDeviceModel->set(['hosted_on' => ''])->where('hosted_on', $pcID)->update();
+    }
+
+    // remove a single device from PC
+    private function removeHostedDeviceFromPC($pcid, $deviceid)
+    {
+        $fragmentPCModel = new FragmentPCModel();
+        $pc = $fragmentPCModel->find($pcid);
+        if (!empty($pc['hosted_devices'])) {
+            $arr = explode(" ", $pc['hosted_devices']);
+            $key = array_search($deviceid, $arr);
+
+            if ($key !== false) {
+                unset($arr[$key]);
+            }
+
+            $newstr = implode(' ', $arr);
+
+            $data = [
+                "hosted_devices" => $newstr,
+            ];
+
+            // update
+            $fragmentPCModel->update($pcid, $data);
+        }
     }
 }
