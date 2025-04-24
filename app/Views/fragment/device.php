@@ -64,4 +64,7 @@
             </tr>
         <?php endforeach ?>
     </table>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 </main>

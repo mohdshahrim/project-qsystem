@@ -86,6 +86,9 @@ function get_office() {
             <?php endforeach ?>
         </tbody>
     </table>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 </main>
 
 <script>
