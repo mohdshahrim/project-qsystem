@@ -38,6 +38,8 @@ $routes->get('/claimmaker/history', 'Claimmaker::pageHistory');
 
 // Fragment system
 $routes->get('/fragment', 'FragmentController::index');
+$routes->get('/fragment/setting', 'FragmentController::pageSetting');
+$routes->post('/fragment/setting/pc', 'FragmentController::postFragmentSettingPC');
 $routes->get('/fragment/pc', 'FragmentController::pagePC');
 $routes->get('/fragment/pc/new', 'FragmentController::pagePCNew');
 $routes->post('/fragment/pc/create', 'FragmentController::postPCCreate');
@@ -49,7 +51,6 @@ $routes->get('/fragment/pc/x-transfer/(:num)/(:alpha)', 'FragmentController::xPC
 $routes->get('/fragment/office', 'FragmentController::pageOffice');
 $routes->get('/fragment/office/edit/(:num)', 'FragmentController::pageOfficeEdit/$1');
 $routes->post('/fragment/office/update', 'FragmentController::postOfficeUpdate');
-
 $routes->get('/fragment/device', 'FragmentController::pageDevice');
 $routes->get('/fragment/device/new', 'FragmentController::pageDeviceNew');
 $routes->post('/fragment/device/create', 'FragmentController::postDeviceCreate');

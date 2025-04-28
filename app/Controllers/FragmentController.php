@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\FragmentSettingPCModel;
 use App\Models\FragmentPCModel;
 use App\Models\FragmentOfficeModel;
 use App\Models\FragmentDeviceModel;
@@ -13,6 +14,66 @@ class FragmentController extends BaseController
         echo view('fragment/header');
         echo view('fragment/index');
         echo view('fragment/footer');
+    }
+
+    // setting and preference
+    public function pageSetting()
+    {
+        // get user id
+        $userModel = new UserModel();
+        $fragmentSettingPCModel = new FragmentSettingPCModel();
+
+        $user = $userModel->where('username', session('username'))->first();
+        //$settingpc = $fragmentSettingPCModel->find($user['id']);
+        if ($fragmentSettingPCModel->find($user['id'])) {
+            // true
+            $settingpc = $fragmentSettingPCModel->find($user['id']);
+        } else {
+            // initializes
+            $this->createFragmentSettingPCUser($user['id']);
+            $settingpc = $fragmentSettingPCModel->find($user['id']);
+        }
+
+        $data = [
+            'settingpc' => $settingpc,
+        ];
+        echo view('fragment/header');
+        echo view('fragment/setting', $data);
+        echo view('fragment/footer');
+    }
+
+    public function postFragmentSettingPC()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'userid' => 'required',
+        ]))
+        {
+            $fragmentSettingPCModel = new FragmentSettingPCModel();
+
+            $userid = $this->request->getPost('userid');
+
+            $data = [
+                'pc_type' => $this->request->getPost('pc_type'),
+                'pc_cpumodel' => $this->request->getPost('pc_cpumodel'),
+                'pc_monitormodel' => $this->request->getPost('pc_monitormodel'),
+                'pc_hosteddevices' => $this->request->getPost('pc_hosteddevices'),
+                'pc_user' => $this->request->getPost('pc_user'),
+                'pc_department' => $this->request->getPost('pc_department'),
+                'pc_notes' => $this->request->getPost('pc_notes'),
+                'pc_office' => $this->request->getPost('pc_office'),
+            ];
+
+            // update the table
+            $fragmentSettingPCModel->update($userid, $data);
+
+            $session = session();
+            $session->setFlashdata('fragmentpcsetting', 'setting updated');
+
+            // craft return link to pc view page
+            $returnlink = "/fragment/setting";
+
+            return redirect()->to($returnlink);
+        }
     }
 
     public function pagePC()
@@ -40,7 +101,13 @@ class FragmentController extends BaseController
             }
         }
 
-        $data = ['pc'=>$result];
+        // get setting
+        $userModel = new UserModel();
+        $fragmentSettingPCModel = new FragmentSettingPCModel();
+        $data = [
+            'pc' => $result,
+            'settingpc' => $fragmentSettingPCModel->find($userModel->where('username', session('username'))->first()['id']),
+        ];
 
         echo view('fragment/header');
         echo view('fragment/pc', $data);
@@ -584,5 +651,18 @@ class FragmentController extends BaseController
             // update
             $fragmentPCModel->update($pcid, $data);
         }
+    }
+
+    // create a new fragment setting PC for the User if not already
+    private function createFragmentSettingPCUser($userid)
+    {
+        //
+        $fragmentSettingPCModel = new FragmentSettingPCModel();
+        $data = [
+            'userid' => $userid,
+        ];
+        
+        // Inserts data and returns inserted row's primary key
+        $fragmentSettingPCModel->insert($data);
     }
 }

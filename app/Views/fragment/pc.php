@@ -6,8 +6,11 @@ function get_office() {
         return "all";
     }
 }
+
+function columnIndex() {
+
+}
 ?>
-<script src="/js/htmx.min.js"></script>
 <style>
 /* table for PC */
 .table-pc {
@@ -47,16 +50,16 @@ function get_office() {
                 <th onclick="sortTable(1)">hostname</th>
                 <th onclick="sortTable(2)">ip address</th>
                 <th onclick="sortTable(3)">os</th>
-                <th onclick="sortTable(4)">type</th>
-                <th onclick="sortTable(5)">cpu model</th>
+                <th style="display:<?= $settingpc['pc_type']?'':'none' ?>;" onclick="sortTable(4)">type</th>
+                <th style="display:<?= $settingpc['pc_cpumodel']?'':'none' ?>;" onclick="sortTable(5)">cpu model</th>
                 <th onclick="sortTable(6)">cpu no</th>
-                <th onclick="sortTable(7)">monitor model</th>
+                <th style="display:<?= $settingpc['pc_monitormodel']?'':'none' ?>;" onclick="sortTable(7)">monitor model</th>
                 <th onclick="sortTable(8)">monitor no</th>
-                <th onclick="sortTable(9)">hosted devices</th>
-                <th onclick="sortTable(10)">user</th>
-                <th onclick="sortTable(11)">department</th>
-                <th onclick="sortTable(12)">notes</th>
-                <th onclick="sortTable(13)">office</th>
+                <th style="display:<?= $settingpc['pc_hosteddevices']?'':'none' ?>;" onclick="sortTable(9)">hosted devices</th>
+                <th style="display:<?= $settingpc['pc_user']?'':'none' ?>;" onclick="sortTable(10)">user</th>
+                <th style="display:<?= $settingpc['pc_department']?'':'none' ?>;" onclick="sortTable(11)">department</th>
+                <th style="display:<?= $settingpc['pc_notes']?'':'none' ?>;" onclick="sortTable(12)">notes</th>
+                <th style="display:<?= $settingpc['pc_office']?'':'none' ?>;" onclick="sortTable(13)">office</th>
                 <th>options</th>
             </tr>
         </thead>
@@ -67,16 +70,16 @@ function get_office() {
                     <td><?= $row['hostname'] ?></td>
                     <td><?= $row['ip_address'] ?></td>
                     <td><?= $row['os'] ?></td>
-                    <td><?= $row['type'] ?></td>
-                    <td><?= $row['cpu_model'] ?></td>
+                    <td style="display:<?= $settingpc['pc_type']?'':'none'?>;"><?= $row['type'] ?></td>
+                    <td style="display:<?= $settingpc['pc_cpumodel']?'':'none'?>;"><?= $row['cpu_model'] ?></td>
                     <td><?= $row['cpu_no'] ?></td>
-                    <td><?= $row['monitor_model'] ?></td>
+                    <td style="display:<?= $settingpc['pc_monitormodel']?'':'none'?>;"><?= $row['monitor_model'] ?></td>
                     <td><?= $row['monitor_no'] ?></td>
-                    <td><?= $row['hosted_devices'] ?></td>
-                    <td><?= $row['user'] ?></td>
-                    <td><?= $row['department'] ?></td>
-                    <td><?= $row['notes'] ?></td>
-                    <td><?= $row['office'] ?></td>
+                    <td style="display:<?= $settingpc['pc_hosteddevices']?'':'none'?>;"><?= $row['hosted_devices'] ?></td>
+                    <td style="display:<?= $settingpc['pc_user']?'':'none'?>;"><?= $row['user'] ?></td>
+                    <td style="display:<?= $settingpc['pc_department']?'':'none'?>;"><?= $row['department'] ?></td>
+                    <td style="display:<?= $settingpc['pc_notes']?'':'none'?>;"><?= $row['notes'] ?></td>
+                    <td style="display:<?= $settingpc['pc_office']?'':'none'?>;"><?= $row['office'] ?></td>
                     <td>
                         <a href="/fragment/pc/view/<?= $row['id'] ?>">view</a>
                         &nbsp;
@@ -131,4 +134,10 @@ function get_office() {
         // Re-attach sorted rows
         rows.forEach(row => tbody.appendChild(row));
     }
+
+    function getClickedColumnIndex(event) {
+        const cell = event.target.closest('td, th');
+        if (!cell) return -1; // Not a table cell
+        return cell.cellIndex;
+    }   
 </script>

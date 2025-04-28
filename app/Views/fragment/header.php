@@ -44,5 +44,7 @@
         &nbsp;
         <a href="/fragment/office">office</a>
         &nbsp;
+        <a href="/fragment/setting">setting</a>
+        &nbsp;
         <a href="/fragment">about</a>
     </header>
