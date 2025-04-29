@@ -27,7 +27,14 @@ function columnIndex() {
 }
 </style>
 <main>
-    <h3>PC (<?php echo get_office(); ?>)</h3>
+    <h3 style="display:inline-block; margin-right:1.5em;">PC <?php echo get_office(); ?></h3>
+    <p style="font-size:small;display:inline-block;">
+        <a href="/fragment/pc">all</a>&nbsp;
+        <a href="/fragment/pc?office=sibu">sibu</a>&nbsp;
+        <a href="/fragment/pc?office=kapit">kapit</a>&nbsp;
+        <a href="/fragment/pc?office=sarikei">sarikei</a>&nbsp;
+        <a href="/fragment/pc?office=tgmanis">tgmanis</a>
+    </p>
 
     <p><button id="button-newpc" onclick="showOfficeSelection()">new PC</button>&nbsp;<span id="span-newpc" style="display:none;">new PC for which office?</span></p>
 
