@@ -7,6 +7,9 @@ use App\Models\FragmentPCModel;
 use App\Models\FragmentOfficeModel;
 use App\Models\FragmentDeviceModel;
 
+define('FRAGMENT_VERSION_NO', '1.0');
+define('FRAGMENT_VERSION_DATE', '29/04/2025');
+
 class FragmentController extends BaseController
 {
     public function index()
@@ -689,5 +692,13 @@ class FragmentController extends BaseController
         
         // Inserts data and returns inserted row's primary key
         $fragmentSettingPCModel->insert($data);
+    }
+
+    // about page
+    public function pageAbout()
+    {
+        echo view('fragment/header');
+        echo view('fragment/about');
+        echo view('fragment/footer');
     }
 }

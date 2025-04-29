@@ -58,6 +58,7 @@ $routes->get('/fragment/device/view/(:num)', 'FragmentController::pageDeviceView
 $routes->get('/fragment/device/edit/(:num)', 'FragmentController::pageDeviceEdit/$1');
 $routes->post('/fragment/device/update', 'FragmentController::postDeviceUpdate');
 $routes->post('/fragment/device/delete', 'FragmentController::postDeviceDelete');
+$routes->get('/fragment/about', 'FragmentController::pageAbout');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');

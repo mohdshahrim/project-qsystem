@@ -7,8 +7,9 @@
 </style>
 
 <main>
-    <h3>Fragment</h3>
-    <p>Welcome to Fragment, painless IT inventory database</p>
+    <h3>Welcome to Fragment</h3>
+    <p>a painless IT inventory database</p>
+    <p>version 1.0 (29/04/2025)</p>
 
     <div class="spacer"></div>
 

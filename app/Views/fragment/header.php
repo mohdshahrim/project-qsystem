@@ -46,5 +46,5 @@
         &nbsp;
         <a href="/fragment/setting">setting</a>
         &nbsp;
-        <a href="/fragment">about</a>
+        <a href="/fragment/about">about</a>
     </header>
