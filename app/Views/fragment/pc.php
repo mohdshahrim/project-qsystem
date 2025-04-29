@@ -64,9 +64,9 @@ function columnIndex() {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($pc as $row):?>
+            <?php foreach ($pc as $key=>$row):?>
                 <tr>
-                    <td><?= $row['id'] ?></td>
+                    <td><?= ($key+1) ?></td>
                     <td><?= $row['hostname'] ?></td>
                     <td><?= $row['ip_address'] ?></td>
                     <td><?= $row['os'] ?></td>
