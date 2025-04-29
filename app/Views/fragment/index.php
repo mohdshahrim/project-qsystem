@@ -1,3 +1,11 @@
+<style>
+.bigfigure{
+    text-align: center;
+    font-size:x-large;
+    font-weight: bold;
+}
+</style>
+
 <main>
     <h3>Fragment</h3>
     <p>Welcome to Fragment, painless IT inventory database</p>
@@ -15,24 +23,24 @@
         </tr>
         <tr>
             <td>total PC</td>
-            <td>30</td>
-            <td>8</td>
-            <td>15</td>
-            <td>5</td>
+            <td class="bigfigure"><?= $dtsbu; ?></td>
+            <td class="bigfigure"><?= $dtkpt; ?></td>
+            <td class="bigfigure"><?= $dtsrk; ?></td>
+            <td class="bigfigure"><?= $dttgm; ?></td>
         </tr>
         <tr>
             <td>total Laptop</td>
-            <td>1</td>
-            <td>0</td>
-            <td>1</td>
-            <td>0</td>
+            <td class="bigfigure"><?= $ltsbu; ?></td>
+            <td class="bigfigure"><?= $ltkpt; ?></td>
+            <td class="bigfigure"><?= $ltsrk; ?></td>
+            <td class="bigfigure"><?= $lttgm; ?></td>
         </tr>
         <tr>
             <td>total Printer</td>
-            <td>9</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
+            <td class="bigfigure"><?= $prsbu; ?></td>
+            <td class="bigfigure"><?= $prkpt; ?></td>
+            <td class="bigfigure"><?= $prsrk; ?></td>
+            <td class="bigfigure"><?= $prtgm; ?></td>
         </tr>
     </table>
 

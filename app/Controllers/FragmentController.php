@@ -11,8 +11,33 @@ class FragmentController extends BaseController
 {
     public function index()
     {
+        $pc = new FragmentPCModel();
+        $device = new FragmentDeviceModel();
+
+        // shortforms
+        // dt = desktop
+        // lt = laptop
+        // pt = printer
+
+        $data = [
+            'dtsbu' => $pc->where(['type'=>'desktop','office'=>'sibu',])->countAllResults(),
+            'dtkpt' => $pc->where(['type'=>'desktop','office'=>'kapit',])->countAllResults(),
+            'dtsrk' => $pc->where(['type'=>'desktop','office'=>'sarikei',])->countAllResults(),
+            'dttgm' => $pc->where(['type'=>'desktop','office'=>'tgmanis',])->countAllResults(),
+
+            'ltsbu' => $pc->where(['type'=>'laptop','office'=>'sibu',])->countAllResults(),
+            'ltkpt' => $pc->where(['type'=>'laptop','office'=>'kapit',])->countAllResults(),
+            'ltsrk' => $pc->where(['type'=>'laptop','office'=>'sarikei',])->countAllResults(),
+            'lttgm' => $pc->where(['type'=>'laptop','office'=>'tgmanis',])->countAllResults(),
+
+            'prsbu' => $device->where(['office'=>'sibu',])->countAllResults(),
+            'prkpt' => $device->where(['office'=>'kapit',])->countAllResults(),
+            'prsrk' => $device->where(['office'=>'sarikei',])->countAllResults(),
+            'prtgm' => $device->where(['office'=>'tgmanis',])->countAllResults(),
+        ];
+
         echo view('fragment/header');
-        echo view('fragment/index');
+        echo view('fragment/index', $data);
         echo view('fragment/footer');
     }
 
