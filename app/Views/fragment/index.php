@@ -14,7 +14,7 @@
     <div class="spacer"></div>
 
     <h3>Quick info</h3>
-    <table class="table-qi">
+    <table class="table-qi" style="width:400px;table-layout:fixed;">
         <tr>
             <td></td>
             <td>Sibu</td>
