@@ -1,3 +1,16 @@
+<?php
+function get_office() {
+    if (isset($_GET['office'])) {
+        return $_GET['office'];
+    } else {
+        return "all";
+    }
+}
+
+function columnIndex() {
+
+}
+?>
 <style>
 /* table for Device */
 .table-device {
@@ -14,13 +27,14 @@
 }
 </style>
 <main>
-    <h3>Device (<?php
-    if (isset($_GET['office'])) {
-        echo $_GET['office'];
-    } else {
-        echo "all";
-    }
-    ?>)</h3>
+    <h3 style="display:inline-block; margin-right:1.5em;">Device <?php echo get_office(); ?></h3>
+    <p style="font-size:small;display:inline-block;">
+        <a href="/fragment/device">all</a>&nbsp;
+        <a href="/fragment/device?office=sibu">sibu</a>&nbsp;
+        <a href="/fragment/device?office=kapit">kapit</a>&nbsp;
+        <a href="/fragment/device?office=sarikei">sarikei</a>&nbsp;
+        <a href="/fragment/device?office=tgmanis">tgmanis</a>
+    </p>
 
     <p><a href="/fragment/device/new"><button>new Device</button></a></p>
 

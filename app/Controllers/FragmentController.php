@@ -441,8 +441,18 @@ class FragmentController extends BaseController
 
     public function pageDevice()
     {
+        $qoffice = ''; // query parameter
+        if (isset($_GET['office'])) {
+            $qoffice = $this->request->getGet('office');
+        }
+
         $fragmentDeviceModel = new FragmentDeviceModel();
-        $result = $fragmentDeviceModel->findAll();
+        if (strlen($qoffice)==0) {
+            $result = $fragmentDeviceModel->findAll();    
+        } else {
+            $result = $fragmentDeviceModel->where('office', $qoffice)->findAll();
+        }
+
         $data = ['device' => $result];
 
         echo view('fragment/header');
