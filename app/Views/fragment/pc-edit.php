@@ -1,6 +1,13 @@
-<main>
-    <h2>Update PC</h2>
+<style>
+.div-pic{
 
+}
+</style>
+
+<main>
+    <h2>Update PC (<a href="/fragment/pc/view/<?= $pc['id']?>">view</a>)</h2>
+
+    <div style="display:inline-block;">
     <form method="post" action="/fragment/pc/update">
         <table>
             <tr>
@@ -145,7 +152,55 @@
         <p><a href="/fragment/pc?office=<?= $pc['office']?>">go back to PC (<?= $pc['office']?>)</a></p>
         <p><a href="/fragment/pc/">go back to PC (all)</a></p>
     </form>
-    
+    </div>
+
+    <style>
+        .pic-container {
+            display:inline-block;
+            vertical-align:top;
+            padding-left:2em;
+            position:relative;
+            width:300px;
+        }
+        .pic-box {
+            background-color: none;
+        }
+        .pic-desc {
+            margin-bottom:30px;
+        }
+        .pic-delete {
+            float:right;
+        }
+    </style>
+    <div class="pic-container">
+        <p>PC pictures</p>
+        <?php helper('form'); ?>
+        <?php if (!isset($pics[1])): ?>
+            <?= form_open_multipart("/fragment/pc/picture/create") ?>
+                <input type="hidden" name="id" value="<?= $pc['id'] ?>"/>
+                <p><input type="file" name="pcpic"/></p>
+                <p><button type="submit">Add</button></p>
+            </form>
+        <?php endif ?>
+        
+        <?php if (isset($pics[0])): ?>
+            <div class="pic-box">
+                <img width="250" src="/uploads/fragment/<?= $pics[0]['file_name']?>"/>
+                <div class="pic-desc">
+                    <?= $pics[0]['file_name'] ?>
+                </div>
+            </div>
+        <?php endif ?>
+
+        <?php if (isset($pics[1])): ?>
+            <div class="pic-box">
+                <img width="250" src="/uploads/fragment/<?= $pics[1]['file_name']?>"/>
+                <div class="pic-desc">
+                    <?= $pics[1]['file_name'] ?>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
 </main>
 
 <script>

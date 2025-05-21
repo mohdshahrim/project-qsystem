@@ -6,6 +6,7 @@ use App\Models\FragmentSettingPCModel;
 use App\Models\FragmentPCModel;
 use App\Models\FragmentOfficeModel;
 use App\Models\FragmentDeviceModel;
+use App\Models\FragmentPictureModel;
 
 define('FRAGMENT_VERSION_NO', '1.0');
 define('FRAGMENT_VERSION_DATE', '29/04/2025');
@@ -224,8 +225,14 @@ class FragmentController extends BaseController
     public function pagePCView($pcid)
     {
         $fragmentPCModel = new FragmentPCModel();
+        $fragmentPictureModel = new FragmentPictureModel();
         $pc = $fragmentPCModel->find($pcid);
-        $data = ['pc'=>$pc];
+        $pics = $fragmentPictureModel->where(['fragment_itemid'=>$pcid,'fragment_type'=>'pc',])->find();
+
+        $data = [
+            'pc'=>$pc,
+            'pics'=>$pics,
+        ];
 
         echo view('fragment/header');
         echo view('fragment/pc-view', $data);
@@ -236,8 +243,10 @@ class FragmentController extends BaseController
     {
         $fragmentPCModel = new FragmentPCModel();
         $fragmentDeviceModel = new FragmentDeviceModel();
+        $fragmentPictureModel = new FragmentPictureModel();
 
         $pc = $fragmentPCModel->find($pcid);
+        $pics = $fragmentPictureModel->where(['fragment_itemid'=>$pcid,'fragment_type'=>'pc',])->find();
 
         $office = "sibu"; // default
 
@@ -255,6 +264,7 @@ class FragmentController extends BaseController
 
         $data = [
             'pc' => $pc,
+            'pics' => $pics,
             'hosted' => $fragmentDeviceModel->where('hosted_on', $pcid)->findAll(), // for hosted device
             'device' => $fragmentDeviceModel->where('office', $office)->where('hosted_on', '')->findAll(),
         ];
@@ -346,6 +356,42 @@ class FragmentController extends BaseController
             } else {
                 return redirect()->to('/fragment/pc/');
             }
+        }
+    }
+
+    public function postPCPictureCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'pcpic' => [
+                    'rules' => 'uploaded[pcpic]'
+                        . '|is_image[pcpic]'
+                        . '|mime_in[pcpic,image/jpg,image/jpeg,image/png,image/gif]'
+                        . '|max_size[pcpic,2048]', // 2MB max
+                ],
+        ]))
+        {
+            $fragmentPictureModel = new FragmentPictureModel();
+
+            if ($this->request->getFile('pcpic')) {
+                $fragment_itemid = $this->request->getPost('id');
+                helper('date');
+
+                $data = [
+                    'fragment_type' => 'pc',
+                    'fragment_itemid' => $fragment_itemid,
+                    'file_name' => 'PC'.$fragment_itemid.date('YmdHis', now()).'.jpg',
+                    'file_path' => 'uploads\fragment',
+                    'uploaded_by' => session('username'),
+                ];
+                $this->request->getFile('pcpic')->store('fragment/', $data['file_name']);
+                $fragmentPictureModel->insert($data);
+
+                return redirect()->to('fragment/pc/edit/'.$fragment_itemid);
+            }
+
+            
+
         }
     }
 
@@ -606,6 +652,11 @@ class FragmentController extends BaseController
             }
         }
     }
+
+    // handling image upload
+    //
+    //
+
 
 
     // parse device id
