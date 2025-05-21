@@ -23,11 +23,19 @@
         <br>
         class FragmentController extends BaseController<br>
         </code>
+    <br>
     <p>2. Fragment uses a loose naming convention, but often consistent when it comes to shortening long names.</p>
     <p class="pl-1">- when codifiying office or region, it uses long-short-shortest</p>
     <p class="pl-1">- for example: Sibu Regional Office - sibu - sbu</p>
     <p class="pl-1">- another example: Kapit Sub-Regional Office - kapit - kpt</p>
     <p class="pl-1">- shortest is also called codename</p>
+    <br>
+    <p>3. Fragment also use loose table structure.</p>
+    <p class="pl-1">- Foreign Keys aren't used much</p>
+    <br>
+
+    <h3>Features</h3>
+    <p>1. Each PC can have at most 2 pictures.</p>
 
     <div class="spacer"></div>
     <div class="spacer"></div>
