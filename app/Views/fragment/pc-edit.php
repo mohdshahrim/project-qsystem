@@ -1,9 +1,3 @@
-<style>
-.div-pic{
-
-}
-</style>
-
 <main>
     <h2>Update PC (<a href="/fragment/pc/view/<?= $pc['id']?>">view</a>)</h2>
 
@@ -130,7 +124,7 @@
                 <td style="position: relative;">
                     <?= $pc['office'] ?>
                     <input type="hidden" name="office" value="<?= $pc['office'] ?>">
-                    <button style="" type="button" id="button-changeoffice" onclick="toggleChangeOffice()">change</button>
+                    <button type="button" id="button-changeoffice" onclick="toggleChangeOffice()">change</button>
                     <div id="div-changeoffice" style="display:none;">
                         <p>
                             <a href="/fragment/pc/x-transfer/<?= $pc['id'] ?>/sibu">sibu</a>
