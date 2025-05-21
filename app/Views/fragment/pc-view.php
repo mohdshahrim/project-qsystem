@@ -15,6 +15,7 @@
         <h2 style="display:inline-block;margin-right:1.5em;">PC (<a href="/fragment/pc/edit/<?= $pc['id']?>">edit</a>)</h2>
         <p style="display:inline-block;font-size:small;">
             <a href="/fragment/pc?office=<?= $pc['office']?>">PC (<?= $pc['office']?>)</a>
+            &nbsp;
             <a href="/fragment/pc/">PC (all)</a>
         </p>
     </div>
