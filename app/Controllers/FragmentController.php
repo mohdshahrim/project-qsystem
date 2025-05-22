@@ -376,12 +376,14 @@ class FragmentController extends BaseController
             if ($this->request->getFile('pcpic')) {
                 $fragment_itemid = $this->request->getPost('id');
                 helper('date');
+                date_default_timezone_set('Asia/Kuala_Lumpur');
 
                 $data = [
                     'fragment_type' => 'pc',
                     'fragment_itemid' => $fragment_itemid,
                     'file_name' => 'PC'.$fragment_itemid.date('YmdHis', now()).'.jpg',
                     'file_path' => 'uploads\fragment',
+                    'uploaded_at' => date('Y-m-d H:i:s'),
                     'uploaded_by' => session('username'),
                 ];
                 $this->request->getFile('pcpic')->store('fragment/', $data['file_name']);
