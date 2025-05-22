@@ -49,6 +49,7 @@ $routes->get('/fragment/pc/edit/(:num)', 'FragmentController::pagePCEdit/$1');
 $routes->post('/fragment/pc/update', 'FragmentController::postPCUpdate');
 $routes->post('/fragment/pc/delete', 'FragmentController::postPCDelete');
 $routes->post('/fragment/pc/picture/create', 'FragmentController::postPCPictureCreate');
+$routes->post('/fragment/pc/picture/delete', 'FragmentController::postPCPictureDelete');
 $routes->get('/fragment/pc/x-transfer/(:num)/(:alpha)', 'FragmentController::xPCTransfer/$1/$2'); // special case
 $routes->get('/fragment/office', 'FragmentController::pageOffice');
 $routes->get('/fragment/office/edit/(:num)', 'FragmentController::pageOfficeEdit/$1');

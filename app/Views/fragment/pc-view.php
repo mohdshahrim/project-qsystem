@@ -188,6 +188,15 @@
                 </div>
             </div>
         <?php endif ?>
+
+        <?php if (isset($pics[1])): ?>
+            <div class="pic-box">
+                <img width="250" src="/uploads/fragment/<?= $pics[1]['file_name']?>"/>
+                <div class="pic-desc">
+                    <?= $pics[1]['file_name'] ?>
+                </div>
+            </div>
+        <?php endif ?>
     </div>
 
     <div class="spacer"></div>

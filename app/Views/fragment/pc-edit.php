@@ -178,8 +178,15 @@
         <?php endif ?>
         
         <?php if (isset($pics[0])): ?>
-            <div class="pic-box">
-                <img width="250" src="/uploads/fragment/<?= $pics[0]['file_name']?>"/>
+            <div class="pic-box" style="position:relative;">
+                <div style="position:absolute;top:0;">
+                    <form method="post" action="/fragment/pc/picture/delete">
+                        <input name="id" value="<?= $pics[0]['id'] ?>" type="hidden" />
+                        <input name="pcid" value="<?= $pc['id'] ?>" type="hidden" />
+                        <button type="submit">delete</button>
+                    </form>
+                </div>
+                <img style="border:1px solid black;" width="250" src="/uploads/fragment/<?= $pics[0]['file_name']?>"/>
                 <div class="pic-desc">
                     <?= $pics[0]['file_name'] ?>
                 </div>
@@ -187,8 +194,15 @@
         <?php endif ?>
 
         <?php if (isset($pics[1])): ?>
-            <div class="pic-box">
-                <img width="250" src="/uploads/fragment/<?= $pics[1]['file_name']?>"/>
+            <div class="pic-box" style="position:relative;">
+                <div style="position:absolute;top:0;">
+                    <form method="post" action="/fragment/pc/picture/delete">
+                        <input name="id" value="<?= $pics[1]['id'] ?>" type="hidden" />
+                        <input name="pcid" value="<?= $pc['id'] ?>" type="hidden" />
+                        <button type="submit">delete</button>
+                    </form>
+                </div>
+                <img style="border:1px solid black;" width="250" src="/uploads/fragment/<?= $pics[1]['file_name']?>"/>
                 <div class="pic-desc">
                     <?= $pics[1]['file_name'] ?>
                 </div>

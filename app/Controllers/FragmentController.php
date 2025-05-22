@@ -395,6 +395,28 @@ class FragmentController extends BaseController
         }
     }
 
+    public function postPCPictureDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'pcid' => 'required',
+        ]))
+        {
+            $fragmentPictureModel = new FragmentPictureModel();
+
+            $id = $this->request->getPost('id');
+            $pcid = $this->request->getPost('pcid');
+            $file_name = $fragmentPictureModel->select('file_name')->where('id', $id)->first()['file_name'];
+
+            if ($fragmentPictureModel->delete($this->request->getPost('id')) ) {
+                // if the deletion is successful, delete the file too
+                if (unlink(WRITEPATH.'uploads\fragment\\'.$file_name) ) {
+                    return redirect()->to('/fragment/pc/edit/'.$pcid);
+                }
+            }
+        }
+    }
+
     // special case
     // to handle PC transfer from office to office
     public function xPCTransfer($pcid, $newoffice)
