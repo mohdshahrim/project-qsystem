@@ -6,6 +6,8 @@ use CodeIgniter\Model;
 
 class FragmentOfficeModel extends Model
 {
+    protected $DBGroup = 'fragment';
+
     protected $table            = 'fragment_office';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;

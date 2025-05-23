@@ -4,9 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
 class FragmentPCModel extends Model
 {
+    protected $DBGroup = 'fragment';
+
     protected $table            = 'fragment_pc';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;

@@ -6,6 +6,8 @@ use CodeIgniter\Model;
 
 class FragmentPictureModel extends Model
 {
+    protected $DBGroup = 'fragment';
+
     protected $table            = 'fragment_pic';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
