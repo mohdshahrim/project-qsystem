@@ -63,6 +63,16 @@ $routes->post('/fragment/device/update', 'FragmentController::postDeviceUpdate')
 $routes->post('/fragment/device/delete', 'FragmentController::postDeviceDelete');
 $routes->get('/fragment/about', 'FragmentController::pageAbout');
 
+
+// Report Delivery Status
+$routes->get('/rds', 'RdsController::index');
+$routes->get('/rds/mill', 'RdsController::pageMill');
+$routes->get('/rds/mill/new', 'RdsController::pageMillNew');
+$routes->post('/rds/mill/create', 'RdsController::postMillCreate');
+$routes->get('/rds/mill/edit/(:num)', 'RdsController::pageMillEdit/$1');
+$routes->post('/rds/mill/update', 'RdsController::postMillUpdate');
+$routes->post('/rds/mill/delete', 'RdsController::postMillDelete');
+
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
 $routes->post('/qrat/c', 'Qrat::postC');
