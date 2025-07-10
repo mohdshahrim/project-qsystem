@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::pageLogin');
 $routes->get('/uploads/fragment/(:any)', 'StaticFiles::serveFragment/$1');
+$routes->get('/getalltemp', 'Home::getAllTemp');
 
 // system admin operations
 $routes->get('/admin', 'AdminController::index');
@@ -66,20 +67,19 @@ $routes->get('/fragment/about', 'FragmentController::pageAbout');
 
 // Report Delivery Status
 $routes->get('/rds', 'RdsController::index');
+$routes->get('/rds/setting', 'RdsController::pageSetting');
 $routes->get('/rds/mill', 'RdsController::pageMill');
 $routes->get('/rds/mill/new', 'RdsController::pageMillNew');
 $routes->post('/rds/mill/create', 'RdsController::postMillCreate');
 $routes->get('/rds/mill/edit/(:num)', 'RdsController::pageMillEdit/$1');
 $routes->post('/rds/mill/update', 'RdsController::postMillUpdate');
 $routes->post('/rds/mill/delete', 'RdsController::postMillDelete');
-
 $routes->get('/rds/licensee', 'RdsController::pageLicensee');
 $routes->get('/rds/licensee/new', 'RdsController::pageLicenseeNew');
 $routes->post('/rds/licensee/create', 'RdsController::postLicenseeCreate');
 $routes->get('/rds/licensee/edit/(:num)', 'RdsController::pageLicenseeEdit/$1');
 $routes->post('/rds/licensee/update', 'RdsController::postLicenseeUpdate');
 $routes->post('/rds/licensee/delete', 'RdsController::postLicenseeDelete');
-
 
 
 // Qrat

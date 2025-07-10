@@ -23,6 +23,41 @@ class Home extends BaseController
         return view('home/login', $data);
     }
 
+    // get temperature
+
+    // same as getTemperatures but designed to serve AJAX
+    public function getAllTemp() {
+        $status = 'ERROR'; // default
+        $url_sibu = "http://api.weatherapi.com/v1/current.json?key=9a0e523564fd475b8e864153242702&q=Sibu&aqi=yes"; // The GET URL
+        $url_kuching = "http://api.weatherapi.com/v1/current.json?key=9a0e523564fd475b8e864153242702&q=Kuching&aqi=yes";
+
+        //$json = file_get_contents($url);
+        if ($json_sibu = json_decode(file_get_contents($url_sibu))) {
+            $status = 'OK';
+        } else {
+            $status = 'ERROR';
+        }
+
+
+        if ($json_kuching = json_decode(file_get_contents($url_kuching))) {
+            $status = 'OK';
+        } else {
+            $status = 'ERROR';
+        }
+
+        $data = [
+            'status' => $status,
+            'sibu_temp' => $json_sibu->current->temp_c,
+            'kuching_temp' => $json_kuching->current->temp_c,
+        ];
+
+        //return $data;
+        return $this->response->setJSON($data);
+    }
+
+
+
+
     // TESTS
     // reserved for general testing only
     public function testme()
@@ -48,20 +83,6 @@ class Home extends BaseController
 
         echo $response->getHeaderLine('Content-Type');
         echo $response->getBody();
-    }
-
-    // just to test reading from db
-    public function testdb(): string
-    {
-        if (file_exists(WRITEPATH.'database/core.db')) {
-
-            $userModel = new \App\Models\Users();
-            $user = $userModel->find(1);
-
-            return "core.db yezza ".$user['username'];
-        } else {
-            return "core.db does not exist";
-        }
     }
 
     public function testforge() {
