@@ -73,6 +73,15 @@ $routes->get('/rds/mill/edit/(:num)', 'RdsController::pageMillEdit/$1');
 $routes->post('/rds/mill/update', 'RdsController::postMillUpdate');
 $routes->post('/rds/mill/delete', 'RdsController::postMillDelete');
 
+$routes->get('/rds/licensee', 'RdsController::pageLicensee');
+$routes->get('/rds/licensee/new', 'RdsController::pageLicenseeNew');
+$routes->post('/rds/licensee/create', 'RdsController::postLicenseeCreate');
+$routes->get('/rds/licensee/edit/(:num)', 'RdsController::pageLicenseeEdit/$1');
+$routes->post('/rds/licensee/update', 'RdsController::postLicenseeUpdate');
+$routes->post('/rds/licensee/delete', 'RdsController::postLicenseeDelete');
+
+
+
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
 $routes->post('/qrat/c', 'Qrat::postC');

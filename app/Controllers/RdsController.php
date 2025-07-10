@@ -30,6 +30,7 @@ class RdsController extends BaseController
             .view('rds/footer');
     }
 
+    // for Mill
     public function pageMill()
     {
         $db = db_connect($this->rds_db);
@@ -156,6 +157,137 @@ class RdsController extends BaseController
                 echo view('rds/footer');
             } else {
                 return redirect()->to('/rds/mill/');
+            }
+        }
+    }
+
+    // for Licensee
+    public function pageLicensee()
+    {
+        $db = db_connect($this->rds_db);
+        $licenseeModel = model('RdsLicenseeModel', true, $db);
+        $data = [
+            'licensees' => $licenseeModel->findAll(),
+        ];
+
+        return view('rds/header')
+            .view('rds/licensee', $data)
+            .view('rds/footer');
+    }
+
+    public function pageLicenseeNew()
+    {
+        return view('rds/header')
+            .view('rds/licensee-new')
+            .view('rds/footer');
+    }
+
+    public function postLicenseeCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'license_no' => 'required',
+        ]))
+        {
+            $db = db_connect($this->rds_db);
+            $licenseeModel = model('RdsLicenseeModel', true, $db);
+
+            $license_no = $this->request->getPost('license_no');
+            $licensee_name = $this->request->getPost('licensee_name');
+            $email = $this->request->getPost('email');
+            $contactperson = $this->request->getPost('contactperson');
+
+            $data = [
+                'license_no' => $license_no,
+                'licensee_name' => $licensee_name,
+                'email' => $email,
+                'contact_person' => $contactperson,
+            ];
+
+            $licenseeModel->insert($data);
+
+            $id = $licenseeModel->getInsertID();
+
+            $returnlink = "/rds/licensee/edit/".$id;
+
+            $successPage = [
+                'message' => "Licensee create success!",
+                'returnlink' => $returnlink,
+            ];
+
+            return view('rds/header').view('rds/rds-success', $successPage).view('rds/footer');
+        }
+    }
+
+    public function pageLicenseeEdit($id)
+    {
+        $db = db_connect($this->rds_db);
+        $licenseeModel = model('RdsLicenseeModel', true, $db);
+
+        $result = $licenseeModel->find($id);
+        $data = ['licensee' => $result];
+
+        return view('rds/header')
+            .view('rds/licensee-edit', $data)
+            .view('rds/footer');        
+    }
+
+    public function postLicenseeUpdate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $db = db_connect($this->rds_db);
+            $licenseeModel = model('RdsLicenseeModel', true, $db);
+
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'id' => $id,
+                'licensee_no' => $this->request->getPost('licensee_no'),
+                'licensee_name' => $this->request->getPost('licensee_name'),
+                'email' => $this->request->getPost('email'),
+                'contact_person' => $this->request->getPost('contactperson'),
+            ];
+
+            if ($licenseeModel->update($id, $data))
+            {
+                // update success
+                $successPage = [
+                    'message' => "licensee update success!",
+                    'returnlink' => '/rds/licensee',
+                ];
+
+                return view('rds/header')
+                    .view('rds/rds-success', $successPage)
+                    .view('rds/footer');   
+            }
+        }
+    }
+
+    public function postLicenseeDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $db = db_connect($this->rds_db);
+            $licenseeModel = model('RdsLicenseeModel', true, $db);
+
+            $id = $this->request->getPost('id');
+
+            if ($licenseeModel->delete($id)) {  
+                // update success
+                $successPage = [
+                    'message' => "Licensee delete success!",
+                    'returnlink' => "/rds/licensee",
+                ];
+
+                echo view('rds/header');
+                echo view('rds/rds-success', $successPage);
+                echo view('rds/footer');
+            } else {
+                return redirect()->to('/rds/licensee/');
             }
         }
     }
