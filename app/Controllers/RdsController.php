@@ -30,6 +30,11 @@ class RdsController extends BaseController
             .view('rds/footer');
     }
 
+    public function pageSetting()
+    {
+        //
+    }
+
     // for Mill
     public function pageMill()
     {
@@ -290,5 +295,58 @@ class RdsController extends BaseController
                 return redirect()->to('/rds/licensee/');
             }
         }
+    }
+
+    public function pageMR()
+    {
+        return view('rds/s-header')
+            .view('rds/mr')
+            .view('rds/s-footer');
+    }
+
+    public function getMR()
+    {
+        $qmonth = $this->request->getGet('qmonth');// query month
+        $qyear = $this->request->getGet('qyear');// query year
+
+        $db = db_connect($this->rds_db);
+        //$mrModel = model('RdsMillReportModel', true, $db);
+        $builder = $db->table('mill_report');
+        $builder->select('mill_report.id, mill.mill_no, mill.mill_name, mill_report.delivery_date, mill_report.status')->where(['mill_report.month' => $qmonth, 'mill_report.year' => $qyear]);
+        $builder->join('mill', 'mill.id = mill_report.mill', 'left');
+
+        $query = $builder->get();
+
+        $data = [
+            'mr' => $query->getResultArray(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
+
+    public function pageMRNew()
+    {
+
+    }
+
+    public function postMRCreate()
+    {
+
+    }
+
+    public function pageMREdit()
+    {
+
+    }
+
+    public function postMRUpdate()
+    {
+
+    }
+
+    public function postMRDelete()
+    {
+
     }
 }

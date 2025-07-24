@@ -80,6 +80,13 @@ $routes->post('/rds/licensee/create', 'RdsController::postLicenseeCreate');
 $routes->get('/rds/licensee/edit/(:num)', 'RdsController::pageLicenseeEdit/$1');
 $routes->post('/rds/licensee/update', 'RdsController::postLicenseeUpdate');
 $routes->post('/rds/licensee/delete', 'RdsController::postLicenseeDelete');
+$routes->get('/rds/mr', 'RdsController::pageMR');
+$routes->get('/rds/mr/get', 'RdsController::getMR');
+$routes->get('/rds/mr/new', 'RdsController::pageMRNew');
+$routes->get('/rds/mr/create', 'RdsController::postMRCreate');
+$routes->get('/rds/mr/edit', 'RdsController::pageMREdit');
+$routes->get('/rds/mr/update', 'RdsController::postMRUpdate');
+$routes->get('/rds/mr/delete', 'RdsController::postMRDelete');
 
 
 // Qrat
