@@ -299,18 +299,24 @@ class RdsController extends BaseController
 
     public function pageMR()
     {
+        $db = db_connect($this->rds_db);
+        $millModel = model('RdsMillModel', true, $db);
+        $data = [
+            'mills' => $millModel->findAll(),
+        ];
+
+
         return view('rds/s-header')
-            .view('rds/mr')
+            .view('rds/mr', $data)
             .view('rds/s-footer');
     }
 
-    public function getMR()
+    public function apiMRGet()
     {
         $qmonth = $this->request->getGet('qmonth');// query month
         $qyear = $this->request->getGet('qyear');// query year
 
         $db = db_connect($this->rds_db);
-        //$mrModel = model('RdsMillReportModel', true, $db);
         $builder = $db->table('mill_report');
         $builder->select('mill_report.id, mill.mill_no, mill.mill_name, mill_report.delivery_date, mill_report.status')->where(['mill_report.month' => $qmonth, 'mill_report.year' => $qyear]);
         $builder->join('mill', 'mill.id = mill_report.mill', 'left');
@@ -324,10 +330,42 @@ class RdsController extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function apiMRCreate()
+    {
+        $mrmill = $this->request->getPost('mrmill');
+        $mrdeliverydate = $this->request->getPost('mrdeliverydate');
+
+        $db = db_connect($this->rds_db);
+        $mrModel = model('RdsMillReportModel', true, $db);
+
+        // deduce what month is the MR based on delivery date
+        $m = new \Moment\Moment($mrdeliverydate); // default is "now" UTC
+        $year = (int)$m->format('Y');
+        $month = (int)$m->subtractMonths(1)->format('m');
+
+        $insertData = [
+            'mill' => $mrmill,
+            'month' => $month,
+            'year' => $year,
+            'delivery_date' => $mrdeliverydate,
+            'status' => '',
+        ];
+
+        $mrModel->insert($insertData);
+
+        $data = [
+            'month' => $month,
+            'year' => $year,
+        ];
+
+        return $this->response->setJSON($data);
+    }
 
     public function pageMRNew()
     {
-
+        return view('rds/s-header')
+            .view('rds/mr-new')
+            .view('rds/s-footer');
     }
 
     public function postMRCreate()

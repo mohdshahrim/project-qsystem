@@ -1,3 +1,4 @@
+<script src="/js/bootstrap.min.js" defer></script>
 <script src="/js/minAjax.js" defer></script>
 <script src="/js/alpinejs.min.js" defer></script>
 
@@ -6,11 +7,12 @@
         qmonth: 1,
         qyear: 2025,
         mr: [],
+        mrmill: '', // refer MR modal
+        mrdeliverydate: '', // refer MR modal
         error: null,
-        set setMR(mr) { this.mr = mr },
         fetchMR({mr}) {
             minAjax({
-                url: '/rds/mr/get',
+                url: '/rds/api/mr/get',
                 type: 'GET',
                 data: {
                     qmonth: this.qmonth,
@@ -19,11 +21,36 @@
                 success: (response) => {
                     data = JSON.parse(response);
                     this.mr = data.mr;
-                    console.table(this.mr);
+                }
+            });
+        },
+        createMR({mrmill, mrdeliverydate}) {
+            minAjax({
+                url: '/rds/api/mr/create',
+                type: 'POST',
+                data: {
+                    mrmill: this.mrmill,
+                    mrdeliverydate: this.mrdeliverydate,
+                },
+                success: (response) => {
+                    data =  JSON.parse(response);
+                    this.qmonth = data.month;
+                    this.qyear = data.year;
+                    
+                    // modify the select too
+                    document.getElementById('select-month').value = this.qmonth;
+                    document.getElementById('select-year').value = this.qyear;
+
+                    this.fetchMR($data);
+
+                    // indicates this part is done
+                    console.log('tehee');
                 }
             });
         }
     }" x-init="fetchMR($data)">
+
+
     <div class="container">
         <div class="">
             <div class="row">
@@ -32,8 +59,12 @@
                         Mill Report
                     </h2>
                 </div>
-                <div class="col">
-                    <button class="btn btn-primary">New MR</button>
+                <div class="col" x-on:mrtoday="
+                    document.getElementById('mrdeliverydate').valueAsDate = new Date();
+                ">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" x-on:click="$dispatch('mrtoday')">
+                        New MR
+                    </button>
                 </div>
             </div>
         </div>
@@ -106,7 +137,47 @@
             </tbody>
         </table>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Mill Report</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="mrmill" class="form-label">Mill</label>
+                            <select class="form-select" aria-label="" id="mrmill" x-init="mrmill = $el.value" x-on:change="mrmill = $el.value">
+                            <?php foreach ($mills as $key=>$row):?>
+                                <option value="<?= $row['id'] ?>"><?= $row['mill_no'].' '.$row['mill_name']; ?></option>
+                            <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="mrdeliverydate" class="form-label">Delivery Date</label>
+                            <input type="date" class="form-control" id="mrdeliverydate" x-init="mrdeliverydate = $el.value" x-on:change="mrdeliverydate = $el.value">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" x-on:click="createMR($data)">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
 
 <script>
 //
