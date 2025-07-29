@@ -361,6 +361,29 @@ class RdsController extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function apiMRDelete()
+    {
+        $mrid = $this->request->getPost('mrid');
+
+        $db = db_connect($this->rds_db);
+        $mrModel = model('RdsMillReportModel', true, $db);
+
+        // get month and year of the targetted MR
+        $mr = $mrModel->find($mrid);
+
+        $month = $mr['month'];
+        $year = $mr['year'];
+
+        $mrModel->delete($mrid);
+
+        $returnData = [
+            'month' => $month,
+            'year' => $year,
+        ];
+
+        return $this->response->setJSON($returnData);
+    }
+
     public function pageMRNew()
     {
         return view('rds/s-header')

@@ -42,9 +42,27 @@
                     document.getElementById('select-year').value = this.qyear;
 
                     this.fetchMR($data);
+                }
+            });
+        },
+        deleteMR(mrid) {
+            minAjax({
+                url: '/rds/api/mr/delete',
+                type: 'POST',
+                data: {
+                    mrid: mrid,
+                },
+                success: (response) => {
+                    data = JSON.parse(response);
+                    
+                    this.qmonth = data.month;
+                    this.qyear = data.year;
+                    
+                    // modify the select too
+                    document.getElementById('select-month').value = this.qmonth;
+                    document.getElementById('select-year').value = this.qyear;
 
-                    // indicates this part is done
-                    console.log('tehee');
+                    this.fetchMR($data);
                 }
             });
         }
@@ -62,7 +80,7 @@
                 <div class="col" x-on:mrtoday="
                     document.getElementById('mrdeliverydate').valueAsDate = new Date();
                 ">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" x-on:click="$dispatch('mrtoday')">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mrModal" x-on:click="$dispatch('mrtoday')">
                         New MR
                     </button>
                 </div>
@@ -130,7 +148,7 @@
                         <td x-text="item.delivery_date"></td>
                         <td x-text="item.status"></td>
                         <td>
-                            <a href="/rds/mr/delete">X</a>
+                            <button class="btn btn-danger btn-sm" x-on:click="deleteMR(item.id)">delete</button>
                         </td>
                     </tr>
                 </template>
@@ -140,19 +158,19 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="mrModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Mill Report</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="mrModalLabel">New Mill Report</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="row">
                         <div class="col">
                             <label for="mrmill" class="form-label">Mill</label>
-                            <select class="form-select" aria-label="" id="mrmill" x-init="mrmill = $el.value" x-on:change="mrmill = $el.value">
+                            <select class="form-select" id="mrmill" x-init="mrmill = $el.value" x-on:change="mrmill = $el.value">
                             <?php foreach ($mills as $key=>$row):?>
                                 <option value="<?= $row['id'] ?>"><?= $row['mill_no'].' '.$row['mill_name']; ?></option>
                             <?php endforeach ?>
@@ -171,7 +189,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" x-on:click="createMR($data)">Okay</button>
+                    <button type="button" class="btn btn-primary" x-on:click="createMR($data)" data-bs-dismiss="modal">Okay</button>
                 </div>
             </div>
         </div>
