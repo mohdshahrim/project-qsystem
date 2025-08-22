@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h2 style="margin-bottom:0px;">Welcome to Qsystem</h2>
+    <h2 style="margin-bottom:0px;">Login to Qsystem</h2>
     <p style="font-size:small; margin-top:0px;">part of Project Quartermaster</p>
     <br>
     <table>
