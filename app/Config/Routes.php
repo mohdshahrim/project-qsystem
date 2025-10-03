@@ -90,6 +90,15 @@ $routes->get('/rds/mr/edit', 'RdsController::pageMREdit');
 $routes->get('/rds/mr/update', 'RdsController::postMRUpdate');
 $routes->get('/rds/mr/delete', 'RdsController::postMRDelete');
 
+$routes->get('/rds/lr', 'RdsController::pageLR');
+$routes->get('/rds/api/lr/get', 'RdsController::apiLRGet');
+$routes->post('/rds/api/lr/create', 'RdsController::apiLRCreate');
+$routes->post('/rds/api/lr/delete', 'RdsController::apiLRDelete');
+$routes->get('/rds/lr/new', 'RdsController::pageLRNew');
+$routes->post('/rds/lr/create', 'RdsController::postLRCreate');
+$routes->get('/rds/lr/edit', 'RdsController::pageLREdit');
+$routes->get('/rds/lr/update', 'RdsController::postLRUpdate');
+$routes->post('/rds/lr/delete', 'RdsController::postLRDelete');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
