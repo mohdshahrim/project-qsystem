@@ -2,9 +2,6 @@
     qmonth: 1,
     qyear: 2025,
     lr: [],
-    tehee() {
-        console.log('tehee');
-    },
     fetchLR() {
         minAjax({
             url: '/rds/api/lr/get',
@@ -18,12 +15,6 @@
                 this.lr = data.lr;
             }
         });
-    },
-    populateTable() {
-        console.log('populateTable');
-    },
-    updateMonth(input) {
-        //console.log('dada ' + input);
     },
 }" x-init="fetchLR">
     <div>
