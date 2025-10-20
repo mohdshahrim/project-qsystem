@@ -99,6 +99,12 @@ $routes->post('/rds/lr/create', 'RdsController::postLRCreate');
 $routes->get('/rds/lr/edit', 'RdsController::pageLREdit');
 $routes->get('/rds/lr/update', 'RdsController::postLRUpdate');
 $routes->post('/rds/lr/delete', 'RdsController::postLRDelete');
+// public facing RDS
+$routes->get('/public/rds', 'Public\RdsController::index');
+$routes->get('/public/rds/lr', 'Public\RdsController::pageLR');
+$routes->get('/public/rds/mr', 'Public\RdsController::index');
+$routes->get('/public/rds/licensee', 'Public\RdsController::index');
+$routes->get('/public/rds/mill', 'Public\RdsController::index');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
