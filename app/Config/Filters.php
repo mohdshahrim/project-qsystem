@@ -105,6 +105,6 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        'admin' => ['before' => ['fragment', 'fragment/*', 'rds', 'rds/*']],
+        'admin' => ['before' => ['fragment', 'fragment/*', 'rds', 'rds/lr', 'rds/mr', 'rds/mill', 'rds/setting', 'rds/licensee']],
     ];
 }
