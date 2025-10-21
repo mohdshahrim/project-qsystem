@@ -34,5 +34,24 @@ class RdsController extends BaseController
             .view('public/rds/footer');
     }
 
+    public function apiLRGet()
+    {
+        $month = $this->request->getGet('month');
+        $year = $this->request->getGet('year');
+        
+        $db = db_connect($this->rds_db);
+        $builder = $db->table('licensee_report');
+        $builder->select('licensee_report.id, licensee.license_no, licensee.licensee_name, licensee.email, licensee.contact_person, licensee_report.delivery_date, licensee_report.status')->where(['licensee_report.month' => $month, 'licensee_report.year' => $year]);
+        $builder->join('licensee', 'licensee.id = licensee_report.licensee', 'left');
+
+        $query = $builder->get();
+
+        $data = [
+            'lr' => $query->getResultArray(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
 
 }

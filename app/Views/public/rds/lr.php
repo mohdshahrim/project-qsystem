@@ -1,14 +1,19 @@
 <div x-data="{
-    qmonth: 1,
-    qyear: 2025,
+    month: 1,
+    year: 2025,
+    yearmonth: '2025-01',
     lr: [],
     fetchLR() {
+        // deconstruct the yearmonth
+        this.year = this.yearmonth.substring(0,4);
+        this.month = parseInt(this.yearmonth.substring(5));
+
         minAjax({
             url: '/rds/api/lr/get',
             type: 'GET',
             data: {
-                month: this.qmonth,
-                year: this.qyear,
+                month: this.month,
+                year: this.year,
             },
             success: (response) => {
                 data = JSON.parse(response);
@@ -33,9 +38,9 @@
 
     <div class="w3-grid w3-grid-padding" style="grid-template-columns: 250px 200px; align-items: center;">
         <div>
-            <input class="w3-input w3-border" type="month" x-on:change="updateMonth($el.value)">
+            <input class="w3-input w3-border" type="month" x-model="yearmonth">
         </div>
-        <div>    
+        <div>
             <button class="w3-button w3-red w3-round-large" x-on:click="fetchLR">Search</button>
         </div>
     </div>
