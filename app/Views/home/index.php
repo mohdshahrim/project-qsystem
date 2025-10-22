@@ -62,7 +62,7 @@
                     
                 </div>
                 <div>
-                    <a class="w3-button w3-blue w3-round-large" href="/login">
+                    <a class="w3-button w3-red w3-round-large" href="/login">
                         <i class="fa fa-sign-in"></i>
                         Sign In
                     </a>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="w3-border w3-container">
-                <a href="#">Go</a>
+                <a href="/public/rds">Go</a>
             </div>
         </div>
 

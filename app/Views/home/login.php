@@ -38,5 +38,7 @@
         </form>
     </table>
     <p style="font-size:0.8em;">version <?php echo QSYSTEM_VERSION_NO; ?> (<?php echo QSYSTEM_VERSION_DATE; ?>)</p>
+    <br>
+    <p>go <a href="/">back</a></p>
 </body>
 </html>
