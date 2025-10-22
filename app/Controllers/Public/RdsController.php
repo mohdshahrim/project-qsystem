@@ -41,5 +41,31 @@ class RdsController extends BaseController
             .view('public/rds/footer');
     }
 
+    public function pageLicensee()
+    {
+        $db = db_connect($this->rds_db);
+        $licenseeModel = model('RdsLicenseeModel', true, $db);
+        $data = [
+            'licensees' => $licenseeModel->findAll(),
+        ];
+
+        return view('public/rds/header')
+            .view('public/rds/licensee', $data)
+            .view('public/rds/footer');
+    }
+
+    public function pageMill()
+    {
+        $db = db_connect($this->rds_db);
+        $licenseeModel = model('RdsMillModel', true, $db);
+        $data = [
+            'mills' => $licenseeModel->findAll(),
+        ];
+
+        return view('public/rds/header')
+            .view('public/rds/mill', $data)
+            .view('public/rds/footer');
+    }
+
 
 }

@@ -103,8 +103,8 @@ $routes->post('/rds/lr/delete', 'RdsController::postLRDelete');
 $routes->get('/public/rds', 'Public\RdsController::index');
 $routes->get('/public/rds/lr', 'Public\RdsController::pageLR');
 $routes->get('/public/rds/mr', 'Public\RdsController::pageMR');
-$routes->get('/public/rds/licensee', 'Public\RdsController::index');
-$routes->get('/public/rds/mill', 'Public\RdsController::index');
+$routes->get('/public/rds/licensee', 'Public\RdsController::pageLicensee');
+$routes->get('/public/rds/mill', 'Public\RdsController::pageMill');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
