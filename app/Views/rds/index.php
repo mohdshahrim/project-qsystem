@@ -1,76 +1,34 @@
-<style>
-    .div-appcontainer {
-        width: 100%;
-        padding-top: 35px;
-        display: inline-flex;
-    }
-    .div-app {
-        color: black;
-        display: block;
-        width: 120px;
-        height: 120px;
-        border-radius: 6px;
-        border: 1px gray solid;
-        margin-right: 15px;
-        margin-top: 15px;
-        padding: 5px;
-        text-decoration: none;
-    }
-    .div-app:hover {
-        color: white;
-        /*background-color: #475569;*/
-        background-color: gray;
-    }
-    .app-info {
-        position: relative;
-        height: 100%;
-    }
-    .app-info-p {
-        position: absolute;
-        bottom: 0;
-        margin: 0;
-        font-size: small;
-    }
-    .app-image {
-        background-size: 90px;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-</style>
-
 <main>
-    <h3>Report Delivery Status (RDS)</h3>
-    <p>for LR and MR</p>
+    <h2>RDS</h2>
 
+    <!-- div to contain array of app shortcuts -->
     <div class="div-appcontainer">
-
-        <a class="div-app app-image" href="/rds/lr" style="background-image:url('/img/rds/lr.png');">
+        <a class="div-app" href="/rds/lr" tabindex="1">
             <div class="app-info">
                 <b>LR</b>
                 <p class="app-info-p">Licensee Report</p>
             </div>
         </a>
 
-        <a class="div-app app-image" href="/rds/mr" style="background-image:url('/img/rds/mr.png');">
+        <a class="div-app" href="/rds/mr" tabindex="2">
             <div class="app-info">
                 <b>MR</b>
                 <p class="app-info-p">Mill Report</p>
             </div>
         </a>
 
-        <a class="div-app app-image" href="/rds/licensee" style="background-image:url('/img/rds/llist.png');">
+        <a class="div-app" href="/rds/licensee" tabindex="3">
             <div class="app-info">
-                <b>Licensee List</b>
-                <p class="app-info-p">list of licensees</p>
+                <b>Licensee</b>
+                <p class="app-info-p">List of Licensee</p>
             </div>
         </a>
 
-        <a class="div-app app-image" href="/rds/mill" style="background-image:url('/img/rds/mlist.png');">
+        <a class="div-app" href="/rds/mill" tabindex="4">
             <div class="app-info">
-                <b>Mill List</b>
-                <p class="app-info-p">list of mills</p>
+                <b>Mill</b>
+                <p class="app-info-p">List of Mill</p>
             </div>
         </a>
-    
     </div>
 </main>

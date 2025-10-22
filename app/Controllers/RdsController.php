@@ -25,9 +25,9 @@ class RdsController extends BaseController
 
     public function index()
     {
-        return view('rds/s-header')
+        return view('rds/header')
             .view('rds/index')
-            .view('rds/s-footer');
+            .view('rds/footer');
     }
 
     public function pageSetting()
@@ -44,9 +44,9 @@ class RdsController extends BaseController
             'mills' => $millModel->findAll(),
         ];
 
-        return view('rds/s-header')
-            .view('rds/s-mill', $data)
-            .view('rds/s-footer');
+        return view('rds/header')
+            .view('rds/mill', $data)
+            .view('rds/footer');
     }
 
     public function pageMillNew()
@@ -305,10 +305,9 @@ class RdsController extends BaseController
             'mills' => $millModel->findAll(),
         ];
 
-
-        return view('rds/s-header')
+        return view('rds/header')
             .view('rds/mr', $data)
-            .view('rds/s-footer');
+            .view('rds/footer');
     }
 
     public function apiMRGet()
@@ -386,9 +385,9 @@ class RdsController extends BaseController
 
     public function pageMRNew()
     {
-        return view('rds/s-header')
+        return view('rds/header')
             .view('rds/mr-new')
-            .view('rds/s-footer');
+            .view('rds/footer');
     }
 
 
