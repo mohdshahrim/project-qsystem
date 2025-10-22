@@ -313,12 +313,12 @@ class RdsController extends BaseController
 
     public function apiMRGet()
     {
-        $qmonth = $this->request->getGet('qmonth');// query month
-        $qyear = $this->request->getGet('qyear');// query year
+        $month = $this->request->getGet('month');
+        $year = $this->request->getGet('year');
 
         $db = db_connect($this->rds_db);
         $builder = $db->table('mill_report');
-        $builder->select('mill_report.id, mill.mill_no, mill.mill_name, mill_report.delivery_date, mill_report.status')->where(['mill_report.month' => $qmonth, 'mill_report.year' => $qyear]);
+        $builder->select('mill_report.id, mill.mill_no, mill.mill_name, mill_report.delivery_date, mill_report.status')->where(['mill_report.month' => $month, 'mill_report.year' => $year]);
         $builder->join('mill', 'mill.id = mill_report.mill', 'left');
 
         $query = $builder->get();
