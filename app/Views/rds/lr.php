@@ -76,6 +76,7 @@
                 lrlicensee: document.getElementById('input-licensee').value,
                 lrmonthyear: document.getElementById('input-month').value,
                 lrdeliverydate: document.getElementById('input-date').value,
+                lrstatus: document.getElementById('input-status').value,
             },
             success: (response) => {
                 // update the month and year
@@ -138,6 +139,10 @@
             &nbsp;
             <span>
                 <input type="date" id="input-date" />
+            </span>
+            &nbsp;
+            <span>
+                <input type="text" id="input-status" value="OK" autocomplete="off"/>
             </span>
             &nbsp;
             <span>

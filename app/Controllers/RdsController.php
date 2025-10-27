@@ -429,6 +429,7 @@ class RdsController extends BaseController
         $lrLicensee = $this->request->getPost('lrlicensee');
         $lrMonthYear = $this->request->getPost('lrmonthyear');
         $lrDeliveryDate = $this->request->getPost('lrdeliverydate');
+        $lrStatus = $this->request->getPost('lrstatus');
 
         $db = db_connect($this->rds_db);
         $lrModel = model('RdsLicenseeReportModel', true, $db);
@@ -443,7 +444,7 @@ class RdsController extends BaseController
             'month' => $lrMonth,
             'year' => $lrYear,
             'delivery_date' => $lrDeliveryDate,
-            'status' => '',
+            'status' => $lrStatus,
         ];
 
         $lrModel->insert($insertData);
@@ -463,6 +464,38 @@ class RdsController extends BaseController
         $db = db_connect($this->rds_db);
         $lrModel = model('RdsLicenseeReportModel', true, $db);
         $lrModel->delete($lr);
+
+        $responseData = [
+            'message' => '',
+        ];
+
+        return $this->response->setJSON($responseData);
+    }
+
+    public function postMRCreate()
+    {
+        $mrMill = $this->request->getPost('mrmill');
+        $mrMonthYear = $this->request->getPost('mrmonthyear');
+        $mrDeliveryDate = $this->request->getPost('mrdeliverydate');
+        $mrStatus = $this->request->getPost('mrstatus');
+
+        $db = db_connect($this->rds_db);
+        $mrModel = model('RdsMillReportModel', true, $db);
+
+        // split monthyear into month and year
+        $arrmy = explode("-", $mrMonthYear);
+        $mrYear = $arrmy[0];
+        $mrMonth = $arrmy[1];
+
+        $insertData = [
+            'mill' => $mrMill,
+            'month' => $mrMonth,
+            'year' => $mrYear,
+            'delivery_date' => $mrDeliveryDate,
+            'status' => $mrStatus,
+        ];
+
+        $mrModel->insert($insertData);
 
         $responseData = [
             'message' => '',

@@ -72,9 +72,10 @@
             url: '/rds/mr/create',
             type: 'POST',
             data: {
-                mrlicensee: document.getElementById('input-licensee').value,
+                mrmill: document.getElementById('input-mill').value,
                 mrmonthyear: document.getElementById('input-month').value,
                 mrdeliverydate: document.getElementById('input-date').value,
+                mrstatus: document.getElementById('input-status').value,
             },
             success: (response) => {
                 // update the month and year
@@ -124,7 +125,7 @@
             </span>
             &nbsp;
             <span>
-                <select id="input-licensee">
+                <select id="input-mill">
                     <?php foreach ($mills as $key=>$row):?>
                         <option value="<?= $row['id'] ?>"><?= $row['mill_no'].' '.$row['mill_name']; ?></option>
                     <?php endforeach ?>
@@ -137,6 +138,10 @@
             &nbsp;
             <span>
                 <input type="date" id="input-date" />
+            </span>
+            &nbsp;
+            <span>
+                <input type="text" id="input-status" value="OK" autocomplete="off"/>
             </span>
             &nbsp;
             <span>

@@ -85,7 +85,7 @@ $routes->get('/rds/api/mr/get', 'RdsController::apiMRGet');
 $routes->post('/rds/api/mr/create', 'RdsController::apiMRCreate');
 $routes->post('/rds/api/mr/delete', 'RdsController::apiMRDelete');
 $routes->get('/rds/mr/new', 'RdsController::pageMRNew');
-$routes->get('/rds/mr/create', 'RdsController::postMRCreate');
+$routes->post('/rds/mr/create', 'RdsController::postMRCreate');
 $routes->get('/rds/mr/edit', 'RdsController::pageMREdit');
 $routes->get('/rds/mr/update', 'RdsController::postMRUpdate');
 $routes->get('/rds/mr/delete', 'RdsController::postMRDelete');
