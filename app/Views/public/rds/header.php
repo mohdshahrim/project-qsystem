@@ -9,6 +9,21 @@
     <script src="/js/alpinejs.min.js" defer></script>
     <title>Qsystem | RDS</title>
     <style>
+        /* for printing */
+        @media print {
+            * {
+                font-size: small;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                padding: 0;
+            }
+            .hidden-print {
+                display: none;
+            }
+        }
+
         .app-box {
             width: 160px;
             height: 160px;
@@ -54,7 +69,7 @@
     <header class="w3-margin-bottom">
         <div class="w3-flex">
             <div class="w3-border-bottom w3-padding" style="flex-grow: 1;">
-                <img src="/favicon.ico" width="30" height="auto">
+                <img src="/favicon.ico" width="30" height="auto" class="hidden-print">
                 Report Delivery Status (RDS)
             </div>
         </div>

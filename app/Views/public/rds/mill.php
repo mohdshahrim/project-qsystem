@@ -15,6 +15,17 @@
 
     <br>
 
+    <div class="w3-grid w3-grid-padding" style="grid-template-columns: 250px 200px; align-items: center;">
+        <div class="hidden-print">
+            <a target="_blank" class="w3-button w3-blue w3-round-large" href="/rds/print/2">
+                <i class="fa fa-print"></i>
+                Print
+            </a>
+        </div>
+    </div>
+
+    <br>
+
     <div>
         <table id="table-report" class="w3-table w3-border w3-bordered">
             <tr>

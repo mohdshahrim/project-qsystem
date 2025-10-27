@@ -2,6 +2,7 @@
     month: 1,
     year: 2025,
     yearmonth: '2025-01',
+    url: ` `,
     mr: [],
     fetchMR() {
         // deconstruct the yearmonth
@@ -21,6 +22,22 @@
             }
         });
     },
+    updateURL() {
+        this.year = this.yearmonth.substring(0,4);
+        this.month = parseInt(this.yearmonth.substring(5));
+        this.url = `/rds/print/4?year=${this.year}&month=${this.month}`;
+    },
+    reformatDate(d) {
+        const newDate = new Date(d);
+        return newDate.toLocaleDateString('en-my', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    },
+    init() {
+        this.updateURL();
+    }
 }" x-init="fetchMR">
     <div>
         <p>
@@ -38,10 +55,15 @@
 
     <div class="w3-grid w3-grid-padding" style="grid-template-columns: 250px 200px; align-items: center;">
         <div>
-            <input class="w3-input w3-border" type="month" x-model="yearmonth">
+            <input class="w3-input w3-border" type="month" x-model="yearmonth" x-on:change="updateURL()">
         </div>
         <div>
             <button class="w3-button w3-red w3-round-large" x-on:click="fetchMR">Search</button>
+            &nbsp;
+            <a target="_blank" class="w3-button w3-blue w3-round-large" x-bind:href="url">
+                <i class="fa fa-print"></i>
+                Print
+            </a>
         </div>
     </div>
 
@@ -71,7 +93,7 @@
                         <td x-text="item.mill_name"></td>
                         <td x-text="item.email"></td>
                         <td x-text="item.contact_person"></td>
-                        <td x-text="item.delivery_date"></td>
+                        <td x-text="reformatDate(item.delivery_date)"></td>
                         <td x-text="item.status"></td>
                     </tr>
                 </template>
