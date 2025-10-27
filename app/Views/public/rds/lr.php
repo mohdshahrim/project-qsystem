@@ -75,6 +75,7 @@
                 <th>No.</th>
                 <th>License No</th>
                 <th>Licensee</th>
+                <th>Email</th>
                 <th>Contact person</th>
                 <th>Delivery date</th>
                 <th>Status</th>
@@ -82,7 +83,7 @@
             <tbody>
                 <template x-if="Object.keys(lr).length === 0">
                     <tr>
-                        <td colspan="5" style="text-align:center;">no data</td>
+                        <td colspan="6" style="text-align:center;">no data</td>
                     </tr>
                 </template>
                 <template x-for="(item, index) in lr" :key="item.id">
@@ -90,6 +91,7 @@
                         <td x-text="index+1"></td>
                         <td x-text="item.license_no"></td>
                         <td x-text="item.licensee_name"></td>
+                        <td x-text="item.email"></td>
                         <td x-text="item.contact_person"></td>
                         <td x-text="reformatDate(item.delivery_date)"></td>
                         <td x-text="item.status"></td>
