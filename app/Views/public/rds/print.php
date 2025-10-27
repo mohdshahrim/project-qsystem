@@ -86,7 +86,6 @@
                     <th>No.</th>
                     <th>License No</th>
                     <th>Licensee</th>
-                    <th>Email</th>
                     <th>Delivery Date</th>
                     <th>Status</th>
                 </tr>
@@ -95,7 +94,6 @@
                         <td><?= ($key+1) ?></td>
                         <td><?= $row['license_no'] ?></td>
                         <td><?= $row['licensee_name'] ?></td>
-                        <td><?= $row['email'] ?></td>
                         <td>
                             <?php
                                 $d = new \DateTime((string)$row['delivery_date']);
@@ -112,7 +110,6 @@
                     <th>No.</th>
                     <th>Mill No</th>
                     <th>Processor Name</th>
-                    <th>Email</th>
                     <th>Delivery Date</th>
                     <th>Status</th>
                 </tr>
@@ -121,7 +118,6 @@
                         <td><?= ($key+1) ?></td>
                         <td><?= $row['mill_no'] ?></td>
                         <td><?= $row['mill_name'] ?></td>
-                        <td><?= $row['email'] ?></td>
                         <td>
                             <?php
                                 $d = new \DateTime((string)$row['delivery_date']);
