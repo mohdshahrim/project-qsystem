@@ -108,6 +108,10 @@ $routes->get('/public/rds/mr', 'Public\RdsController::pageMR');
 $routes->get('/public/rds/licensee', 'Public\RdsController::pageLicensee');
 $routes->get('/public/rds/mill', 'Public\RdsController::pageMill');
 
+// eLeave Checker = ec
+$routes->get('/public/ec', 'EcController::index');
+
+
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
 $routes->post('/qrat/c', 'Qrat::postC');

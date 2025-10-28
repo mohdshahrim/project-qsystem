@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="w3-border w3-container">
-                <a href="#">Go</a>
+                <a href="/public/ec">Go</a>
             </div>
         </div>
     </main>
