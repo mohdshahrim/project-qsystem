@@ -14,7 +14,7 @@
         <?php endif ?>
 
         <?php if (session("role")=="admin"): ?>
-        <a class="div-app" href="/claimmakera" tabindex="2">
+        <a class="div-app" href="/rr" tabindex="2">
             <div class="app-info">
                 <b>Router Reset Record</b>
                 <p class="app-info-p">keep record of router reset</p>

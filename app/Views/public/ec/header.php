@@ -7,47 +7,8 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <script src="/js/minAjax.js" defer></script>
     <script src="/js/alpinejs.min.js" defer></script>
-    <title>Qsystem | EleaveChecker</title>
+    <title>Qsystem | EleaveChecker (EC)</title>
     <style>
-        .app-box {
-            width: 160px;
-            height: 160px;
-            display: inline-block;
-        }
-        .app-box:hover {
-            background-color: lightgray;
-        }
-        .app-box > div:nth-child(1) {
-            height: 130px;
-            position: relative;
-        }
-        .app-box > div:nth-child(1) > div:last-child {
-            bottom: 0px;
-            position: absolute;
-            padding-right: 0.5em;
-            font-size: small;
-        }
-        .app-box > div:nth-child(2) {
-            height: 30px;
-        }
-        /* styling for header at topright */
-        #header-topright {
-            position: relative;
-        }
-        #header-topright > div:first-child {
-            width: auto;
-            height: 100%;
-            display: inline-block;
-            font-size: small;
-        }
-        #header-topright > div:last-child {
-            right: 0px;
-            width: auto;
-            height: 100%;
-            display: inline-block;
-            padding: 4px;
-            position: absolute;
-        }
     </style>
 </head>
 <body>

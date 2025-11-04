@@ -111,6 +111,14 @@ $routes->get('/public/rds/mill', 'Public\RdsController::pageMill');
 // eLeave Checker = ec
 $routes->get('/public/ec', 'EcController::index');
 
+// Router Reset Record = rr
+$routes->get('/rr', 'RouterResetController::index');
+$routes->get('/rr/setting', 'RouterResetController::pageSetting');
+$routes->get('/rr/action/new', 'RouterResetController::pageActionNew');
+$routes->post('/rr/action/create', 'RouterResetController::postActionCreate');
+$routes->post('/rr/action/delete', 'RouterResetController::postActionDelete');
+$routes->get('/rr/log/new', 'RouterResetController::pageLogNew');
+$routes->post('/rr/log/create', 'RouterResetController::postLogCreate');
 
 // Qrat
 $routes->get('/qrat', 'Qrat::index');
