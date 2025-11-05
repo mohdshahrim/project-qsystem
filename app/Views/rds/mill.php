@@ -45,7 +45,7 @@
                         &nbsp;
                         <form action="/rds/mill/delete" method="post">
                             <input type="hidden" name="id" value="<?= $row['id'] ?>" />
-                            <input type="submit" />
+                            <input type="submit" value="delete" />
                         </form>
                     </td>
                 </tr>
