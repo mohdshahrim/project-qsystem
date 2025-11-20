@@ -504,4 +504,19 @@ class RdsController extends BaseController
         return $this->response->setJSON($responseData);
     }
 
+    public function postMRDelete()
+    {
+        $mr = $this->request->getPost('mr');
+
+        $db = db_connect($this->rds_db);
+        $mrModel = model('RdsMillReportModel', true, $db);
+        $mrModel->delete($mr);
+
+        $responseData = [
+            'message' => '',
+        ];
+
+        return $this->response->setJSON($responseData);
+    }
+
 }
