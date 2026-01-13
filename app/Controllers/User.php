@@ -1,179 +1,175 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\UserModel;
 
-define('QSYSTEM_VERSION_NO', '0.1');
-define('QSYSTEM_VERSION_DATE', '01/02/2025');
+use App\Controllers\BaseController;
+use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\UserModel;
 
 class User extends BaseController
 {
-    // NOTE: FUNCTION NAMING
-    // For consistency, always begin the function name with either
-    // "post" or "page" to differentiate between whether the function involves
-    // with POST process or just displaying PAGE
-    //
-    // For other purpose, always begin the function name with verb
+    // serve as both landing page and login page
+    public function index()
+    {
+        $data = [
+            'loginmessage' => 'enter password'
+        ];
 
+        return view('login', $data);
+    }
 
     public function postLogin()
     {
-        $userModel = new UserModel();
-        // Prior to v4.5.0, by default, the method was returned as a lowercase string (i.e., 'get', 'post', etc). But it was a bug.
         if ($this->request->getMethod() === 'POST' && $this->validate([
-            'username' => 'required',
             'password' => 'required'
         ]))
         {
-            $username = $this->request->getPost('username');
+            $userModel = new UserModel();
+
             $password = $this->request->getPost('password');
 
-            // verify the existence of the username
-            $result = $userModel->where('username', $username)->first();
-            if ($result)
-            {
-                // verify the password match
-                $user_password = $result['password_hash'];
-                if (password_verify($password,$user_password))
-                {
-                    // initialiaze a session
-                    $session = \Config\Services::session();
-                    $role = $result['role'];
-                    $session->set(['username'=>$username, 'role'=>$role]);
+            $result = $userModel->where('id', 1)->first();
 
-                    return redirect()->to('/user/home');
-                }
-                else
-                {
-                    echo view('home/login', ['loginmessage' => 'Password is invalid']);
-                }
-            }
-            else
-            {
-                echo view('home/login', ['loginmessage' => 'Username is invalid']);
-            }
-        }
-        else
-        {
-            echo view('home/login', ['loginmessage' => 'Input is required']);
-        }
-    }
+            $password_hash = $result['password_hash'];
 
-    public function postLogout()
-    {
-        // THOUGHTS: logically, just delete the session files
-        // and redirect. BUt will it disturb other people session too?
-        session()->destroy();
-        return redirect()->to('/');
+            if (!password_verify($password, $password_hash)) {
+                echo view('login', ['loginmessage' => 'wrong password']);
+            } else {
+                // initialiaze a session
+                $session = \Config\Services::session();
+                $session->set(['display_name'=>$result['display_name']]);
+
+                return redirect()->to('/home');
+            }
+        } else {
+            echo view('login', ['loginmessage' => 'password is required']);
+        }
     }
 
     public function pageHome()
     {
-        if (!session('username'))
-        {
-            session()->destroy();
-            return redirect()->to('/');
-        }
-        else
-        {
-            echo view('user/header');
-            echo view('user/index');
-            echo view('user/footer');
-        }
+        return view('home');
     }
 
-    // specific page to view and modify user account details
-    public function pageUserAccount()
+    public function getLogout()
     {
-        if (!session('username'))
-        {
-            session()->destroy();
-            return redirect()->to('/');
-        }
-        else
-        {
-            $userModel = new UserModel();
-            $data = $userModel->where('username', session('username'))->first();
-
-            echo view('user/header');
-            echo view('user/account', $data);
-            echo view('user/footer');
-        }
+        session()->destroy();
+        return redirect()->to('/');
     }
 
-    // user password update operation
+    public function pageMyAccount()
+    {
+        $userModel = new UserModel();
+        $userData = $userModel->where('id', 1)->first();
+
+        $data = [
+            'display_name' => $userData['display_name'],
+            'created_at' => $userData['created_at'],
+            'updated_at' => $userData['updated_at'],
+        ];
+
+        return view('my-account/header')
+            .view('my-account/index', $data)
+            .view('my-account/footer');
+    }
+
+    // page for changing password
+    public function pageChangePassword()
+    {
+        return view('my-account/header')
+            .view('my-account/change-password')
+            .view('my-account/footer');
+    }
+
     public function postPasswordUpdate()
     {
-        if (!session('username'))
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required',
+        ]))
         {
-            session()->destroy();
-            return redirect()->to('/');
-        }
-        else
-        {
-            $session = \Config\Services::session();
 
-            if ($this->request->getMethod() === 'POST' && $this->validate([
-                'oldpassword' => 'required',
-                'newpassword' => 'required',
-                'confirmpassword' => 'required',
-            ]))
-            {
-                $userModel = new UserModel();
-                $username = session('username');
-                
-                // NOTE: don't forget rowid - always use select('rowid, *)
-                // NOTE: perhaps rowid is not that important, we can skip
-                $result = $userModel->select('rowid, *')->where('username', $username)->first();
+            $old_password = $this->request->getPost('old_password');
+            $new_password = $this->request->getPost('new_password');
+            $confirm_password = $this->request->getPost('confirm_password');
 
-                // verify old password
-                $oldpassword = $this->request->getPost('oldpassword');
-                if (password_verify($oldpassword, $result['password_hash']))
-                {
-                    $newpassword = $this->request->getPost('newpassword');
-                    $confirmpassword = $this->request->getPost('confirmpassword');
-                    // verify newpassword and confirmpassword
-                    if ($newpassword==$confirmpassword)
-                    {
-                        // verification OK, update the password
-                        $data = [
-                            'password_hash' => password_hash($confirmpassword, PASSWORD_DEFAULT),
-                        ];
-                        
-                        if ($userModel->update($result['id'], $data))
-                        {
-                            // password update successfully
-                            $session->setFlashdata('password_message', 'password updated successfully');
-                            return redirect()->to('/user/account');
-                        }
-                        else
-                        {
-                            // password update failed
-                            $session->setFlashdata('password_message', 'password update failed');
-                            return redirect()->to('/user/account');
-                        }
-                    }
-                    else
-                    {
-                        // verification failed
-                        $session->setFlashdata('password_message', 'new password not confirmed');
-                        return redirect()->to('/user/account');
-                    }
-                }
-                else
-                {
-                    // old password verification failed
-                    $session->setFlashdata('password_message', 'invalid old password');
-                    return redirect()->to('/user/account');
+            // password confirmation logic
+            $userModel = new UserModel();
+            $userData = $userModel->where('id', 1)->first();
+            $password = $userData['password_hash'];
+            if (!password_verify($old_password, $password)) {
+                echo view('my-account/header')
+                    .view('my-account/message',
+                        [
+                            'type' => "warning",
+                            'message' => "Incorrect old password",
+                            'returnlink' => "/my-account/change-password",
+                        ]
+                    )
+                    .view('my-account/footer');
+            } else {
+                if ($new_password!==$confirm_password) {
+                    echo view('my-account/header')
+                        .view('my-account/message',
+                            [
+                                'type' => "warning",
+                                'message' => "New password confirmation failed",
+                                'returnlink' => "/my-account/change-password",
+                            ]
+                        )
+                        .view('my-account/footer');
+                } else {
+                    // update the password
+                    $userModel->update(1, ['password_hash' => password_hash($confirm_password, PASSWORD_DEFAULT)]);
+
+                    echo view('my-account/header')
+                        .view('my-account/message',
+                            [
+                                'type' => "info",
+                                'message' => "Password updated successfully",
+                                'returnlink' => "/my-account/change-password",
+                            ]
+                        )
+                        .view('my-account/footer');
                 }
             }
-            else
-            {
-                // password update condition is not met
-                $session->setFlashdata('password_message', 'password update condition is not met');
-                return redirect()->to('/user/account');
-            }
+        } else {
+            echo view('my-account/header')
+                .view('my-account/message',
+                    [
+                        'type' => "warning",
+                        'message' => "Password cannot be empty",
+                        'returnlink' => "/my-account/change-password",
+                    ]
+                )
+                .view('my-account/footer');
         }
     }
 
+    public function pageUpdateAccount()
+    {
+        return view('my-account/header')
+            .view('my-account/update-account')
+            .view('my-account/footer');
+    }
+
+    public function postAccountUpdate()
+    {
+        if ($this->request->getMethod() === 'POST')
+        {
+            $userModel = new UserModel();
+
+            if (isset($_POST['display_name'])) {
+                $display_name = $this->request->getPost('display_name');
+                if ($display_name!='') {
+                    $userModel->update(1, ['display_name' => $display_name]);
+                }
+            }
+
+            return redirect()->to('/my-account');
+        } else {
+            return redirect()->to('/my-account/update-account');
+        }
+    }
 }

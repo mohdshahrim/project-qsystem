@@ -34,7 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        'admin'         => \App\Filters\AdminFilter::class,
+        'user'          => \App\Filters\UserFilter::class,
     ];
 
     /**
@@ -66,7 +66,10 @@ class Filters extends BaseFilters
      * List of filter aliases that are always
      * applied before and after every request.
      *
-     * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
+     * @var array{
+     *     before: array<string, array{except: list<string>|string}>|list<string>,
+     *     after: array<string, array{except: list<string>|string}>|list<string>
+     * }
      */
     public array $globals = [
         'before' => [
@@ -105,17 +108,11 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        'admin' => ['before' =>[
-            'fragment',
-            'fragment/*',
-            'rds',
-            'rds/lr',
-            'rds/mr',
-            'rds/mill',
-            'rds/setting',
-            'rds/licensee',
-            'rr',
-            'qs',
+        'user' => ['before' => [
+            'home',
+            'home/*',
+            'my-account',
+            'my-account/*',
         ]],
     ];
 }

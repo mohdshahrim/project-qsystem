@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Log\Handlers\FileHandler;
+use CodeIgniter\Log\Handlers\HandlerInterface;
 
 class Logger extends BaseConfig
 {
@@ -38,8 +39,7 @@ class Logger extends BaseConfig
      *
      * @var int|list<int>
      */
-    //public $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
-    public $threshold = [4, 5, 7];
+    public $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
 
     /**
      * --------------------------------------------------------------------------
@@ -74,7 +74,7 @@ class Logger extends BaseConfig
      * Handlers are executed in the order defined in this array, starting with
      * the handler on top and continuing down.
      *
-     * @var array<class-string, array<string, int|list<string>|string>>
+     * @var array<class-string<HandlerInterface>, array<string, int|list<string>|string>>
      */
     public array $handlers = [
         /*

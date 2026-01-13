@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
 class UserModel extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'rowid';
+    protected $table            = 'user';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','username', 'email', 'password_hash','fullname','department','designation','telno','role'];
+    protected $allowedFields    = ['display_name', 'password_hash', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -26,7 +25,7 @@ class UserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $deletedField  = false;
 
     // Validation
     protected $validationRules      = [];
@@ -44,6 +43,4 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    
 }
