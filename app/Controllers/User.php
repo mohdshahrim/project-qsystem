@@ -48,7 +48,9 @@ class User extends BaseController
 
     public function pageHome()
     {
-        return view('home');
+        return view('header')
+            .view('home')
+            .view('components/footer');
     }
 
     public function getLogout()
