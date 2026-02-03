@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-64">
+<div class="w3-padding" style="">
     <h2>System Message</h2>
     <h2 class="<?php
         if ($type=="warning") {

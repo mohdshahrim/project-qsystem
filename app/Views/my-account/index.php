@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-64">
+<div class="w3-padding" style="">
     <h1>Account Info</h1>
     <br>
     <table class="w3-table w3-border w3-bordered w3-half">

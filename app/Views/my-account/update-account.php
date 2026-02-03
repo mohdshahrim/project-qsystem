@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-64">
+<div class="w3-padding">
     <h1>Update Account</h1>
     <br>
     <form action="/my-account/update-account/update" method="post" class="w3-quarter">

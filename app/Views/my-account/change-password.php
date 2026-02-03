@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-64">
+<div class="w3-padding" style="">
     <h1>Change Password</h1>
     <br>
     <form action="/my-account/change-password/update" method="post" class="w3-quarter">
