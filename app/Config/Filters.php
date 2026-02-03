@@ -113,6 +113,10 @@ class Filters extends BaseFilters
             'home/*',
             'my-account',
             'my-account/*',
+            'setting',
+            'setting/*',
+            'fragment',
+            'fragment/*',
         ]],
     ];
 }
