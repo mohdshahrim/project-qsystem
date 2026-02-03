@@ -7,7 +7,7 @@
 
 
 <?= $this->section('menu') ?>
-    Menu
+    <b>home</b>
 <?= $this->endSection() ?>
 
 

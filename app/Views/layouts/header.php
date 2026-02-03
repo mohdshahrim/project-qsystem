@@ -10,6 +10,9 @@
         header {
             height: 30px;
         }
+        body {
+            background-color: #F6F5F8FF;
+        }
 
         /* statscard styling */
         .statscard {
@@ -72,8 +75,9 @@
     <main class="w3-grid" style="grid-template-columns: 200px auto">
         <!-- left block -->
         <div class="" style="padding: 1em;">
-            <div class="w3-border w3-round-large">
+            <div class="w3-border w3-white w3-round-large">
 
+                <!-- system logo -->
                 <div class="w3-center w3-padding w3-margin-top">
                     <img src="/favicon.ico" width="45" height="auto">
                 </div>
