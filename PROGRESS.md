@@ -6,6 +6,10 @@
 
 - [x] design account personalization
 
-- [ ] design database management feature (backup, restore, export)
-
 - [x] design display of system version, and change logs
+
+- [ ] design setting for app management
+
+- [ ] design IT inventory system
+
+- [x] redesign home UI to improve development flow and usage experience

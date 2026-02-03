@@ -72,7 +72,7 @@ class User extends BaseController
 
         return view('my-account/header')
             .view('my-account/index', $data)
-            .view('my-account/footer');
+            .view('components/footer');
     }
 
     // page for changing password
@@ -80,7 +80,7 @@ class User extends BaseController
     {
         return view('my-account/header')
             .view('my-account/change-password')
-            .view('my-account/footer');
+            .view('components/footer');
     }
 
     public function postPasswordUpdate()
@@ -153,7 +153,7 @@ class User extends BaseController
     {
         return view('my-account/header')
             .view('my-account/update-account')
-            .view('my-account/footer');
+            .view('components/footer');
     }
 
     public function postAccountUpdate()
