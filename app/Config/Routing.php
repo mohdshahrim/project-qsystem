@@ -31,7 +31,7 @@ class Routing extends BaseRouting
     public array $routeFiles = [
         APPPATH . 'Config/Routes.php',
         APPPATH . 'Config/RouteFiles/UserRoutes.php',
-        APPPATH . 'Config/RouteFiles/DmRoutes.php',
+        APPPATH . 'Config/RouteFiles/SettingRoutes.php',
     ];
 
     /**
