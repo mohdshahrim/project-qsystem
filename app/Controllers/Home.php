@@ -9,4 +9,12 @@ class Home extends BaseController
     {
         return view('login');
     }
+
+    // page for apps listing
+    public function pageApps()
+    {
+        return view('header')
+            .view('apps')
+            .view('components/footer');
+    }
 }

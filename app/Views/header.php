@@ -16,6 +16,6 @@
     <p class="margin-0"><a href="#" class="w3-button display-block">Devices</a></p>
     <p class="margin-0"><a href="#" class="w3-button display-block">Office</a></p>
     <p class="margin-0"><a href="#" class="w3-button display-block">Users</a></p>
-    <p class="margin-0"><a href="#" class="w3-button display-block">more...</a></p>
+    <p class="margin-0"><a href="/home/apps" class="w3-button display-block">more...</a></p>
 <?= $this->endSection() ?>
 

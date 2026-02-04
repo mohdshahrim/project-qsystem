@@ -13,3 +13,5 @@
 - [ ] design IT inventory system
 
 - [x] redesign home UI to improve development flow and usage experience
+
+- [ ] design dedicated page for app shortcuts

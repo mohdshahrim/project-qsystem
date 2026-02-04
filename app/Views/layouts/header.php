@@ -78,8 +78,8 @@
             <div class="w3-border w3-white w3-round-large">
 
                 <!-- system logo -->
-                <div class="w3-center w3-padding w3-margin-top">
-                    <img src="/favicon.ico" width="45" height="auto">
+                <div class="">
+                    <img src="/img/map.svg" width="100%" height="auto">
                 </div>
 
                 <!-- special functions -->
