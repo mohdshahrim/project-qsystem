@@ -148,4 +148,50 @@ class Fragment extends BaseController
             .view('fragment/site-edit', $data)
             .view('components/footer');
     }
+
+    public function postSiteUpdate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'site_id' => 'required',
+        ]))
+        {
+            $siteModel = new SiteModel();
+            $id = $this->request->getPost('id');
+
+            // SKIP: skip checking for site_id duplicates
+
+            $data = [
+                'site_id' => $this->request->getPost('site_id'),
+                'site_name' => $this->request->getPost('site_name'),
+                'site_type' => $this->request->getPost('site_type'),
+                'address' => $this->request->getPost('address'),
+                'city' => $this->request->getPost('oic'), // SKIP: just put oic as 1
+            ];
+            
+            if (!$siteModel->update($id, $data)) {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Site update has failed. Check the logs.",
+                    'link' => "/fragment/site/".$id,
+                ];
+
+                $header = ['navbar'=>"site",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            } else {
+                $message = [
+                    'title' => "Success!",
+                    'message' => "Site updated successfully",
+                    'link' => "/fragment/site/".$id,
+                ];
+
+                $header = ['navbar'=>"site",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
 }
