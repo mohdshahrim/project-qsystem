@@ -103,7 +103,7 @@
                         <span class="w3-right">
                             <a href="/fragment/site">cancel</a>
                             &nbsp;
-                            <button type="submit" class="w3-button w3-asphalt">Okay</button>
+                            <button type="submit" class="w3-button w3-asphalt w3-round">Okay</button>
                         </span>
                     </td>
                 </tr>

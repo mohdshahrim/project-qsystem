@@ -96,7 +96,8 @@ class Fragment extends BaseController
                 'site_name' => $this->request->getPost('site_name'),
                 'site_type' => $this->request->getPost('site_type'),
                 'address' => $this->request->getPost('address'),
-                'city' => $this->request->getPost('oic'), // SKIP: just put oic as 1
+                'city' => $this->request->getPost('city'),
+                'oic' => $this->request->getPost('oic'), // SKIP: just put oic as 1
             ];
 
             $siteModel->insert($data);
@@ -166,7 +167,8 @@ class Fragment extends BaseController
                 'site_name' => $this->request->getPost('site_name'),
                 'site_type' => $this->request->getPost('site_type'),
                 'address' => $this->request->getPost('address'),
-                'city' => $this->request->getPost('oic'), // SKIP: just put oic as 1
+                'city' => $this->request->getPost('city'),
+                'oic' => $this->request->getPost('oic'), // SKIP: just put oic as 1
             ];
             
             if (!$siteModel->update($id, $data)) {

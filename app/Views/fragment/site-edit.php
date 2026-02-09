@@ -38,9 +38,9 @@
                     </td>
                     <td>
                         <select name="site_type" class="w3-input w3-border">
-                            <option value="2" <?php if($site['site_type']==2){echo "selected";}?>>Regional Office</option>
-                            <option value="3" <?php if($site['site_type']==3){echo "selected";}?>>Sub-regional Office</option>
-                            <option value="1" <?php if($site['site_type']==1){echo "selected";}?>>HQ</option>
+                            <option value="1" <?php if($site['site_type']=="1"){echo "selected";}?>>Regional Office</option>
+                            <option value="2" <?php if($site['site_type']=="2"){echo "selected";}?>>Sub-regional Office</option>
+                            <option value="0" <?php if($site['site_type']=="0"){echo "selected";}?>>HQ</option>
                         </select>
                     </td>
                 </tr>
@@ -64,15 +64,15 @@
                     </td>
                     <td>
                         <select name="city" class="w3-input w3-border">
-                            <option value="1" <?php if($site['city']==1){echo "selected";}?>>Kuching</option>
-                            <option value="2" <?php if($site['city']==2){echo "selected";}?>>Sarikei</option>
-                            <option value="3" <?php if($site['city']==3){echo "selected";}?>>Tanjung Manis</option>
-                            <option value="4" <?php if($site['city']==4){echo "selected";}?>>Sibu</option>
-                            <option value="5" <?php if($site['city']==5){echo "selected";}?>>Kapit</option>
-                            <option value="6" <?php if($site['city']==6){echo "selected";}?>>Bintulu</option>
-                            <option value="7" <?php if($site['city']==7){echo "selected";}?>>Miri</option>
-                            <option value="8" <?php if($site['city']==8){echo "selected";}?>>Limbang</option>
-                            <option value="9" <?php if($site['city']==9){echo "selected";}?>>Lawas</option>
+                            <option value="0" <?php if($site['city']=="0"){echo "selected";}?>>Kuching</option>
+                            <option value="1" <?php if($site['city']=="1"){echo "selected";}?>>Sarikei</option>
+                            <option value="2" <?php if($site['city']=="2"){echo "selected";}?>>Tanjung Manis</option>
+                            <option value="3" <?php if($site['city']=="3"){echo "selected";}?>>Sibu</option>
+                            <option value="4" <?php if($site['city']=="4"){echo "selected";}?>>Kapit</option>
+                            <option value="5" <?php if($site['city']=="5"){echo "selected";}?>>Bintulu</option>
+                            <option value="6" <?php if($site['city']=="6"){echo "selected";}?>>Miri</option>
+                            <option value="7" <?php if($site['city']=="7"){echo "selected";}?>>Limbang</option>
+                            <option value="8" <?php if($site['city']=="8"){echo "selected";}?>>Lawas</option>
                         </select>
                     </td>
                 </tr>
