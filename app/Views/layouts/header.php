@@ -84,7 +84,10 @@
         .font-size-2rem {
             font-size: 2rem;
         }
-        /* applying "position-absolute", "right-0", "top--10px", and "font-size-2rem" on <span>*</span> will produce "mandatory input sign" */
+        .user-select-none {
+            user-select: none;
+        }
+        /* applying "position-absolute", "right-0", "top--10px", "font-size-2rem", and "user-select-none" on <span>*</span> will produce "mandatory input sign" */
     </style>
 </head>
 <body>

@@ -15,7 +15,7 @@
                     <td class="position-relative">
                         <input type="hidden" name="id" value="<?= $site['id'] ?>"></input>
                         <input type="text" name="site_id" value="<?= $site['site_id'] ?>" class="w3-input w3-border"></input>
-                        <span class="w3-text-red position-absolute right-0 top--10px font-size-2rem">*</span>
+                        <span class="w3-text-red position-absolute right-0 top--10px font-size-2rem user-select-none">*</span>
                     </td>
                 </tr>
 
@@ -104,7 +104,7 @@
                         <span class="w3-right">
                             <a href="/fragment/site">cancel</a>
                             &nbsp;
-                            <button type="submit" class="w3-button w3-asphalt">Okay</button>
+                            <button type="submit" class="w3-button w3-asphalt w3-round">Okay</button>
                         </span>
                     </td>
                 </tr>

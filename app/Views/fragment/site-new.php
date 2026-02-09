@@ -14,7 +14,7 @@
                     </td>
                     <td class="position-relative">
                         <input type="text" name="site_id" class="w3-input w3-border"></input>
-                        <span class="w3-text-red position-absolute right-0 top--10px font-size-2rem">*</span>
+                        <span class="w3-text-red position-absolute right-0 top--10px font-size-2rem user-select-none">*</span>
                     </td>
                 </tr>
 
