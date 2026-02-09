@@ -66,6 +66,25 @@
         .margin-0 {
             margin: 0;
         }
+        .text-decoration-none {
+            text-decoration: none;
+        }
+        .position-relative {
+            position: relative;
+        }
+        .position-absolute {
+            position: absolute;
+        }
+        .right-0 {
+            right: 0;
+        }
+        .top--10px {
+            top: -10px;
+        }
+        .font-size-2rem {
+            font-size: 2rem;
+        }
+        /* applying "position-absolute", "right-0", "top--10px", and "font-size-2rem" on <span>*</span> will produce "mandatory input sign" */
     </style>
 </head>
 <body>

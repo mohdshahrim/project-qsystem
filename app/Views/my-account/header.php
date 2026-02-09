@@ -7,12 +7,12 @@
 
 
 <?= $this->section('menu') ?>
-    My Account
+    <b>my account</b>
 <?= $this->endSection() ?>
 
 
 <?= $this->section('sidebar') ?>
-    <p class="margin-0"><a href="/my-account" class="w3-button display-block">Account Info</a></p>
-    <p class="margin-0"><a href="/my-account/update-account" class="w3-button display-block">Update Account</a></p>
-    <p class="margin-0"><a href="/my-account/change-password" class="w3-button display-block">Change Password</a></p>
+    <p class="margin-0"><a href="/my-account" class="w3-button display-block">account info</a></p>
+    <p class="margin-0"><a href="/my-account/update-account" class="w3-button display-block">update account</a></p>
+    <p class="margin-0"><a href="/my-account/change-password" class="w3-button display-block">change password</a></p>
 <?= $this->endSection() ?>

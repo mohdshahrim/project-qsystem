@@ -15,3 +15,5 @@
 - [x] redesign home UI to improve development flow and usage experience
 
 - [ ] design dedicated page for app shortcuts
+
+- [ ] create setting to clear logs and sessions
