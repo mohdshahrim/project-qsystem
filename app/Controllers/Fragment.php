@@ -54,11 +54,10 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
-
     public function pageSite()
     {
         $siteModel = new SiteModel();
-        $sites = $siteModel->findAll();
+        $sites = $siteModel->limit(-1,1)->findAll(); // unlimited rows, but offset (skip) the first row
         
         $data = [
             'sites' => $sites,
@@ -69,7 +68,6 @@ class Fragment extends BaseController
             .view('fragment/site', $data)
             .view('components/footer');
     }
-
 
     public function pageSiteNew()
     {
@@ -170,30 +168,57 @@ class Fragment extends BaseController
                 'city' => $this->request->getPost('city'),
                 'oic' => $this->request->getPost('oic'), // SKIP: just put oic as 1
             ];
-            
+
+            $header = ['navbar'=>"site",];
+
             if (!$siteModel->update($id, $data)) {
                 $message = [
                     'title' => "Error",
                     'message' => "Site update has failed. Check the logs.",
                     'link' => "/fragment/site/".$id,
                 ];
-
-                $header = ['navbar'=>"site",];
-                return view('fragment/header', $header)
-                    .view('components/message', $message)
-                    .view('components/footer');
             } else {
                 $message = [
                     'title' => "Success!",
                     'message' => "Site updated successfully",
                     'link' => "/fragment/site/".$id,
                 ];
-
-                $header = ['navbar'=>"site",];
-                return view('fragment/header', $header)
-                    .view('components/message', $message)
-                    .view('components/footer');
             }
+
+            return view('fragment/header', $header)
+                .view('components/message', $message)
+                .view('components/footer');
+        }
+    }
+
+    public function postSiteDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $siteModel = new SiteModel();
+            $id = $this->request->getPost("id");
+
+            $header = ['navbar'=>"site",];
+
+            if (!$siteModel->delete($id)) {
+                $message = [
+                    'title' => "Error!",
+                    'message' => "Failed to delete site",
+                    'link' => "/fragment/site/".$id,
+                ];
+            } else {
+                $message = [
+                    'title' => "Success!",
+                    'message' => "Site deleted successfully",
+                    'link' => "/fragment/site",
+                ];
+            }
+
+            return view('fragment/header', $header)
+                .view('components/message', $message)
+                .view('components/footer');
         }
     }
 }

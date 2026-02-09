@@ -4,6 +4,8 @@ namespace App\Models\Fragment;
 
 use CodeIgniter\Model;
 
+use App\Models\Fragment\PCModel;
+
 class SiteModel extends Model
 {
     protected $DBGroup = 'fragment';
@@ -33,7 +35,7 @@ class SiteModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
         'site_id',
@@ -75,5 +77,12 @@ class SiteModel extends Model
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete    = ['defaultSiteID'];
+
+    // set id to "1" for tables that dependent on site_id
+    protected function defaultSiteID(array $data)
+    {
+        $pcModel = new PcModel();
+        $pcModel->whereIn('site', $data['id'])->set(['site'=>1])->update();
+    }
 }

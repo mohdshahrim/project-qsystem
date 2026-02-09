@@ -37,9 +37,9 @@
                     </td>
                     <td>
                         <select name="site_type" class="w3-input w3-border">
-                            <option value="2">Regional Office</option>
-                            <option value="3">Sub-regional Office</option>
-                            <option value="1">HQ</option>
+                            <option value="1">Regional Office</option>
+                            <option value="2">Sub-regional Office</option>
+                            <option value="0">HQ</option>
                         </select>
                     </td>
                 </tr>
@@ -63,15 +63,15 @@
                     </td>
                     <td>
                         <select name="city" class="w3-input w3-border">
-                            <option value="1">Kuching</option>
-                            <option value="2">Sarikei</option>
-                            <option value="3">Tanjung Manis</option>
-                            <option value="4">Sibu</option>
-                            <option value="5">Kapit</option>
-                            <option value="6">Bintulu</option>
-                            <option value="7">Miri</option>
-                            <option value="8">Limbang</option>
-                            <option value="9">Lawas</option>
+                            <option value="0">Kuching</option>
+                            <option value="1">Sarikei</option>
+                            <option value="2">Tanjung Manis</option>
+                            <option value="3">Sibu</option>
+                            <option value="4">Kapit</option>
+                            <option value="5">Bintulu</option>
+                            <option value="6">Miri</option>
+                            <option value="7">Limbang</option>
+                            <option value="8">Lawas</option>
                         </select>
                     </td>
                 </tr>

@@ -61,7 +61,10 @@
         <tr>
             <td>
                 <span class="w3-left">
-                    <a href="/fragment/site/delete" class="w3-button w3-red w3-round">delete</a>
+                    <form action="/fragment/site/delete" method="post">
+                        <input type="hidden" name="id" value="<?= $site['id'] ?>"></input>
+                        <button type="submit" class="w3-button w3-red w3-round">delete</button>
+                    </form>
                 </span>
             </td>
             <td>
