@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Fragment\PCModel;
-use App\Models\Fragment\UserModel;
+use App\Models\Fragment\StaffModel;
 use App\Models\Fragment\PrinterModel;
 use App\Models\Fragment\SiteModel;
 use App\Models\Fragment\MonitorModel;
@@ -220,5 +220,26 @@ class Fragment extends BaseController
                 .view('components/message', $message)
                 .view('components/footer');
         }
+    }
+
+    public function pageStaff()
+    {
+        $db = \Config\Database::connect();
+
+        $staffModel = new StaffModel();
+        $siteModel = new SiteModel();
+
+        $staffs = $staffModel->getStaffs();
+        $sites = $siteModel->limit(-1, 1)->findAll();
+        
+        $data = [
+            'staffs' => $staffs,
+            'sites' => $sites,
+        ];
+
+        $header = ['navbar'=>"staff",];
+        return view('fragment/header', $header)
+            .view('fragment/staff', $data)
+            .view('components/footer');
     }
 }

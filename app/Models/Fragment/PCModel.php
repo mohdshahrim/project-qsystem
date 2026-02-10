@@ -14,7 +14,7 @@ class PCModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['hostname', 'asset_no', 'serial_no', 'model', 'os', 'ip_address', 'computer_type', 'assigned_user', 'physical_location', 'notes', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['hostname', 'asset_no', 'serial_no', 'model', 'os', 'ip_address', 'computer_type', 'assigned_user', 'site', 'physical_location', 'notes', 'created_at', 'updated_at', 'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

@@ -16,7 +16,7 @@
     <p class="margin-0 <?php if($navbar=="pc"){ echo "w3-asphalt";} ?>"><a href="/fragment/pc" class="w3-button display-block">pc</a></p>
     <p class="margin-0 <?php if($navbar=="monitor"){ echo "w3-asphalt";} ?>"><a href="/fragment/monitor" class="w3-button display-block">monitor</a></p>
     <p class="margin-0 <?php if($navbar=="printer"){ echo "w3-asphalt";} ?>"><a href="/fragment/printer" class="w3-button display-block">printer</a></p>
-    <p class="margin-0 <?php if($navbar=="user"){ echo "w3-asphalt";} ?>"><a href="/fragment/user" class="w3-button display-block">user</a></p>
+    <p class="margin-0 <?php if($navbar=="staff"){ echo "w3-asphalt";} ?>"><a href="/fragment/staff" class="w3-button display-block">staff</a></p>
     <p class="margin-0 <?php if($navbar=="site"){ echo "w3-asphalt";} ?>"><a href="/fragment/site" class="w3-button display-block">site</a></p>
     <p class="margin-0 <?php if($navbar=="department"){ echo "w3-asphalt";} ?>"><a href="/fragment/department" class="w3-button display-block">department</a></p>
 <?= $this->endSection() ?>

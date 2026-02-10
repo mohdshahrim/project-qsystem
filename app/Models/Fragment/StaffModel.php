@@ -4,17 +4,17 @@ namespace App\Models\Fragment;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class StaffModel extends Model
 {
     protected $DBGroup = 'fragment';
 
-    protected $table            = 'user';
+    protected $table            = 'staff';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['staff_id', 'fullname', 'telno', 'email', 'birthdate', 'age', 'department', 'site', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['staff_id', 'fullname', 'telno', 'email', 'birthdate', 'age', 'designation', 'department',  'site', 'created_at', 'updated_at', 'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -45,4 +45,14 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getStaffs()
+    {
+        return $this->db->table('staff')
+            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, staff.created_at, staff.updated_at, staff.deleted_at,')
+            ->where('staff.id !=', 1)
+            ->join('site','site.id = staff.site', 'left')
+            ->get()
+            ->getResultArray();
+    }
 }
