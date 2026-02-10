@@ -17,3 +17,7 @@
 - [ ] design dedicated page for app shortcuts
 
 - [ ] create setting to clear logs and sessions
+
+- [ ] create spark command to initialize fragment tables
+
+- [ ] design nice Error 404 Page
