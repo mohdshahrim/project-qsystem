@@ -54,6 +54,21 @@
         </tr>
 
         <tr>
+            <td>created_at</td>
+            <td><?= $staff['created_at'] ?></td>
+        </tr>
+
+        <tr>
+            <td>updated_at</td>
+            <td><?= $staff['updated_at'] ?></td>
+        </tr>
+
+        <tr>
+            <td>deleted_at</td>
+            <td><?= $staff['deleted_at'] ?></td>
+        </tr>
+
+        <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
