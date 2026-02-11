@@ -50,7 +50,7 @@ class StaffModel extends Model
     {
         return $this->db->table('staff')
             ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, staff.created_at, staff.updated_at, staff.deleted_at,')
-            ->where('staff.id !=', 1)
+            ->where('staff.id !=', 1) // always skip the id 1 because it is dummy row
             ->join('site','site.id = staff.site', 'left')
             ->get()
             ->getResultArray();
