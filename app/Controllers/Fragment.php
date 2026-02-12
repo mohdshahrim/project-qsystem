@@ -22,7 +22,7 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
-    public function pagePc()
+    public function pagePC()
     {
         $pcModel = new PCModel();
         $builder = $pcModel->builder();
@@ -73,10 +73,15 @@ class Fragment extends BaseController
     public function pageSiteNew()
     {
         $siteModel = new SiteModel();
+        $staffModel = new StaffModel();
+
+        $data = [
+            'staffs' => $staffModel->limit(-1, 1)->findAll(),
+        ];
 
         $header = ['navbar'=>"site",];
         return view('fragment/header', $header)
-            .view('fragment/site-new')
+            .view('fragment/site-new', $data)
             .view('components/footer');
     }
 
@@ -118,12 +123,15 @@ class Fragment extends BaseController
     public function pageSiteRead($id)
     {
         $siteModel = new SiteModel();
+        $staffModel = new StaffModel();
+        
         $site = $siteModel->find($id);
 
         $data = [
             'site' => $site,
             'sitetype' => $siteModel::SITETYPE,
             'city' => $siteModel::CITY,
+            'oic_fullname' => $staffModel->where('id', $site['oic'])->first()['fullname'],
         ];
 
         $header = ['navbar'=>"site",];
@@ -135,12 +143,14 @@ class Fragment extends BaseController
     public function pageSiteEdit($id)
     {
         $siteModel = new SiteModel();
+        $staffModel = new StaffModel();
         $site = $siteModel->find($id);
 
         $data = [
             'site' => $site,
             'sitetype' => $siteModel::SITETYPE,
             'city' => $siteModel::CITY,
+            'staffs' => $staffModel->limit(-1, 1)->findAll(),
         ];
 
         $header = ['navbar'=>"site",];

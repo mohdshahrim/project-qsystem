@@ -84,7 +84,10 @@
                     </td>
                     <td>
                         <select name="oic" class="w3-input w3-border">
-                            <option value="1">Default</option>
+                            <option value="1">DEFAULT</option>
+                            <?php foreach ($staffs as $row):?>
+                                <option value="<?= $row['id'] ?>"><?= $row['fullname'] ?></option>
+                            <?php endforeach ?>
                         </select>
                     </td>
                 </tr>

@@ -35,7 +35,7 @@
 
         <tr>
             <td>Manager / EIC / OIC</td>
-            <td></td>
+            <td><?= $oic_fullname ?></td>
         </tr>
 
         <tr>

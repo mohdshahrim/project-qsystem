@@ -26,20 +26,17 @@
     <!-- table -->
     <table class="w3-table w3-white w3-border w3-bordered">
         <tr>
+            <td>no</td>
             <td>hostname</td>
             <td>ip address</td>
             <td>asset no</td>
-        </tr>
-        <tr>
-            <td>SIBU17_IT</td>
-            <td>172.16.17.172</td>
-            <td>A0080577</td>
         </tr>
         <?php foreach ($pc as $key=>$row): ?>
             <tr>
                 <td><?= ($key+1) ?></td>
                 <td><?= $row['hostname'] ?></td>
                 <td><?= $row['ip_address'] ?></td>
+                <td><?= $row['asset_no'] ?></td>
             </tr>
         <?php endforeach ?>
     </table>
