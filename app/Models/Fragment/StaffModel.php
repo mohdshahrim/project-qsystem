@@ -46,6 +46,16 @@ class StaffModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    public function getStaff($id)
+    {
+        return $this->db->table('staff')
+            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, staff.created_at, staff.updated_at, staff.deleted_at,')
+            ->join('site','site.id = staff.site', 'left')
+            ->where('staff.id', $id)
+            ->get()
+            ->getResultArray()[0];
+    }
+
     public function getStaffs()
     {
         return $this->db->table('staff')

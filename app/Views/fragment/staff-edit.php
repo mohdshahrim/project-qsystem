@@ -105,8 +105,8 @@
                     </td>
                     <td class="position-relative">
                         <select name="site" class="w3-input w3-border">
-                            <?php foreach ($designations as $row):?>
-                                <option value="<?= $row['id'] ?>" <?php if($staff['designation']==$row['id']){echo "selected";}?>><?= $row['designation_name'] ?></option>
+                            <?php foreach ($sites as $row):?>
+                                <option value="<?= $row['id'] ?>" <?php if($staff['site']==$row['id']){echo "selected";}?>><?= $row['site_name'] ?></option>
                             <?php endforeach ?>
                         </select>
                     </td>

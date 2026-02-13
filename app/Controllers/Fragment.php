@@ -257,8 +257,13 @@ class Fragment extends BaseController
     public function pageStaffNew()
     {
         $departmentModel = new DepartmentModel();
+        $designationModel = new DesignationModel();
+        $siteModel = new SiteModel();
+
         $data = [
-            'departments' => $departmentModel->limit(-1, 1)->findAll(),
+            'designations' => $designationModel->findAll(),
+            'departments' => $departmentModel->findAll(),
+            'sites' => $siteModel->findAll(),
         ];
 
         $header = ['navbar'=>"staff",];
@@ -307,11 +312,13 @@ class Fragment extends BaseController
     {
         $staffModel = new StaffModel();
         $siteModel = new SiteModel();
-        $staff = $staffModel->find($id);
+        $designationModel = new DesignationModel();
+        $departmentModel = new DepartmentModel();
+
+        //$staff = $staffModel->find($id);
 
         $data = [
-            'staff' => $staff,
-            'sitetype' => $siteModel::SITETYPE,
+            'staff' => $staffModel->getStaff($id),
             'city' => $siteModel::CITY,
         ];
 

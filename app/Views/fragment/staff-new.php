@@ -100,7 +100,9 @@
                     </td>
                     <td class="position-relative">
                         <select name="site" class="w3-input w3-border">
-                            <option value="1">DEFAULT</option>
+                            <?php foreach ($sites as $row):?>
+                                <option value="<?= $row['id'] ?>"><?= $row['site_name'] ?></option>
+                            <?php endforeach ?>
                         </select>
                     </td>
                 </tr>

@@ -14,7 +14,7 @@
         </tr>
 
         <tr>
-            <td>Site Name</td>
+            <td>Staff ID / No.</td>
             <td><?= $staff['staff_id'] ?></td>
         </tr>
 
@@ -40,7 +40,7 @@
 
         <tr>
             <td>Designation</td>
-            <td><?= $staff['designation'] ?></td>
+            <td></td>
         </tr>
 
         <tr>
@@ -50,7 +50,7 @@
 
         <tr>
             <td>Site</td>
-            <td><?= $staff['site'] ?></td>
+            <td><?= $staff['site_id'] ?></td>
         </tr>
 
         <tr>
