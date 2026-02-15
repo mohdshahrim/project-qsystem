@@ -42,27 +42,35 @@ class StaffModel extends Model
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
-    protected $afterFind      = [];
+    protected $afterFind      = ['updateStaffAge']; // WARNING: BAD PRACTICE, could jam the whole system because of frequent updates!
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getStaff($id)
+    public function updateStaffAge(array $data)
     {
-        return $this->db->table('staff')
-            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, staff.created_at, staff.updated_at, staff.deleted_at,')
-            ->join('site','site.id = staff.site', 'left')
-            ->where('staff.id', $id)
-            ->get()
-            ->getResultArray()[0];
+        if (empty($data['data'])) {
+            return $data;
+        }
+
+        // check if retrieved single row or multiple rows
+        if (isset($data['data']['id'])) {
+            //
+            $age = $this->calculateAge($data['data']['birthdate']);
+        } else {
+            //
+            foreach ($data['data'] as &$row) {
+                // WARNING: be careful when using PHP Reference "&" above
+                $row['age'] = $this->calculateAge($row['birthdate']);
+            }
+        }
+
+        return $data;
     }
 
-    public function getStaffs()
+    public function calculateAge($birthdate)
     {
-        return $this->db->table('staff')
-            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, staff.created_at, staff.updated_at, staff.deleted_at,')
-            ->where('staff.id !=', 1) // always skip the id 1 because it is dummy row
-            ->join('site','site.id = staff.site', 'left')
-            ->get()
-            ->getResultArray();
+        $birth_year = (Integer)substr($birthdate, 0, 4);
+        $current_year = (Integer)date("Y");
+        return $current_year - $birth_year;
     }
 }

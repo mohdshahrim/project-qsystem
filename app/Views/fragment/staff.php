@@ -13,6 +13,8 @@
                 <td class="w3-border-right">no.</td>
                 <td class="w3-border-right">fullname</td>
                 <td class="w3-border-right">staff id</td>
+                <td class="w3-border-right">birthdate</td>
+                <td class="w3-border-right">age</td>
                 <td class="w3-border-right">tel no.</td>
                 <td class="w3-border-right">email</td>
                 <td class="w3-border-right">designation</td>
@@ -27,6 +29,8 @@
                         <a href="/fragment/staff/<?= $row['id'] ?>" class="text-decoration-none"><?= $row['fullname'] ?></a>
                     </td>
                     <td class="w3-border-right"><?= $row['staff_id'] ?></td>
+                    <td class="w3-border-right"><?= $row['birthdate'] ?></td>
+                    <td class="w3-border-right"><?= $row['age'] ?></td>
                     <td class="w3-border-right"><?= $row['telno'] ?></td>
                     <td class="w3-border-right"><?= $row['email'] ?></td>
                     <td class="w3-border-right"><?= $row['designation'] ?></td>

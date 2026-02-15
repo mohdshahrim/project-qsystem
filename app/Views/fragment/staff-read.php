@@ -35,17 +35,21 @@
 
         <tr>
             <td>Age</td>
-            <td><?= $staff['age'] ?></td>
+            <td>
+                <?=
+                    $staff['age']
+                ?>
+            </td>
         </tr>
 
         <tr>
             <td>Designation</td>
-            <td></td>
+            <td><?= $staff['designation_name'] ?></td>
         </tr>
 
         <tr>
             <td>Department</td>
-            <td><?= $staff['department'] ?></td>
+            <td><?= $staff['department_name'] ?></td>
         </tr>
 
         <tr>
