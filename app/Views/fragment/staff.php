@@ -33,8 +33,8 @@
                     <td class="w3-border-right"><?= $row['age'] ?></td>
                     <td class="w3-border-right"><?= $row['telno'] ?></td>
                     <td class="w3-border-right"><?= $row['email'] ?></td>
-                    <td class="w3-border-right"><?= $row['designation'] ?></td>
-                    <td class="w3-border-right"><?= $row['department'] ?></td>
+                    <td class="w3-border-right"><?= $row['designation_name'] ?></td>
+                    <td class="w3-border-right"><?= $row['department_name'] ?></td>
                     <td class="w3-border-right"><?= $row['site_id'] ?></td>
                     <td class="w3-center">
                         <a href="/fragment/staff/<?= $row['id'] ?>">view</a>
