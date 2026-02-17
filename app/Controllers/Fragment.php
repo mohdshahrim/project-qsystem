@@ -411,7 +411,7 @@ class Fragment extends BaseController
     {
         $staffModel = new StaffModel();
         $staff = $staffModel
-            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, designation.id, designation.designation_name, department.id, department.department_name, staff.created_at, staff.updated_at, staff.deleted_at,')
+            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, designation.id as designationid, designation.designation_name, department.id as departmentid, department.department_name, staff.created_at, staff.updated_at, staff.deleted_at,')
             ->join('site','site.id = staff.site', 'left')
             ->join('department','department.id = staff.department', 'left')
             ->join('designation','designation.id = staff.designation', 'left')
