@@ -235,9 +235,9 @@ class Fragment extends BaseController
 
     public function pageStaff()
     {
-        $db = \Config\Database::connect();
+        //$db = \Config\Database::connect();
 
-        $staffModel = new StaffModel();
+        //$staffModel = new StaffModel();
         $siteModel = new SiteModel();
 
         $staffs = $this->getStaffs();
@@ -393,6 +393,20 @@ class Fragment extends BaseController
         }
     }
 
+    public function pageDesignation()
+    {
+        $designationModel = new DesignationModel();
+
+        $data = [
+            'designations' => $designationModel->limit(-1, 1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"designation",];
+        return view('fragment/header', $header)
+            .view('fragment/designation', $data)
+            .view('components/footer');
+    }
+
     private function getStaff($id)
     {
         $staffModel = new StaffModel();
@@ -410,11 +424,11 @@ class Fragment extends BaseController
     {
         $staffModel = new StaffModel();
         $staffs = $staffModel
-            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, designation.id, designation.designation_name, department.id, department.department_name, staff.created_at, staff.updated_at, staff.deleted_at,')
-            ->where('staff.id !=', 1) // always skip the id 1 because it is dummy row
+            ->select('staff.id, staff.staff_id, staff.fullname, staff.telno, staff.email, staff.birthdate, staff.age, staff.designation, staff.department, staff.site, site.site_id, site.site_name, designation.id  as designationid, designation.designation_name, department.id as departmentid, department.department_name, staff.created_at, staff.updated_at, staff.deleted_at,')
             ->join('site','site.id = staff.site', 'left')
             ->join('department','department.id = staff.department', 'left')
             ->join('designation','designation.id = staff.designation', 'left')
+            ->limit(-1, 1)
             ->findAll();
         return $staffs;
     }
