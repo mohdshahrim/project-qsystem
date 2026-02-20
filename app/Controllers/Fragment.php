@@ -407,6 +407,92 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+    public function postDesignationCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'designation_name' => 'required',
+        ]))
+        {
+            $designationModel = new DesignationModel();
+            
+            $data = [
+                'designation_name' => $this->request->getPost('designation_name'),
+            ];
+
+            if ($designationModel->insert($data)) {
+                return redirect()->to('/fragment/designation');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to create new designation. Check the error logs.",
+                    'link' => "/fragment/designation",
+                ];
+
+                $header = ['navbar'=>"designation",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
+    public function postDesignationUpdate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'designation_name' => 'required',
+        ]))
+        {
+            $designationModel = new DesignationModel();
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'designation_name' => $this->request->getPost('designation_name'),
+            ];
+
+            if ($designationModel->update($id, $data)) {
+                return redirect()->to('/fragment/designation');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to updated designation. Check the error logs.",
+                    'link' => "/fragment/designation",
+                ];
+
+                $header = ['navbar'=>"designation",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
+    public function postDesignationDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $designationModel = new DesignationModel();
+            $id = $this->request->getPost('id');
+
+            if ($designationModel->delete($id)) {
+                return redirect()->to('/fragment/designation');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to delete designation. Check the error logs.",
+                    'link' => "/fragment/designation",
+                ];
+
+                $header = ['navbar'=>"designation",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
     private function getStaff($id)
     {
         $staffModel = new StaffModel();
