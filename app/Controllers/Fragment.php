@@ -393,6 +393,37 @@ class Fragment extends BaseController
         }
     }
 
+    public function postStaffDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $staffModel = new StaffModel();
+            $id = $this->request->getPost("id");
+
+            $header = ['navbar'=>"staff",];
+
+            if (!$staffModel->delete($id)) {
+                $message = [
+                    'title' => "Error!",
+                    'message' => "Failed to delete staff",
+                    'link' => "/fragment/staff/".$id,
+                ];
+            } else {
+                $message = [
+                    'title' => "Success!",
+                    'message' => "Staff deleted successfully",
+                    'link' => "/fragment/staff",
+                ];
+            }
+
+            return view('fragment/header', $header)
+                .view('components/message', $message)
+                .view('components/footer');
+        }
+    }
+
     public function pageDesignation()
     {
         $designationModel = new DesignationModel();

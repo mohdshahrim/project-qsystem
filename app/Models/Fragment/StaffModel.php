@@ -8,6 +8,10 @@ class StaffModel extends Model
 {
     protected $DBGroup = 'fragment';
 
+    // CUSTOM PROPERTIES
+    // Other tables/models that rely on this table/model
+    protected $childTables = ['PCModel', 'SiteModel'];
+
     protected $table            = 'staff';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
@@ -44,7 +48,14 @@ class StaffModel extends Model
     protected $beforeFind     = [];
     protected $afterFind      = ['updateStaffAge']; // WARNING: BAD PRACTICE, could jam the whole system because of frequent updates!
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete    = ['setDefaultForChild'];
+
+    // Function to set default row (id 1) to any affected child (refer ) during Delete
+    public function setDefaultForChild(array $data)
+    {
+        // test
+        log_message('error', "here is the id ".$data['id'][0]);
+    }
 
     public function updateStaffAge(array $data)
     {
