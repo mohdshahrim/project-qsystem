@@ -12,7 +12,7 @@ class PrinterModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['asset_no', 'serial_no', 'model', 'printer_type', 'host', 'ip_address', 'is_rental', 'notes', 'created_at', 'updated_at', 'deleted_at'];
 
