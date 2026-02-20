@@ -32,3 +32,8 @@ $routes->post('/fragment/designation/create', 'Fragment::postDesignationCreate')
 //$routes->get('/fragment/designation/edit/(:num)', 'Fragment::pageDesignationEdit/$1');
 $routes->post('/fragment/designation/update', 'Fragment::postDesignationUpdate');
 $routes->post('/fragment/designation/delete', 'Fragment::postDesignationDelete');
+
+$routes->get('/fragment/department', 'Fragment::pageDepartment');
+$routes->post('/fragment/department/create', 'Fragment::postDepartmentCreate');
+$routes->post('/fragment/department/update', 'Fragment::postDepartmentUpdate');
+$routes->post('/fragment/department/delete', 'Fragment::postDepartmentDelete');

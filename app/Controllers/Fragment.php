@@ -493,6 +493,106 @@ class Fragment extends BaseController
         }
     }
 
+    public function pageDepartment()
+    {
+        $deparmentModel = new DepartmentModel();
+
+        $data = [
+            'departments' => $deparmentModel->limit(-1, 1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"department",];
+        return view('fragment/header', $header)
+            .view('fragment/department', $data)
+            .view('components/footer');
+    }
+
+    public function postDepartmentCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'department_name' => 'required',
+        ]))
+        {
+            $departmentModel = new DepartmentModel();
+            
+            $data = [
+                'department_name' => $this->request->getPost('department_name'),
+            ];
+
+            if ($departmentModel->insert($data)) {
+                return redirect()->to('/fragment/department');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to create new department. Check the error logs.",
+                    'link' => "/fragment/department",
+                ];
+
+                $header = ['navbar'=>"department",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
+    public function postDepartmentUpdate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'department_name' => 'required',
+        ]))
+        {
+            $departmentModel = new DepartmentModel();
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'department_name' => $this->request->getPost('department_name'),
+            ];
+
+            if ($departmentModel->update($id, $data)) {
+                return redirect()->to('/fragment/department');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to update department. Check the error logs.",
+                    'link' => "/fragment/department",
+                ];
+
+                $header = ['navbar'=>"department",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
+    public function postDepartmentDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $departmentModel = new DepartmentModel();
+            $id = $this->request->getPost('id');
+
+            if ($departmentModel->delete($id)) {
+                return redirect()->to('/fragment/department');
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to delete department. Check the error logs.",
+                    'link' => "/fragment/department",
+                ];
+
+                $header = ['navbar'=>"department",];
+                return view('fragment/header', $header)
+                    .view('components/message', $message)
+                    .view('components/footer');
+            }
+        }
+    }
+
     private function getStaff($id)
     {
         $staffModel = new StaffModel();
