@@ -25,11 +25,16 @@ class UserFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session('display_name')) {
-            if (!session('display_name')) {
-                session()->destroy();
-            }
-            return redirect()->to(session('display_name') ? '/home' : '/');
+        //if (!session('display_name')) {
+        //    if (!session('display_name')) {
+        //        session()->destroy();
+        //    }
+        //    return redirect()->to(session('display_name') ? '/home' : '/');
+        //}
+        if (!session('display_name'))
+        {
+            session()->destroy();
+            return redirect()->to('/');
         }
     }
 
