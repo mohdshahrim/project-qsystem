@@ -3,14 +3,11 @@
 namespace App\Models\Fragment;
 
 use CodeIgniter\Model;
+use App\Models\Fragment\PCModel;
 
 class StaffModel extends Model
 {
     protected $DBGroup = 'fragment';
-
-    // CUSTOM PROPERTIES
-    // Other tables/models that rely on this table/model
-    protected $childTables = ['PCModel', 'SiteModel'];
 
     protected $table            = 'staff';
     protected $primaryKey       = 'id';
@@ -50,11 +47,11 @@ class StaffModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = ['setDefaultForChild'];
 
-    // Function to set default row (id 1) to any affected child (refer ) during Delete
+    // Function to set default row (id 1) to any affected child tables during Delete
     public function setDefaultForChild(array $data)
     {
-        // test
-        log_message('error', "here is the id ".$data['id'][0]);
+        $this->setDefaultForPCModel($data['id'][0]);
+        $this->setDefaultForSiteModel($data['id'][0]);
     }
 
     public function updateStaffAge(array $data)
@@ -83,5 +80,17 @@ class StaffModel extends Model
         $birth_year = (Integer)substr($birthdate, 0, 4);
         $current_year = (Integer)date("Y");
         return $current_year - $birth_year;
+    }
+
+    public function setDefaultForPCModel($id)
+    {
+        $pcmodel = new PCModel();
+        $pcmodel->set('assigned_user', 1)->where('assigned_user', $id)->update();
+    }
+
+    public function setDefaultForSiteModel($id)
+    {
+        $sitemodel = new SiteModel();
+        $sitemodel->set('oic', 1)->where('oic', $id)->update();
     }
 }

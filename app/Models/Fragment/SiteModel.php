@@ -77,12 +77,5 @@ class SiteModel extends Model
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = ['defaultSiteID'];
-
-    // set id to "1" for tables that dependent on site_id
-    protected function defaultSiteID(array $data)
-    {
-        $pcModel = new PcModel();
-        $pcModel->whereIn('site', $data['id'])->set(['site'=>1])->update();
-    }
+    protected $afterDelete    = [];
 }

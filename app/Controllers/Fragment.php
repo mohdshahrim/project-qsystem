@@ -404,7 +404,7 @@ class Fragment extends BaseController
 
             $header = ['navbar'=>"staff",];
 
-            if (!$staffModel->delete($id)) {
+            if (!$staffModel->delete($id, true)) {
                 $message = [
                     'title' => "Error!",
                     'message' => "Failed to delete staff",
