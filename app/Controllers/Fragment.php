@@ -55,6 +55,37 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+    public function apiPCGetBySite($site_id)
+    {
+        $pcModel = new PCModel();
+        $builder = $pcModel->builder();
+        $builder->select('
+            pc.id,
+            pc.hostname,
+            pc.asset_no,
+            pc.serial_no,
+            pc.model,
+            pc.os,
+            pc.ip_address,
+            pc.computer_type,
+            pc.assigned_user,
+            pc.site,
+            pc.physical_location,
+            pc.notes,
+            pc.created_at,
+            pc.updated_at,
+            pc.deleted_at,
+        ')->where('site', $site_id);
+
+        $query = $builder->get();
+
+        $data = [
+            'pc' => $query->getResultArray(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
     public function pageSite()
     {
         $siteModel = new SiteModel();
@@ -622,6 +653,115 @@ class Fragment extends BaseController
                     .view('components/footer');
             }
         }
+    }
+
+    public function pageMonitor()
+    {
+        $monitorModel = new MonitorModel();
+        $builder = $monitorModel->builder();
+        $builder->select('
+            monitor.id,
+            monitor.asset_no,
+            monitor.serial_no,
+            monitor.model,
+            monitor.screen_size,
+            monitor.host,
+            pc.hostname,
+            pc.site,
+            monitor.notes,
+            monitor.created_at,
+            monitor.updated_at,
+            monitor.deleted_at,
+        ')
+        ->join('pc','pc.id = monitor.host', 'left');
+
+        $query = $builder->get();
+
+        $data = [
+            'monitor' => $query->getResultArray(),
+        ];
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor', $data)
+            .view('components/footer');
+    }
+
+    public function pageMonitorRead($id)
+    {
+        
+    }
+
+    public function pageMonitorNew()
+    {
+        $pcModel = new PCModel();
+        $siteModel = new SiteModel();
+
+        $data = [
+            'pc' => $pcModel->findAll(),
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor-new', $data)
+            .view('components/footer');
+    }
+
+    public function postMonitorCreate()
+    {
+
+    }
+
+    public function apiMonitorCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'asset_no' => 'required',
+        ]))
+        {
+            $monitorModel = new MonitorModel();
+            
+            $data = [
+                'site' => $this->request->getPost('site'),
+                'asset_no' => $this->request->getPost('asset_no'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'screen_size' => $this->request->getPost('screen_size'),
+                'notes' => $this->request->getPost('notes'),
+                'host' => $this->request->getPost('host'),
+            ];
+
+            if ($monitorModel->insert($data)) {
+                $message = [
+                    'title' => "OK",
+                    'message' => "New monitor created",
+                    'link' => "/fragment/monitor",
+                ];
+                return $this->response->setJSON($message);
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to create new monitor. Check the error logs.",
+                    'link' => "/fragment/monitor",
+                ];
+                 return $this->response->setJSON($message);
+            }
+        }
+    }
+
+    public function pageMonitorEdit($id)
+    {
+
+    }
+
+    public function postMonitorUpdate()
+    {
+
+    }
+
+    public function postMonitorDelete()
+    {
+
     }
 
     private function getStaff($id)

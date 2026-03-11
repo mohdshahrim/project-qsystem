@@ -1,5 +1,13 @@
 <?= $this->extend('layouts/header') ?>
 
+<?= $this->section('javascript') ?>
+    <?php
+        if ($navbar=="monitor") {
+            echo "<script src=\"/js/alpinejs.min.js\" defer></script>";
+            echo "<script src=\"/js/minAjax.js\" defer></script>";
+        }
+    ?>
+<?= $this->endSection() ?>
 
 <?= $this->section('title') ?>
     Fragment

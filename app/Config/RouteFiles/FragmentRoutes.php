@@ -8,6 +8,16 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/fragment', 'Fragment::index');
 $routes->get('/fragment/pc', 'Fragment::pagePC');
 $routes->get('/fragment/pc/new', 'Fragment::pagePCNew');
+$routes->get('/fragment/pc/api/get-by-site/(:num)', 'Fragment::apiPCGetBySite/$1');
+
+$routes->get('/fragment/monitor', 'Fragment::pageMonitor');
+$routes->get('/fragment/monitor/(:num)', 'Fragment::pageMonitorRead/$1');
+$routes->get('/fragment/monitor/new', 'Fragment::pageMonitorNew');
+$routes->post('/fragment/monitor/create', 'Fragment::postMonitorCreate');
+$routes->get('/fragment/monitor/edit/(:num)', 'Fragment::pageMonitorEdit/$1');
+$routes->post('/fragment/monitor/update', 'Fragment::postMonitorUpdate');
+$routes->post('/fragment/monitor/delete', 'Fragment::postMonitorDelete');
+$routes->post('/fragment/monitor/api/create', 'Fragment::apiMonitorCreate');
 
 $routes->get('/fragment/site', 'Fragment::pageSite');
 $routes->get('/fragment/site/(:num)', 'Fragment::pageSiteRead/$1');
