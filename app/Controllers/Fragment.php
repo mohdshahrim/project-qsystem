@@ -689,7 +689,16 @@ class Fragment extends BaseController
 
     public function pageMonitorRead($id)
     {
-        
+        $monitorModel = new MonitorModel();
+
+        $data = [
+            'monitor' => $this->getMonitor($id),
+        ];
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor-read', $data)
+            .view('components/footer');
     }
 
     public function pageMonitorNew()
@@ -788,5 +797,17 @@ class Fragment extends BaseController
             ->limit(-1, 1)
             ->findAll();
         return $staffs;
+    }
+
+    private function getMonitor($id)
+    {
+        $monitorModel = new MonitorModel();
+        $monitor = $monitorModel
+            ->select('monitor.id, monitor.asset_no, monitor.serial_no, monitor.model, monitor.screen_size, monitor.site, monitor.host, monitor.notes, monitor.created_at, monitor.updated_at, monitor.deleted_at,')
+            ->join('site','site.id = monitor.site', 'left')
+            ->join('pc','pc.id = monitor.host', 'left')
+            ->where('monitor.id', $id)
+            ->find()[0];
+        return $monitor;
     }
 }
