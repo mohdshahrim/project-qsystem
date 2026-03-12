@@ -3,6 +3,7 @@ x-data="{
     step1: true,
     step2: false,
     step3: false,
+    disableStep2next: true,
     site_id: 1,
     site_name: 'DEFAULT',
     host: [],
@@ -77,7 +78,7 @@ x-data="{
 
         <div>
             <button x-on:click="step1=true; step2=false; step3=false;" class="w3-button w3-border w3-border-asphalt w3-round">go back</button>
-            <button x-on:click="step1=false; step2=false; step3=true; loadHostList($data);" class="w3-button w3-asphalt w3-round">Next</button>
+            <button x-on:click="step1=false; step2=false; step3=true; loadHostList($data);" class="w3-button w3-asphalt w3-round" x-bind:disabled="disableStep2next">Next</button>
         </div>
 
         <br>
@@ -106,7 +107,7 @@ x-data="{
                     &nbsp;
                 </td>
                 <td class="position-relative">
-                    <input x-model="monitor.asset_no" type="text" name="asset_no" class="w3-input w3-border"></input>
+                    <input x-model="monitor.asset_no" type="text" name="asset_no" class="w3-input w3-border" x-effect="if (monitor.asset_no!=''){disableStep2next=false;}else{disableStep2next=true;}" ></input>
                     <span class="w3-text-red position-absolute right-0 top--10px font-size-2rem user-select-none">*</span>
                 </td>
             </tr>
