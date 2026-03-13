@@ -60,6 +60,10 @@ x-data="{
     <div x-show="step1">
         <h3>Step 1 of 3 <b>Choose Site</b></h3>
 
+        <div>
+            <a href="/fragment/monitor" class="w3-button w3-border w3-border-asphalt w3-round">cancel</a>
+        </div>
+
         <br>
 
         <div class="w3-grid" style="grid-template-columns: repeat(auto-fill, 250px); column-gap: 20px;">
