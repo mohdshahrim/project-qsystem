@@ -3,7 +3,7 @@
 
     <br>
 
-    <div class="w3-half">
+    <div class="w3-third">
         <table>
             <colgroup>
                 <col width="150px"></col>
@@ -38,16 +38,37 @@
             </tr>
 
             <tr>
-                <td>Site</td>
                 <td>
-                    <span><?= $monitor['site_id'] ?></span>
-                    <a style="display:block; position:absolute; top:0; right:0;" href="" class="w3-button">change site</a>
+                    Site
+                </td>
+                <td>
+                    <a href="/fragment/monitor/change-site/<?= $monitor['id'] ?>" class="w3-button w3-light-gray w3-round w3-block" title="click to change Site">
+                        <?php
+                            if ($monitor['site_id']=="") {
+                                echo "site not set";
+                            } else {
+                                echo $monitor['site_id'];
+                            }
+                        ?>
+                    </a>
                 </td>
             </tr>
 
             <tr>
-                <td>Host</td>
-                <td><?= $monitor['hostname'] ?></td>
+                <td>
+                    Host
+                </td>
+                <td>
+                    <a href="/fragment/monitor/change-host/<?= $monitor['id'] ?>" class="w3-button w3-light-gray w3-round w3-block" title="click to change Host"><?= $monitor['hostname'] ?>
+                    <?php
+                            if ($monitor['host']=="") {
+                                echo "host not set";
+                            } else {
+                                echo $monitor['host'];
+                            }
+                        ?>
+                    </a>
+                </td>
             </tr>
 
             <tr>
@@ -72,14 +93,8 @@
 
             <tr>
                 <td colspan="2">
-                    <span style="display:inline-block;">
-                        <form action="/fragment/monitor/delete" method="post">
-                            <input type="hidden" name="id" value="<?= $monitor['id'] ?>"></input>
-                            <button type="submit" class="w3-button w3-text-red w3-round">delete</button>
-                        </form>
-                    </span>
-                    <a href="/fragment/monitor" class="w3-button w3-red w3-round">cancel</a>
-                    <a href="/fragment/monitor/edit/<?= $monitor['id'] ?>" class="w3-button w3-asphalt w3-round">edit</a>
+                    <a href="/fragment/monitor/<?= $monitor['id'] ?>" class="w3-button w3-text-red w3-round">cancel</a>
+                    <a href="/fragment/monitor/edit/<?= $monitor['id'] ?>" class="w3-button w3-asphalt w3-round">okay</a>
                 </td>
             </tr>
         </table>

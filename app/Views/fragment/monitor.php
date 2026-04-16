@@ -41,6 +41,7 @@
             <td>model</td>
             <td>screen size</td>
             <td>host</td>
+            <td>site</td>
             <td>notes</td>
             <td>created at</td>
             <td>updated at</td>
@@ -53,9 +54,10 @@
                 <td><?= $row['model'] ?></td>
                 <td><?= $row['screen_size'] ?></td>
                 <td><?= $row['hostname'] ?></td>
+                <td><?= $row['site_id'] ?></td>
                 <td><?= $row['notes'] ?></td>
-                <td><?= $row['created_at'] ?></td>
-                <td><?= $row['updated_at'] ?></td>
+                <td class="w3-small"><?= $row['created_at'] ?></td>
+                <td class="w3-small"><?= $row['updated_at'] ?></td>
                 <td class="w3-center">
                     <a href="/fragment/monitor/<?= $row['id'] ?>">view</a>
                     &nbsp;

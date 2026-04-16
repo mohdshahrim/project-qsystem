@@ -667,15 +667,16 @@ class Fragment extends BaseController
             monitor.screen_size,
             monitor.host,
             pc.hostname,
-            pc.site,
+            site.site_id as site_id,
             monitor.notes,
             monitor.created_at,
             monitor.updated_at,
             monitor.deleted_at,
         ')
-        ->join('pc','pc.id = monitor.host', 'left');
+        ->join('pc','pc.id = monitor.host', 'left')
+        ->join('site','site.id = monitor.site', 'left');
 
-        $query = $builder->get();
+        $query = $builder->get(-1,1); // because we don't want to include the 'DEFAULT' or 'index1'
 
         $data = [
             'monitor' => $query->getResultArray(),
@@ -760,7 +761,55 @@ class Fragment extends BaseController
 
     public function pageMonitorEdit($id)
     {
+        $monitorModel = new MonitorModel();
 
+        $data = [
+            'monitor' => $this->getMonitor($id),
+        ];
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor-edit', $data)
+            .view('components/footer');
+    }
+
+    public function pageMonitorChangeSite($id)
+    {
+        // skip verify ID
+        $siteModel = new SiteModel();
+
+        $data = [
+            'monitor' => $this->getMonitor($id),
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor-changesite', $data)
+            .view('components/footer');
+    }
+
+    public function postMonitorChangeSiteSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'site' => 'required',
+        ]))
+        {
+            $monitor_id = $this->request->getPost('id');
+
+            $monitorModel = new MonitorModel();
+            $monitor = $monitorModel->find($monitor_id);
+
+            $site_id = $this->request->getPost('site');
+
+            if ($monitor['site']!=$site_id) {
+                // unhost the monitor
+                $monitorModel->update($monitor_id, ['site'=>$site_id, 'host'=>null]);
+            }
+
+            return redirect()->to('/fragment/monitor/'.$monitor_id);
+        }
     }
 
     public function postMonitorUpdate()
@@ -803,7 +852,7 @@ class Fragment extends BaseController
     {
         $monitorModel = new MonitorModel();
         $monitor = $monitorModel
-            ->select('monitor.id, monitor.asset_no, monitor.serial_no, monitor.model, monitor.screen_size, monitor.site, monitor.host, monitor.notes, monitor.created_at, monitor.updated_at, monitor.deleted_at,')
+            ->select('monitor.id, monitor.asset_no, monitor.serial_no, monitor.model, monitor.screen_size, monitor.site, monitor.host, monitor.notes, pc.hostname as hostname, site.site_id as site_id, monitor.created_at, monitor.updated_at, monitor.deleted_at,')
             ->join('site','site.id = monitor.site', 'left')
             ->join('pc','pc.id = monitor.host', 'left')
             ->where('monitor.id', $id)
