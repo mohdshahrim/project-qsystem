@@ -20,6 +20,8 @@ $routes->post('/fragment/monitor/delete', 'Fragment::postMonitorDelete');
 $routes->post('/fragment/monitor/api/create', 'Fragment::apiMonitorCreate');
 $routes->get('/fragment/monitor/change-site/(:num)', 'Fragment::pageMonitorChangeSite/$1');
 $routes->post('/fragment/monitor/change-site/submit', 'Fragment::postMonitorChangeSiteSubmit');
+$routes->get('/fragment/monitor/change-host/(:num)', 'Fragment::pageMonitorChangeHost/$1');
+$routes->post('/fragment/monitor/change-host/submit', 'Fragment::postMonitorChangeHostSubmit');
 
 $routes->get('/fragment/site', 'Fragment::pageSite');
 $routes->get('/fragment/site/(:num)', 'Fragment::pageSiteRead/$1');

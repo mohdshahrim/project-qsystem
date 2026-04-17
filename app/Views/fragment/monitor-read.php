@@ -12,42 +12,43 @@
             <tr>
                 <td>Asset no</td>
                 <td>
-                    <input type="text" name="asset_no" class="w3-input w3-border" value="<?= $monitor['asset_no'] ?>"></input>
+                    <?= $monitor['asset_no'] ?>
                 </td>
             </tr>
 
             <tr>
                 <td>Serial No.</td>
                 <td>
-                    <input type="text" name="serial_no" class="w3-input w3-border" value="<?= $monitor['serial_no'] ?>"></input>
+                    <?= $monitor['serial_no'] ?>
                 </td>
             </tr>
 
             <tr>
                 <td>Model</td>
                 <td>
-                    <input type="text" name="model" class="w3-input w3-border" value="<?= $monitor['model'] ?>"></input>
+                    <?= $monitor['model'] ?>
                 </td>
             </tr>
 
             <tr>
                 <td>Screen size</td>
                 <td>
-                    <input type="text" name="screen_size" class="w3-input w3-border" value="<?= $monitor['screen_size'] ?>"></input>
+                    <?= $monitor['screen_size'] ?>
                 </td>
             </tr>
 
             <tr>
                 <td>Site</td>
                 <td>
-                    <span><?= $monitor['site_id'] ?></span>
-                    <a style="display:block; position:absolute; top:0; right:0;" href="" class="w3-button">change site</a>
+                    <?= $monitor['site_id'] ?>
                 </td>
             </tr>
 
             <tr>
                 <td>Host</td>
-                <td><?= $monitor['hostname'] ?></td>
+                <td>
+                    <?= $monitor['hostname'] ?>
+                </td>
             </tr>
 
             <tr>

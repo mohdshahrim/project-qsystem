@@ -720,7 +720,7 @@ class Fragment extends BaseController
 
     public function postMonitorCreate()
     {
-
+        // NOTE: for the time being, "Monitor Create" is handled by apiMonitorCreate()
     }
 
     public function apiMonitorCreate()
@@ -807,6 +807,44 @@ class Fragment extends BaseController
                 // unhost the monitor
                 $monitorModel->update($monitor_id, ['site'=>$site_id, 'host'=>null]);
             }
+
+            return redirect()->to('/fragment/monitor/'.$monitor_id);
+        }
+    }
+
+    public function pageMonitorChangeHost($id)
+    {
+        // skip verify ID
+        $pcModel = new PCModel();        
+        $monitor = $this->getMonitor($id);
+        $data['monitor'] = $monitor;
+
+        // only suggest PCs from the same site as monitor
+        // if the site is none/1, there should be no host to be suggested
+        if ($monitor['site']!=1) {
+            $data['pcs'] = $pcModel->where('site', $monitor['site'])->findAll();
+        } else {
+            $data['pcs'] = $pcModel->where('site', 1)->findAll();
+        }
+
+        $header = ['navbar'=>"monitor",];
+        return view('fragment/header', $header)
+            .view('fragment/monitor-changehost', $data)
+            .view('components/footer');
+    }
+
+    public function postMonitorChangeHostSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'pc' => 'required',
+        ]))
+        {
+            $monitor_id = $this->request->getPost('id');
+            $pc_id = $this->request->getPost('pc');
+
+            $monitorModel = new MonitorModel();
+            $monitorModel->update($monitor_id, ['host'=>$pc_id]);
 
             return redirect()->to('/fragment/monitor/'.$monitor_id);
         }
