@@ -68,7 +68,7 @@ x-data="{
 
         <div class="w3-grid" style="grid-template-columns: repeat(auto-fill, 250px); column-gap: 20px;">
             <?php foreach($sites as $key=>$row): ?>
-                <a class="w3-border w3-white w3-padding w3-round text-decoration-none w3-hover-asphalt" x-on:click="site_id=<?= $row['id'] ?>;site_name='<?= $row['site_id'] ?>';step1=false;step2=true;step3=false;" style="cursor:pointer;">
+                <a class="w3-border w3-white w3-padding w3-round text-decoration-none w3-hover-asphalt" x-on:click="monitor.site=<?= $row['id'] ?>;site_id=<?= $row['id'] ?>;site_name='<?= $row['site_id'] ?>';step1=false;step2=true;step3=false;" style="cursor:pointer;">
                     <h3><?= $row['site_id'] ?></h3>
                     <p><?= $row['site_name'] ?></p>
                 </a>
