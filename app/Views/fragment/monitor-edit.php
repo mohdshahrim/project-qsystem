@@ -13,6 +13,7 @@
                 <tr>
                     <td>Asset no</td>
                     <td>
+                        <input type="hidden" name="id" value="<?= $monitor['id'] ?>" />
                         <input type="text" name="asset_no" class="w3-input w3-border" value="<?= $monitor['asset_no'] ?>"></input>
                     </td>
                 </tr>

@@ -852,7 +852,28 @@ class Fragment extends BaseController
 
     public function postMonitorUpdate()
     {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            // NOTE: skip checking if monitor "id" exist
 
+            $monitorModel = new MonitorModel();
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'asset_no' => $this->request->getPost('asset_no'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'screen_size' => $this->request->getPost('screen_size'),
+            ];
+
+            $monitorModel->update($id, $data);
+
+            // NOTE: skip showing message
+
+            return redirect()->to('/fragment/monitor/'.$id);
+        }
     }
 
     public function postMonitorDelete()
