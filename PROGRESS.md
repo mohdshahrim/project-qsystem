@@ -16,8 +16,12 @@
 
 - [ ] design dedicated page for app shortcuts
 
-- [ ] create setting to clear logs and sessions
+- [x] create setting to clear logs and sessions
 
-- [ ] create spark command to initialize fragment tables
+- [x] create spark command to initialize fragment tables
 
 - [ ] design nice Error 404 Page
+
+- [x] setting for clearing logs and sessions
+
+- [x] fix: monitor creation ignores site
