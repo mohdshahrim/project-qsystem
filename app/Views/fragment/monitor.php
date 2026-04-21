@@ -26,10 +26,10 @@ x-init="loadSites({$data})">
             </a>
         </div>
         <span>
-            <template x-for="(item, index) in sites" :key="item.id">
-                <div class="w3-margin-right" style="display: inline-block;">
-                    <input class="w3-check" type="checkbox" :id="$id('id)" :value="item.id">
-                    <label x-text="item.site_name" :for="$id('id')"></label>
+            <template x-for="(item, index) in sites">
+                <div class="w3-margin-right" style="display: inline-block;" x-id="['site']">
+                    <input class="w3-check" type="checkbox" :id="$id('site')" :value="item.id">
+                    <label x-text="item.site_id" :for="$id('site')" :title="item.site_name"></label>
                 </div>
             </template>
         </span>
@@ -39,8 +39,8 @@ x-init="loadSites({$data})">
         &nbsp;
 
         <div class="w3-margin-left" style="display: inline-block;">
-            <input class="w3-check w3-margin-left" type="checkbox">
-            <label>include unhosted</label>
+            <input class="w3-check w3-margin-left" type="checkbox" id="include-unhosted">
+            <label for="include-unhosted">include unhosted</label>
         </div>
     </div>
 
