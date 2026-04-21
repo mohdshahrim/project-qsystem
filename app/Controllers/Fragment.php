@@ -264,6 +264,17 @@ class Fragment extends BaseController
         }
     }
 
+    public function apiSiteGet()
+    {
+        $siteModel = new SiteModel();
+
+        $data = [
+            'sites' => $siteModel->limit(-1, 1)->findAll(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
     public function pageStaff()
     {
         //$db = \Config\Database::connect();

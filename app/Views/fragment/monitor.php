@@ -1,4 +1,22 @@
-<div class="w3-container">
+<div class="w3-container"
+x-data="{
+    reload_monitor: false,
+    sites: [],
+    monitors: [],
+    async loadSites({sites}){
+        const response = await fetch('/fragment/site/api/get-sites');
+
+        if (!response.ok) {
+            console.log('error ${response.status}');
+        } else {
+            const data = await response.json();
+            this.sites = data.sites;
+            console.log(data.sites);
+        }
+    },
+}"
+
+x-init="loadSites({$data})">
     <h1>List of Monitors</h1>
 
     <div>
@@ -7,18 +25,14 @@
                 <i class="fa fa-plus"></i>
             </a>
         </div>
-        <div class="w3-margin-right" style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Sibu</label>
-        </div>
-        <div class="w3-margin-right" style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Kapit</label>
-        </div>
-        <div style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Tg. Manis</label>
-        </div>
+        <span>
+            <template x-for="(item, index) in sites" :key="item.id">
+                <div class="w3-margin-right" style="display: inline-block;">
+                    <input class="w3-check" type="checkbox" :id="$id('id)" :value="item.id">
+                    <label x-text="item.site_name" :for="$id('id')"></label>
+                </div>
+            </template>
+        </span>
 
         &nbsp;
         &nbsp;

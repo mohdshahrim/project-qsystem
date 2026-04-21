@@ -30,6 +30,7 @@ $routes->post('/fragment/site/create', 'Fragment::postSiteCreate');
 $routes->get('/fragment/site/edit/(:num)', 'Fragment::pageSiteEdit/$1');
 $routes->post('/fragment/site/update', 'Fragment::postSiteUpdate');
 $routes->post('/fragment/site/delete', 'Fragment::postSiteDelete');
+$routes->get('/fragment/site/api/get-sites', 'Fragment::apiSiteGet');
 
 $routes->get('/fragment/staff', 'Fragment::pageStaff');
 $routes->get('/fragment/staff/(:num)', 'Fragment::pageStaffRead/$1');

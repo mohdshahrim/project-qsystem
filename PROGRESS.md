@@ -25,3 +25,5 @@
 - [x] setting for clearing logs and sessions
 
 - [x] fix: monitor creation ignores site
+
+- [ ] implement: filter monitor by site
