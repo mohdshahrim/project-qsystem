@@ -46,10 +46,6 @@ x-data="{
 x-init="loadSites()">
     <h1>List of Monitors</h1>
 
-    <span>
-        <button x-on:click="loadMonitors()">load</button>
-    </span>
-
     <div>
         <div class="w3-margin-right" style="display: inline-block;">
             <a href="/fragment/monitor/new" class="w3-button w3-asphalt w3-round">
@@ -107,9 +103,9 @@ x-init="loadSites()">
                 <td class="w3-small" x-text="item.updated_at"></td>
 
                 <td class="w3-center">
-                    <a href="/fragment/monitor/1">view</a>
+                    <a :href="'/fragment/monitor/' + item.id">view</a>
                     &nbsp;
-                    <a href="/fragment/monitor/edit/1">edit</a>
+                    <a :href="'/fragment/monitor/edit/' + item.id">edit</a>
                 </td>
             </tr>
         </template>
