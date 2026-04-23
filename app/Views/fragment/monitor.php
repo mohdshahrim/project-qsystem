@@ -3,6 +3,9 @@ x-data="{
     reload_monitor: false,
     sites: [],
     monitors: [],
+    resetMonitors(){
+        this.monitors = [];
+    },
     loadSites(){
             fetch('/fragment/site/api/get-sites')
                 .then(response => {
@@ -55,7 +58,7 @@ x-init="loadSites()">
         <span>
             <template x-for="(item, index) in sites">
                 <div class="w3-margin-right" style="display: inline-block;" x-id="['site', item.id]">
-                    <input class="w3-check" type="checkbox" :id="$id('site', item.id)" :value="item.id" checked>
+                    <input class="w3-check" type="checkbox" :id="$id('site', item.id)" :value="item.id" x-on:change="resetMonitors();loadMonitors()" checked>
                     <label x-text="item.site_id" :for="$id('site', item.id)" :title="item.site_name"></label>
                 </div>
             </template>
