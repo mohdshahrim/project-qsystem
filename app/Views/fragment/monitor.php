@@ -3,16 +3,21 @@ x-data="{
     reload_monitor: false,
     sites: [],
     monitors: [],
-    async loadSites({sites}){
-        const response = await fetch('/fragment/site/api/get-sites');
-
-        if (!response.ok) {
-            console.log('error ${response.status}');
-        } else {
-            const data = await response.json();
-            this.sites = data.sites;
-            console.log(data.sites);
-        }
+    loadSites(){
+            fetch('/fragment/site/api/get-sites')
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('error during fetch for loadSites()');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    this.sites = data.sites;
+                    console.log(data.sites);
+                })
+                .then(()=>{
+                    this.loadMonitors();
+                });
     },
     loadMonitors(){
         this.sites.forEach((s,i)=>{
@@ -38,7 +43,7 @@ x-data="{
     }
 }"
 
-x-init="loadSites({$data})">
+x-init="loadSites()">
     <h1>List of Monitors</h1>
 
     <span>
