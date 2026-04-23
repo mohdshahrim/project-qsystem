@@ -18,6 +18,7 @@ $routes->get('/fragment/monitor/edit/(:num)', 'Fragment::pageMonitorEdit/$1');
 $routes->post('/fragment/monitor/update', 'Fragment::postMonitorUpdate');
 $routes->post('/fragment/monitor/delete', 'Fragment::postMonitorDelete');
 $routes->post('/fragment/monitor/api/create', 'Fragment::apiMonitorCreate');
+$routes->get('/fragment/monitor/api/get-by-site/(:num)', 'Fragment::apiMonitorGetBySite/$1');
 $routes->get('/fragment/monitor/change-site/(:num)', 'Fragment::pageMonitorChangeSite/$1');
 $routes->post('/fragment/monitor/change-site/submit', 'Fragment::postMonitorChangeSiteSubmit');
 $routes->get('/fragment/monitor/change-host/(:num)', 'Fragment::pageMonitorChangeHost/$1');

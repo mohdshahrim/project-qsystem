@@ -770,6 +770,33 @@ class Fragment extends BaseController
         }
     }
 
+    public function apiMonitorGetBySite($site_id)
+    {
+        $monitorModel = new MonitorModel();
+        $builder = $monitorModel->builder();
+        $builder->select('
+            monitor.id,
+            monitor.asset_no,
+            monitor.serial_no,
+            monitor.model,
+            monitor.screen_size,
+            monitor.site,
+            monitor.host,
+            monitor.notes,
+            monitor.created_at,
+            monitor.updated_at,
+            monitor.deleted_at,
+        ')->where('site', $site_id);
+
+        $query = $builder->get();
+
+        $data = [
+            'monitor' => $query->getResultArray(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
     public function pageMonitorEdit($id)
     {
         $monitorModel = new MonitorModel();

@@ -14,10 +14,36 @@ x-data="{
             console.log(data.sites);
         }
     },
+    loadMonitors(){
+        this.sites.forEach((s,i)=>{
+            // checkbox id format for sites = site-{sequence}-{id}
+            // console.log(`site-${i+1}-${s.id}`);
+            // document.getElementById(`site-${i+1}-${s.id}`).disabled = true;
+
+            if (document.getElementById(`site-${i+1}-${s.id}`).checked==true) {
+                
+                fetch(`/fragment/monitor/api/get-by-site/${s.id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log('not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.monitors.push(...data.monitor);
+                        console.log(this.monitors);
+                    });
+            }
+        });
+    }
 }"
 
 x-init="loadSites({$data})">
     <h1>List of Monitors</h1>
+
+    <span>
+        <button x-on:click="loadMonitors()">load</button>
+    </span>
 
     <div>
         <div class="w3-margin-right" style="display: inline-block;">
@@ -27,9 +53,9 @@ x-init="loadSites({$data})">
         </div>
         <span>
             <template x-for="(item, index) in sites">
-                <div class="w3-margin-right" style="display: inline-block;" x-id="['site']">
-                    <input class="w3-check" type="checkbox" :id="$id('site')" :value="item.id">
-                    <label x-text="item.site_id" :for="$id('site')" :title="item.site_name"></label>
+                <div class="w3-margin-right" style="display: inline-block;" x-id="['site', item.id]">
+                    <input class="w3-check" type="checkbox" :id="$id('site', item.id)" :value="item.id" checked>
+                    <label x-text="item.site_id" :for="$id('site', item.id)" :title="item.site_name"></label>
                 </div>
             </template>
         </span>
@@ -60,24 +86,27 @@ x-init="loadSites({$data})">
             <td>created at</td>
             <td>updated at</td>
         </tr>
-        <?php foreach ($monitor as $key=>$row): ?>
+
+        <template x-for="(item, index) in monitors">
             <tr>
-                <td><?= ($key+1) ?></td>
-                <td><?= $row['asset_no'] ?></td>
-                <td><?= $row['serial_no'] ?></td>
-                <td><?= $row['model'] ?></td>
-                <td><?= $row['screen_size'] ?></td>
-                <td><?= $row['hostname'] ?></td>
-                <td><?= $row['site_id'] ?></td>
-                <td><?= $row['notes'] ?></td>
-                <td class="w3-small"><?= $row['created_at'] ?></td>
-                <td class="w3-small"><?= $row['updated_at'] ?></td>
+                <td x-text="(index+1)"></td>
+                <td x-text="item.asset_no"></td>
+                <td x-text="item.serial_no"></td>
+                <td x-text="item.model"></td>
+                <td x-text="item.screen_size"></td>
+
+                <td x-text="item.host"></td>
+                <td x-text="item.site"></td>
+                <td x-text="item.notes"></td>
+                <td class="w3-small" x-text="item.created_at"></td>
+                <td class="w3-small" x-text="item.updated_at"></td>
+
                 <td class="w3-center">
-                    <a href="/fragment/monitor/<?= $row['id'] ?>">view</a>
+                    <a href="/fragment/monitor/1">view</a>
                     &nbsp;
-                    <a href="/fragment/monitor/edit/<?= $row['id'] ?>">edit</a>
+                    <a href="/fragment/monitor/edit/1">edit</a>
                 </td>
             </tr>
-        <?php endforeach ?>
+        </template>
     </table>
 </div>
