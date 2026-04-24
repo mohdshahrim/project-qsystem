@@ -63,15 +63,6 @@ x-init="loadSites()">
                 </div>
             </template>
         </span>
-
-        &nbsp;
-        &nbsp;
-        &nbsp;
-
-        <div class="w3-margin-left" style="display: inline-block;">
-            <input class="w3-check w3-margin-left" type="checkbox" id="include-unhosted">
-            <label for="include-unhosted">include unhosted</label>
-        </div>
     </div>
 
     <br>
