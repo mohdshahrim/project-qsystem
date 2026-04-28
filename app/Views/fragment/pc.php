@@ -3,7 +3,7 @@
 
     <div>
         <div class="w3-margin-right" style="display: inline-block;">
-            <a href="/fragment/pc/add" class="w3-button w3-asphalt w3-round">
+            <a href="/fragment/pc/new" class="w3-button w3-asphalt w3-round">
                 <i class="fa fa-plus"></i>
             </a>
         </div>

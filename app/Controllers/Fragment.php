@@ -55,6 +55,20 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+    public function pagePCNew()
+    {
+        $siteModel = new SiteModel();
+
+        $data = [
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"pc",];
+        return view('fragment/header', $header)
+            .view('fragment/pc-new', $data)
+            .view('components/footer');
+    }
+
     public function apiPCGetBySite($site_id)
     {
         $pcModel = new PCModel();
@@ -772,6 +786,12 @@ class Fragment extends BaseController
 
     public function apiMonitorGetBySite($site_id)
     {
+        $only_unhosted = 'false'; // default
+        if (isset($_GET['only_unhosted'])) {
+            $only_unhosted = $this->request->getGet('only_unhosted');
+            log_message('error', $only_unhosted);
+        }
+
         $monitorModel = new MonitorModel();
         $builder = $monitorModel->builder();
         $builder->select('
@@ -787,6 +807,13 @@ class Fragment extends BaseController
             monitor.updated_at,
             monitor.deleted_at,
         ')->where('site', $site_id);
+
+        //$query = $builder->get();
+        if ($only_unhosted=='true') {
+            $builder->where('host', '')
+            ->orWhere('host', '1')
+            ->orWhere('host', 'NULL');
+        }
 
         $query = $builder->get();
 

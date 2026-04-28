@@ -2,7 +2,7 @@
 
 <?= $this->section('javascript') ?>
     <?php
-        if ($navbar=="monitor") {
+        if ($navbar=="monitor"||"pc") {
             echo "<script src=\"/js/alpinejs.min.js\" defer></script>";
             echo "<script src=\"/js/minAjax.js\" defer></script>";
         }
