@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Database\RawSql;
+
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Fragment\PCModel;
@@ -805,7 +807,7 @@ class Fragment extends BaseController
     {
         $only_unhosted = 'false'; // default
         if (isset($_GET['only_unhosted'])) {
-            $only_unhosted = $this->request->getGet('only_unhosted');
+            $only_unhosted = filter_var($this->request->getGet('only_unhosted'), FILTER_VALIDATE_BOOLEAN);
             log_message('error', $only_unhosted);
         }
 
@@ -823,14 +825,14 @@ class Fragment extends BaseController
             monitor.created_at,
             monitor.updated_at,
             monitor.deleted_at,
-        ')->where('site', $site_id);
+        ')->where('site', $site_id)
+        ->when($only_unhosted, static function($builder){
+            $builder->groupStart()
+            ->where('host', '')
+            ->orWhere('host', null)
+            ->groupEnd();
+        });
 
-        //$query = $builder->get();
-        if ($only_unhosted=='true') {
-            $builder->where('host', '')
-            ->orWhere('host', '1')
-            ->orWhere('host', 'NULL');
-        }
 
         $query = $builder->get();
 

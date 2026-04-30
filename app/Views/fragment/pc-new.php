@@ -202,10 +202,9 @@ x-data="{
             <button x-on:click="step4=true; step3=false; step2=false; step1=false; step5=false; loadUserList($data);" class="w3-button w3-asphalt w3-round">Skip</button>
         </div>
 
-        <div class="w3-panel w3-leftbar w3-white">
-            <p class="w3-small w3-text-grey">Only unhosted monitors from <span x-text="site_name"></span> are shown here.</p>
-            <p class="w3-small w3-text-grey">Assigning monitor is optional.</p>
-        </div>
+        <br>
+
+        <p>only unhosted monitors from <span x-text="site_name"></span> are shown here</p>
 
         <br>
 
@@ -229,17 +228,16 @@ x-data="{
 
     <!-- STEP 4 -->
     <div x-show="step4">
-        <h3>Step 4 of 4 <b>Assign User</b></h3>
+        <h3>Step 4 of 4 <b>Assign User</b> (optional)</h3>
 
         <div>
             <button x-on:click="step3=true; step4=false; step5=false; step1=false; step2=false;" class="w3-button w3-border w3-border-asphalt w3-round">go back</button>
             <button x-on:click="step5=true; step4=false; step3=false; step2=false; step1=false;" class="w3-button w3-asphalt w3-round">Skip</button>
         </div>
 
-        <div class="w3-panel w3-leftbar w3-white">
-            <p class="w3-small w3-text-grey">Only Users from <span x-text="site_name"></span> are shown here.</p>
-            <p class="w3-small w3-text-grey">Assigning User is optional.</p>
-        </div>
+        <br>
+
+        <p>only users from <span x-text="site_name"></span> are shown here</p>
 
         <br>
 
@@ -251,10 +249,10 @@ x-data="{
                 <col width="250px">
             </colgroup>
             <tr>
-                <td>Staff ID</td>
-                <td>Fullname</td>
-                <td>Designation</td>
-                <td>Department</td>
+                <td class="w3-small">staff ID</td>
+                <td class="w3-small">fullname</td>
+                <td class="w3-small">designation</td>
+                <td class="w3-small">department</td>
             </tr>
             <template x-for="(item, index) in users">
                 <tr class="w3-white w3-border w3-hover-asphalt" x-on:click="pc.user=item.id; user.fullname=item.fullname; step5=true; step4=false; step3=false; step2=false; step1=false;" style="cursor:pointer;">
@@ -365,7 +363,7 @@ x-data="{
                     <span class="w3-small w3-text-gray">monitor</span>
                 </div>
                 <div>
-                    <span x-text="monitor.asset_no"></span>
+                    <span x-text="monitor.asset_no ? monitor.asset_no : '-'"></span>
                 </div>
             </div>
 
@@ -375,7 +373,7 @@ x-data="{
                     <span class="w3-small w3-text-gray">user</span>
                 </div>
                 <div>
-                    <span x-text="user.fullname"></span>
+                    <span x-text="user.fullname ? user.fullname : '-'"></span>
                 </div>
             </div>
         </div>
