@@ -480,6 +480,23 @@ class Fragment extends BaseController
         }
     }
 
+    public function apiStaffGetBySite($site_id)
+    {
+        $staffModel = new StaffModel();
+        $builder = $staffModel->builder();
+        $builder->where('site', $site_id)
+        ->join('designation','designation.id = staff.designation', 'left')
+        ->join('department','department.id = staff.department', 'left');
+
+        $query = $builder->get();
+
+        $data = [
+            'staff' => $query->getResultArray(),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
     public function pageDesignation()
     {
         $designationModel = new DesignationModel();

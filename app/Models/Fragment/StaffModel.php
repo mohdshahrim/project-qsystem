@@ -15,7 +15,7 @@ class StaffModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['staff_id', 'fullname', 'telno', 'email', 'birthdate', 'age', 'designation', 'department',  'site', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['staff_id', 'fullname', 'telno', 'email', 'birthdate', 'age', 'designation', 'department', 'site', 'created_at', 'updated_at', 'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

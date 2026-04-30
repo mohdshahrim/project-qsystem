@@ -40,6 +40,7 @@ $routes->post('/fragment/staff/create', 'Fragment::postStaffCreate');
 $routes->get('/fragment/staff/edit/(:num)', 'Fragment::pageStaffEdit/$1');
 $routes->post('/fragment/staff/update', 'Fragment::postStaffUpdate');
 $routes->post('/fragment/staff/delete', 'Fragment::postStaffDelete');
+$routes->get('/fragment/staff/api/get-by-site/(:num)', 'Fragment::apiStaffGetBySite/$1');
 
 $routes->get('/fragment/designation', 'Fragment::pageDesignation');
 //$routes->get('/fragment/designation/(:num)', 'Fragment::pageDesignationRead/$1');
