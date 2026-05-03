@@ -102,6 +102,57 @@ class Fragment extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function apiPCCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'hostname' => 'required',
+            'asset_no' => 'required',
+        ]))
+        {
+            $pcModel = new PCModel();
+            
+            $data = [
+                'hostname' => $this->request->getPost('hostname'),
+                'asset_no' => $this->request->getPost('asset_no'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'os' => $this->request->getPost('os'),
+                'ip_address' => $this->request->getPost('ip_address'),
+                'computer_type' => $this->request->getPost('computer_type'),
+                'assigned_user' => $this->request->getPost('assigned_user'),
+                'site' => $this->request->getPost('site'),
+                'physical_location' => $this->request->getPost('physical_location'),
+                'notes' => $this->request->getPost('notes'),
+            ];
+
+            if ($pcModel->insert($data)) {
+                $message = [
+                    'title' => "OK",
+                    'message' => "New PC created",
+                    'link' => "/fragment/pc",
+                ];
+
+                // get pc id
+                $pc_id = $pcModel->getInsertID();
+
+                // check if monitor is also submitted
+                $monitor_id = $this->request->getPost('monitor_id');
+                if ($monitor_id!='') {
+                    $monitorModel = new MonitorModel();
+                    $monitorModel->update($monitor_id, ['host'=>$pc_id]);
+                }
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to create new PC",
+                    'link' => "/fragment/pc",
+                ];
+            }
+
+            return $this->response->setJSON($message);
+        }
+    }
+
     public function pageSite()
     {
         $siteModel = new SiteModel();

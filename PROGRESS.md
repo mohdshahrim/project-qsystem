@@ -26,4 +26,6 @@
 
 - [x] fix: monitor creation ignores site
 
-- [ ] implement: filter monitor by site
+- [x] implement: filter monitor by site
+
+- [ ] complete PC crud

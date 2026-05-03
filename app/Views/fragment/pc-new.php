@@ -22,6 +22,7 @@ x-data="{
         site: '',
         physical_location: '',
         notes: '',
+        monitor: '',
     },
     monitor: {},
     user: {},
@@ -48,6 +49,35 @@ x-data="{
             }
         });
     },
+    submit() {
+        minAjax({
+            url: '/fragment/pc/api/create',
+            type: 'POST',
+            data: {
+                hostname: this.pc.hostname,
+                asset_no: this.pc.asset_no,
+                serial_no: this.pc.serial_no,
+                model: this.pc.model,
+                os: this.pc.os,
+                ip_address: this.pc.ip_address,
+                computer_type: this.pc.computer_type,
+                assigned_user: this.pc.user,
+                site: this.pc.site,
+                physical_location: this.pc.physical_location,
+                notes: this.pc.notes,
+                monitor_id: this.pc.monitor,
+            },
+            success: (response) => {
+                data = JSON.parse(response);
+                if (data['title']=='OK') {
+                    console.log('OK');
+                    window.location.href = '/fragment/pc';
+                } else {
+                    console.log('Failed');
+                }
+            },
+        });
+    }
     }">
     <h1>Add PC</h1>
 
@@ -271,7 +301,7 @@ x-data="{
 
         <div>
             <button x-on:click="step4=true; step5=false; step1=false; step2=false; step3=false;" class="w3-button w3-border w3-border-asphalt w3-round">go back</button>
-            <button x-on:click="xFunction()" class="w3-button w3-asphalt w3-round">Confirm and Save</button>
+            <button x-on:click="submit()" class="w3-button w3-asphalt w3-round">Confirm and Save</button>
         </div>
 
         <br>
