@@ -30,7 +30,7 @@ x-data="{
 
             if (document.getElementById(`site-${i+1}-${s.id}`).checked==true) {
                 
-                fetch(`/fragment/monitor/api/get-by-site/${s.id}`)
+                fetch(`/fragment/monitor/api/get-by-site/${s.id}?only_unhosted=false`)
                     .then(response => {
                         if (!response.ok) {
                             console.log('not ok');
@@ -90,7 +90,7 @@ x-init="loadSites()">
                 <td x-text="item.model"></td>
                 <td x-text="item.screen_size"></td>
 
-                <td x-text="item.host"></td>
+                <td x-text="item.hostname"></td>
                 <td x-text="item.site"></td>
                 <td x-text="item.notes"></td>
                 <td class="w3-small" x-text="item.created_at"></td>

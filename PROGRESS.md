@@ -28,4 +28,10 @@
 
 - [x] implement: filter monitor by site
 
-- [ ] complete PC crud
+- [x] complete PC crud
+
+- [x] fix host not showing on fragment monitor
+
+- [ ] implement site filter for fragment pc
+
+- [ ] fix fragment pc table for showing default pc
