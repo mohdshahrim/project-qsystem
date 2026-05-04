@@ -871,15 +871,17 @@ class Fragment extends BaseController
             monitor.model,
             monitor.screen_size,
             monitor.site,
-            pc.hostname,
-            pc.site as pc_site,
             monitor.host,
             monitor.notes,
             monitor.created_at,
             monitor.updated_at,
             monitor.deleted_at,
+            pc.hostname,
+            pc.site as pc_site,
+            site.site_id,
         ')
         ->join('pc','pc.id = monitor.host', 'left')
+        ->join('site','site.id = monitor.site', 'left')
         ->where('monitor.site', $site_id)
         ->when($only_unhosted, static function($builder){
             $builder->groupStart()

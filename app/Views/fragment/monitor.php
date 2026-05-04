@@ -68,33 +68,34 @@ x-init="loadSites()">
     <br>
 
     <!-- table -->
-    <table class="w3-table w3-white w3-border w3-bordered">
+    <table class="w3-table w3-white w3-border w3-bordered w3-hoverable">
         <tr>
-            <td>no</td>
-            <td>asset no</td>
-            <td>serial no</td>
-            <td>model</td>
-            <td>screen size</td>
-            <td>host</td>
-            <td>site</td>
-            <td>notes</td>
-            <td>created at</td>
-            <td>updated at</td>
+            <td class="w3-border-right">no</td>
+            <td class="w3-border-right">asset no</td>
+            <td class="w3-border-right">serial no</td>
+            <td class="w3-border-right">model</td>
+            <td class="w3-border-right">screen size</td>
+            <td class="w3-border-right">host</td>
+            <td class="w3-border-right">site</td>
+            <td class="w3-border-right">notes</td>
+            <td class="w3-border-right">created at</td>
+            <td class="w3-border-right">updated at</td>
+            <td>options</td>
         </tr>
 
         <template x-for="(item, index) in monitors">
-            <tr>
-                <td x-text="(index+1)"></td>
-                <td x-text="item.asset_no"></td>
-                <td x-text="item.serial_no"></td>
-                <td x-text="item.model"></td>
-                <td x-text="item.screen_size"></td>
+            <tr class="w3-small">
+                <td x-text="(index+1)" class="w3-border-right"></td>
+                <td x-text="item.asset_no" class="w3-border-right"></td>
+                <td x-text="item.serial_no" class="w3-border-right"></td>
+                <td x-text="item.model" class="w3-border-right"></td>
+                <td x-text="item.screen_size" class="w3-border-right"></td>
 
-                <td x-text="item.hostname"></td>
-                <td x-text="item.site"></td>
-                <td x-text="item.notes"></td>
-                <td class="w3-small" x-text="item.created_at"></td>
-                <td class="w3-small" x-text="item.updated_at"></td>
+                <td x-text="item.hostname" class="w3-border-right"></td>
+                <td x-text="item.site_id" class="w3-border-right"></td>
+                <td x-text="item.notes" class="w3-border-right"></td>
+                <td class="w3-tiny w3-border-right" x-text="item.created_at"></td>
+                <td class="w3-tiny w3-border-right" x-text="item.updated_at"></td>
 
                 <td class="w3-center">
                     <a :href="'/fragment/monitor/' + item.id">view</a>

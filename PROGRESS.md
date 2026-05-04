@@ -35,3 +35,7 @@
 - [ ] implement site filter for fragment pc
 
 - [ ] fix fragment pc table for showing default pc
+
+- [x] improve fragment monitor table by using small font and border the table
+
+- [x] name the site in fragment monitor
