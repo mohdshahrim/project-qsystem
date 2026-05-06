@@ -45,4 +45,29 @@ class PCModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getPC()
+    {
+        return $this->select('
+            pc.id,
+            pc.hostname,
+            pc.asset_no,
+            pc.serial_no,
+            pc.model,
+            pc.os,
+            pc.ip_address,
+            pc.computer_type,
+            pc.assigned_user,
+            pc.site,
+            pc.physical_location,
+            pc.notes,
+            pc.created_at,
+            pc.updated_at,
+            pc.deleted_at,
+            staff.fullname,
+        ')
+        ->join('staff','staff.id = pc.assigned_user', 'left')
+        ->limit(-1,1)
+        ->findAll();
+    }
 }

@@ -79,6 +79,10 @@ class AppSetup extends BaseCommand
 
                 CLI::write('core database: user table seeded');
 
+                CLI::write('preparing fragment database... please wait...');
+
+                $this->runMigrations();
+
                 CLI::write('Setup finished');
             }
 
@@ -87,6 +91,19 @@ class AppSetup extends BaseCommand
             exit();
         }
 
+    }
+
+    private function runMigrations(): void
+    {
+        try {
+            $migrate = \Config\Services::migrations();
+            $migrate->latest();
+            CLI::write('fragment database has been setup', 'green');
+        } catch (\Throwable $e) {
+            $this->showError($e);
+            CLI::error('Migration failed. Setup aborted.');
+            exit(1);
+        }
     }
 
 }
