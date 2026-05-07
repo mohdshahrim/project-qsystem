@@ -70,4 +70,26 @@ class PCModel extends Model
         ->limit(-1,1)
         ->findAll();
     }
+
+    public function getPCBySite($site_id)
+    {
+        return $this->select('
+            pc.id,
+            pc.hostname,
+            pc.asset_no,
+            pc.serial_no,
+            pc.model,
+            pc.os,
+            pc.ip_address,
+            pc.computer_type,
+            pc.assigned_user,
+            pc.site,
+            pc.physical_location,
+            pc.notes,
+            pc.created_at,
+            pc.updated_at,
+            pc.deleted_at,
+        ')->where('site', $site_id)
+        ->findAll();
+    }
 }

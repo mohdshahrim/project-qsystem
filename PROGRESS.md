@@ -32,10 +32,12 @@
 
 - [x] fix host not showing on fragment monitor
 
-- [ ] implement site filter for fragment pc
+- [x] implement site filter for fragment pc
 
-- [ ] fix fragment pc table for showing default pc
+- [x] fix fragment pc table for showing default pc
 
 - [x] improve fragment monitor table by using small font and border the table
 
 - [x] name the site in fragment monitor
+
+- [ ] fix core.db not included in gitignore

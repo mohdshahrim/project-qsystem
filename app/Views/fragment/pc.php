@@ -1,4 +1,46 @@
-<div class="w3-container">
+<div class="w3-container"
+x-data="{
+    sites: [],
+    pcs: [],
+    resetPCs(){
+        this.pcs = [];
+    },
+    loadSites() {
+        fetch('/fragment/site/api/get-sites')
+            .then(response => {
+                if (!response.ok) {
+                    console.log('error during fetch for loadSites()');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.sites = data.sites;
+                console.log(data.sites);
+            })
+            .then(()=>{
+                this.loadPCs();
+            });
+    },
+    loadPCs() {
+        this.sites.forEach((s,i)=>{
+            if (document.getElementById(`site-${i+1}-${s.id}`).checked==true) {
+                
+                fetch(`/fragment/pc/api/get-by-site/${s.id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log('not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.pcs.push(...data.pc);
+                    });
+            }
+        });
+    }
+}"
+
+x-init="loadSites()">
     <h1>List of PC</h1>
 
     <div>
@@ -7,37 +49,51 @@
                 <i class="fa fa-plus"></i>
             </a>
         </div>
-        <div class="w3-margin-right" style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Sibu</label>
-        </div>
-        <div class="w3-margin-right" style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Kapit</label>
-        </div>
-        <div style="display: inline-block;">
-            <input class="w3-check" type="checkbox">
-            <label>Tg. Manis</label>
-        </div>
+        <span>
+            <template x-for="(item, index) in sites">
+                <div class="w3-margin-right" style="display: inline-block;" x-id="['site', item.id]">
+                    <input class="w3-check" type="checkbox" :id="$id('site', item.id)" :value="item.id" x-on:change="resetPCs();loadPCs()" checked>
+                    <label x-text="item.site_id" :for="$id('site', item.id)" :title="item.site_name"></label>
+                </div>
+            </template>
+        </span>
     </div>
 
     <br>
 
     <!-- table -->
-    <table class="w3-table w3-white w3-border w3-bordered">
+    <table class="w3-table w3-white w3-border w3-bordered w3-hoverable">
         <tr>
-            <td>no</td>
-            <td>hostname</td>
-            <td>ip address</td>
-            <td>asset no</td>
+            <td class="w3-border-right">no</td>
+            <td class="w3-border-right">hostname</td>
+            <td class="w3-border-right">asset no</td>
+            <td class="w3-border-right">serial no</td>
+            <td class="w3-border-right">model</td>
+            <td class="w3-border-right">os</td>
+            <td class="w3-border-right">ip address</td>
+            <td class="w3-border-right">assigned user</td>
+            <td class="w3-border-right">site</td>
+            <td>options</td>
         </tr>
-        <?php foreach ($pc as $key=>$row): ?>
-            <tr>
-                <td><?= ($key+1) ?></td>
-                <td><?= $row['hostname'] ?></td>
-                <td><?= $row['ip_address'] ?></td>
-                <td><?= $row['asset_no'] ?></td>
+
+        <template x-for="(item, index) in pcs">
+            <tr class="w3-small">
+                <td x-text="(index+1)" class="w3-border-right"></td>
+                <td x-text="item.hostname" class="w3-border-right"></td>
+                <td x-text="item.asset_no" class="w3-border-right"></td>
+                <td x-text="item.serial_no" class="w3-border-right"></td>
+                <td x-text="item.model" class="w3-border-right"></td>
+
+                <td x-text="item.os" class="w3-border-right"></td>
+                <td x-text="item.ip_address" class="w3-border-right"></td>
+                <td x-text="item.assigned_user" class="w3-border-right"></td>
+                <td x-text="item.site" class="w3-border-right"></td>
+                <td class="w3-center">
+                    <a :href="'/fragment/pc/' + item.id">view</a>
+                    &nbsp;
+                    <a :href="'/fragment/pc/edit/' + item.id">edit</a>
+                </td>
             </tr>
-        <?php endforeach ?>
+        </template>
     </table>
 </div>

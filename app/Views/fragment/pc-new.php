@@ -285,7 +285,7 @@ x-data="{
                 <td class="w3-small">department</td>
             </tr>
             <template x-for="(item, index) in users">
-                <tr class="w3-white w3-border w3-hover-asphalt" x-on:click="pc.user=item.id; user.fullname=item.fullname; step5=true; step4=false; step3=false; step2=false; step1=false;" style="cursor:pointer;">
+                <tr class="w3-white w3-border w3-hover-asphalt" x-on:click="pc.assigned_user=item.id; user.fullname=item.fullname; step5=true; step4=false; step3=false; step2=false; step1=false;" style="cursor:pointer;">
                     <td class="w3-padding" x-text="item.staff_id"></td>
                     <td class="w3-padding" x-text="item.fullname"></td>
                     <td class="w3-padding" x-text="item.designation_name"></td>

@@ -7,20 +7,20 @@ x-data="{
         this.monitors = [];
     },
     loadSites(){
-            fetch('/fragment/site/api/get-sites')
-                .then(response => {
-                    if (!response.ok) {
-                        console.log('error during fetch for loadSites()');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    this.sites = data.sites;
-                    console.log(data.sites);
-                })
-                .then(()=>{
-                    this.loadMonitors();
-                });
+        fetch('/fragment/site/api/get-sites')
+            .then(response => {
+                if (!response.ok) {
+                    console.log('error during fetch for loadSites()');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.sites = data.sites;
+                console.log(data.sites);
+            })
+            .then(()=>{
+                this.loadMonitors();
+            });
     },
     loadMonitors(){
         this.sites.forEach((s,i)=>{

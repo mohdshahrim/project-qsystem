@@ -27,28 +27,9 @@ class Fragment extends BaseController
     public function pagePC()
     {
         $pcModel = new PCModel();
-        $builder = $pcModel->builder();
-        $builder->select('
-            pc.id,
-            pc.hostname,
-            pc.asset_no,
-            pc.serial_no,
-            pc.model,
-            pc.os,
-            pc.ip_address,
-            pc.computer_type,
-            pc.assigned_user,
-            pc.physical_location,
-            pc.notes,
-            pc.created_at,
-            pc.updated_at,
-            pc.deleted_at,
-        ');
-
-        $query = $builder->get();
 
         $data = [
-            'pc' => $query->getResultArray(),
+            'pc' => $pcModel->getPC(),
         ];
 
         $header = ['navbar'=>"pc",];
@@ -74,29 +55,9 @@ class Fragment extends BaseController
     public function apiPCGetBySite($site_id)
     {
         $pcModel = new PCModel();
-        $builder = $pcModel->builder();
-        $builder->select('
-            pc.id,
-            pc.hostname,
-            pc.asset_no,
-            pc.serial_no,
-            pc.model,
-            pc.os,
-            pc.ip_address,
-            pc.computer_type,
-            pc.assigned_user,
-            pc.site,
-            pc.physical_location,
-            pc.notes,
-            pc.created_at,
-            pc.updated_at,
-            pc.deleted_at,
-        ')->where('site', $site_id);
-
-        $query = $builder->get();
 
         $data = [
-            'pc' => $query->getResultArray(),
+            'pc' => $pcModel->getPCBySite($site_id),
         ];
 
         return $this->response->setJSON($data);
