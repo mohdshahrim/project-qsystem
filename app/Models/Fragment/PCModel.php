@@ -89,7 +89,10 @@ class PCModel extends Model
             pc.created_at,
             pc.updated_at,
             pc.deleted_at,
-        ')->where('site', $site_id)
+            site.site_id,
+        ')
+        ->join('site','site.id = pc.site', 'left')
+        ->where('site', $site_id)
         ->findAll();
     }
 }

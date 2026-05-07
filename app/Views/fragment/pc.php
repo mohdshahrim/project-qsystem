@@ -87,7 +87,7 @@ x-init="loadSites()">
                 <td x-text="item.os" class="w3-border-right"></td>
                 <td x-text="item.ip_address" class="w3-border-right"></td>
                 <td x-text="item.assigned_user" class="w3-border-right"></td>
-                <td x-text="item.site" class="w3-border-right"></td>
+                <td x-text="item.site_id" class="w3-border-right"></td>
                 <td class="w3-center">
                     <a :href="'/fragment/pc/' + item.id">view</a>
                     &nbsp;
