@@ -40,4 +40,6 @@
 
 - [x] name the site in fragment monitor
 
-- [ ] fix core.db not included in gitignore
+- [x] fix core.db not included in gitignore
+
+- [x] check why pc create always end up assigning wrong user

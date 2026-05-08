@@ -83,16 +83,17 @@ class PCModel extends Model
             pc.ip_address,
             pc.computer_type,
             pc.assigned_user,
-            pc.site,
             pc.physical_location,
             pc.notes,
             pc.created_at,
             pc.updated_at,
             pc.deleted_at,
             site.site_id,
+            staff.fullname,
         ')
         ->join('site','site.id = pc.site', 'left')
-        ->where('site', $site_id)
+        ->join('staff','staff.id = pc.assigned_user', 'left')
+        ->where('pc.site', $site_id)
         ->findAll();
     }
 }

@@ -93,4 +93,29 @@ class StaffModel extends Model
         $sitemodel = new SiteModel();
         $sitemodel->set('oic', 1)->where('oic', $id)->update();
     }
+
+    public function getStaffBySite($site_id)
+    {
+        return $this->select('
+            staff.id,
+            staff.staff_id,
+            staff.fullname,
+            staff.telno,
+            staff.email,
+            staff.birthdate,
+            staff.age,
+            staff.designation,
+            staff.department,
+            staff.site,
+            staff.created_at,
+            staff.updated_at,
+            staff.deleted_at,
+            designation.designation_name,
+            department.department_name,
+        ')
+        ->join('designation','designation.id = staff.designation', 'left')
+        ->join('department','department.id = staff.department', 'left')
+        ->where('site', $site_id)
+        ->findAll();
+    }
 }
