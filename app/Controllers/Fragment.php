@@ -38,6 +38,20 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+    public function pagePCRead($id)
+    {
+        $pcModel = new PCModel();
+
+        $data = [
+            'pc' => $pcModel->find($id),
+        ];
+
+        $header = ['navbar'=>"pc",];
+        return view('fragment/header', $header)
+            .view('fragment/pc-read', $data)
+            .view('components/footer');
+    }
+
     public function pagePCNew()
     {
         $siteModel = new SiteModel();
