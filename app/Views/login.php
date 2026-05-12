@@ -31,7 +31,7 @@
                 <tr>
                     <td colspan="2">
                         <p class="text-align-center margin-0">
-                            <img src="/favicon.ico" width="70" height="auto">
+                            <img src="/logo.svg" width="100" height="auto">
                         </p>
                         <br>
                         <p class="text-align-center w3-small">

@@ -43,3 +43,5 @@
 - [x] fix core.db not included in gitignore
 
 - [x] check why pc create always end up assigning wrong user
+
+- [ ] display short-duration message of pc create success

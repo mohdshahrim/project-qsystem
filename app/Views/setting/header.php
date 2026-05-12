@@ -7,7 +7,9 @@
 
 
 <?= $this->section('menu') ?>
-    <b>setting</b>
+    <a href="/setting" class="w3-button display-block">
+        <b>setting</b>
+    </a>
 <?= $this->endSection() ?>
 
 

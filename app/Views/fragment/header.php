@@ -15,7 +15,7 @@
 
 
 <?= $this->section('menu') ?>
-    <a href="/fragment" class="w3-button display-block <?php if($navbar=="main"){ echo "w3-asphalt";} else {echo "w3-light-gray";}?>">
+    <a href="/fragment" class="w3-button display-block <?php if($navbar=="main"){ echo "w3-asphalt";}?>">
         <b>fragment</b>
     </a>
 <?= $this->endSection() ?>
