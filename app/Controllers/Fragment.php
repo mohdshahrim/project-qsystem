@@ -24,6 +24,8 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+
+    /* PC */
     public function pagePC()
     {
         $pcModel = new PCModel();
@@ -103,12 +105,16 @@ class Fragment extends BaseController
             if ($pcModel->insert($data)) {
                 $message = [
                     'title' => "OK",
-                    'message' => "New PC created",
+                    'message' => "New PC created successfully",
                     'link' => "/fragment/pc",
                 ];
 
                 // get pc id
                 $pc_id = $pcModel->getInsertID();
+
+                // create flashdata for success message
+                $session = session();
+                $session->setFlashdata(['message'=>$message['message'], 'id'=>$pc_id]);
 
                 // check if monitor is also submitted
                 $monitor_id = $this->request->getPost('monitor_id');
@@ -128,6 +134,8 @@ class Fragment extends BaseController
         }
     }
 
+
+    /* SITE */
     public function pageSite()
     {
         $siteModel = new SiteModel();
@@ -317,6 +325,8 @@ class Fragment extends BaseController
         return $this->response->setJSON($data);
     }
 
+
+    /* STAFF */
     public function pageStaff()
     {
         //$db = \Config\Database::connect();
@@ -519,6 +529,8 @@ class Fragment extends BaseController
         return $this->response->setJSON($data);
     }
 
+
+    /* DESIGNATION */ 
     public function pageDesignation()
     {
         $designationModel = new DesignationModel();
@@ -619,6 +631,8 @@ class Fragment extends BaseController
         }
     }
 
+
+    /* DEPARTMENT */
     public function pageDepartment()
     {
         $deparmentModel = new DepartmentModel();
@@ -719,6 +733,8 @@ class Fragment extends BaseController
         }
     }
 
+
+    /* MONITOR */
     public function pageMonitor()
     {
         $monitorModel = new MonitorModel();
@@ -992,6 +1008,8 @@ class Fragment extends BaseController
 
     }
 
+
+    /* UTILITY FUNTIONS */
     private function getStaff($id)
     {
         $staffModel = new StaffModel();
