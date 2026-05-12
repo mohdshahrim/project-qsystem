@@ -1,5 +1,7 @@
 # Qsystem
 
+![main dashboard](public/img/screenshot.png)
+
 fast and powerful system for IT-pros
 - self-hosted
 - no Internet needed
