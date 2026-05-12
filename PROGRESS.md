@@ -44,4 +44,8 @@
 
 - [x] check why pc create always end up assigning wrong user
 
-- [ ] display short-duration message of pc create success
+- [x] display short-duration message of pc create success
+
+- [x] implement PC delete
+
+- [ ] implement PC update

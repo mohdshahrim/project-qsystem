@@ -44,7 +44,7 @@ class PCModel extends Model
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete    = ['setDefaultForChild'];
 
     public function getPC()
     {
@@ -95,5 +95,17 @@ class PCModel extends Model
         ->join('staff','staff.id = pc.assigned_user', 'left')
         ->where('pc.site', $site_id)
         ->findAll();
+    }
+
+    // function to affect child rows
+    public function setDefaultForChild(array $data)
+    {
+        $this->setDefaultForMonitorModel($data['id'][0]);
+    }
+
+    public function setDefaultForMonitorModel($id)
+    {
+        $monitormodel = new MonitorModel();
+        $monitormodel->set('host', '')->where('host', $id)->update();
     }
 }

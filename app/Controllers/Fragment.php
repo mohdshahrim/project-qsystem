@@ -134,6 +134,37 @@ class Fragment extends BaseController
         }
     }
 
+    public function postPCDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $pcModel = new PCModel();
+            $id = $this->request->getPost("id");
+
+            $header = ['navbar'=>"pc",];
+
+            if (!$pcModel->delete($id, true)) {
+                $message = [
+                    'title' => "Error!",
+                    'message' => "Failed to delete pc",
+                    'link' => "/fragment/pc/".$id,
+                ];
+            } else {
+                $message = [
+                    'title' => "Success!",
+                    'message' => "PC deleted successfully",
+                    'link' => "/fragment/pc",
+                ];
+            }
+
+            return view('fragment/header', $header)
+                .view('components/message', $message)
+                .view('components/footer');
+        }
+    }
+
 
     /* SITE */
     public function pageSite()
