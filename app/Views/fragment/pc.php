@@ -1,3 +1,13 @@
+<?php
+    $session = session();
+    if ($session->getFlashData('message')) {
+        $message = $session->getFlashData('message');
+        echo "<div style=\"width:auto; height:auto; position:absolute; top:2em; place-self:center;\" class=\"w3-yellow w3-padding w3-round\">";
+        echo $message;
+        echo "</div>";
+    }
+?>
+
 <div class="w3-container"
 x-data="{
     sites: [],
@@ -57,18 +67,6 @@ x-init="loadSites()">
                 </div>
             </template>
         </span>
-
-        <?php
-            $session = session();
-            if ($session->getFlashData('message')) {
-                $message = $session->getFlashData('message');
-                echo "<div style=\"display:inline-block;\" class=\"w3-yellow w3-border w3-padding w3-round\">";
-                echo "<span>";
-                echo $message;
-                echo "</span>";
-                echo "</div>";
-            }
-        ?>
     </div>
 
     <br>
@@ -103,7 +101,7 @@ x-init="loadSites()">
                 <td class="w3-center">
                     <a :href="'/fragment/pc/' + item.id">view</a>
                     &nbsp;
-                    <a :href="'/fragment/pc/edit/' + item.id">edit</a>
+                    <a :href="'/fragment/pc/delete/' + item.id">delete</a>
                 </td>
             </tr>
         </template>
