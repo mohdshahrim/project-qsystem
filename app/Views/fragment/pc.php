@@ -10,6 +10,7 @@
 
 <div class="w3-container"
 x-data="{
+    newpc: <?php echo $session->getFlashData('newpc')? $session->getFlashData('newpc'):'false';?>,
     sites: [],
     pcs: [],
     resetPCs(){
@@ -87,7 +88,7 @@ x-init="loadSites()">
         </tr>
 
         <template x-for="(item, index) in pcs">
-            <tr class="w3-small">
+            <tr :class="(newpc && item.id==newpc)? 'w3-small w3-yellow':'w3-small'">
                 <td x-text="(index+1)" class="w3-border-right"></td>
                 <td x-text="item.hostname" class="w3-border-right"></td>
                 <td x-text="item.asset_no" class="w3-border-right"></td>

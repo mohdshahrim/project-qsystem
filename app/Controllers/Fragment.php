@@ -114,7 +114,7 @@ class Fragment extends BaseController
 
                 // create flashdata for success message
                 $session = session();
-                $session->setFlashdata(['message'=>$message['message'], 'id'=>$pc_id]);
+                $session->setFlashdata(['message'=>$message['message'], 'newpc'=>$pc_id]);
 
                 // check if monitor is also submitted
                 $monitor_id = $this->request->getPost('monitor_id');
