@@ -45,7 +45,7 @@ class Fragment extends BaseController
         $pcModel = new PCModel();
 
         $data = [
-            'pc' => $pcModel->find($id),
+            'pc' => $pcModel->getPCByID($id),
         ];
 
         $header = ['navbar'=>"pc",];
@@ -134,35 +134,59 @@ class Fragment extends BaseController
         }
     }
 
-    public function postPCDelete()
+    public function postPCUpdate()
     {
         if ($this->request->getMethod() === 'POST' && $this->validate([
             'id' => 'required',
         ]))
         {
             $pcModel = new PCModel();
-            $id = $this->request->getPost("id");
+            $id = $this->request->getPost('id');
 
-            $header = ['navbar'=>"pc",];
+            $data = [
+                'asset_no' => $this->request->getPost('asset_no'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'os' => $this->request->getPost('os'),
+                'ip_address' => $this->request->getPost('ip_address'),
+                'physical_location' => $this->request->getPost('physical_location'),
+                'computer_type' => $this->request->getPost('computer_type'),
+                'notes' => $this->request->getPost('notes'),
+            ];
 
-            if (!$pcModel->delete($id, true)) {
-                $message = [
-                    'title' => "Error!",
-                    'message' => "Failed to delete pc",
-                    'link' => "/fragment/pc/".$id,
-                ];
+            $session = session();
+            if (!$pcModel->update($id, $data)) {
+                $session->setFlashdata('message', "Error: failed to update PC");
             } else {
-                $message = [
-                    'title' => "Success!",
-                    'message' => "PC deleted successfully",
-                    'link' => "/fragment/pc",
-                ];
+                $session->setFlashdata('message', "Success: PC updated");
             }
 
-            return view('fragment/header', $header)
-                .view('components/message', $message)
-                .view('components/footer');
+            return redirect()->to('/fragment/pc/'.$id);
         }
+    }
+
+    public function getPCDelete($id)
+    {
+        $pcModel = new PCModel();
+
+        if (!$pcModel->delete($id, true)) {
+            $message = [
+                'title' => "Error!",
+                'message' => "Failed to delete pc",
+                'link' => "/fragment/pc/".$id,
+            ];
+        } else {
+            $message = [
+                'title' => "Success!",
+                'message' => "PC deleted successfully",
+                'link' => "/fragment/pc",
+            ];
+        }
+
+        $header = ['navbar'=>"pc",];
+        return view('fragment/header', $header)
+            .view('components/message', $message)
+            .view('components/footer');
     }
 
 

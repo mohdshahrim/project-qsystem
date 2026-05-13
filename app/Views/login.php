@@ -33,7 +33,6 @@
                         <p class="text-align-center margin-0">
                             <img src="/logo.svg" width="100" height="auto">
                         </p>
-                        <br>
                         <p class="text-align-center w3-small">
                             <?php echo $loginmessage; ?>
                         </p>

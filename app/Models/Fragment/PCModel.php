@@ -12,7 +12,7 @@ class PCModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['hostname', 'asset_no', 'serial_no', 'model', 'os', 'ip_address', 'computer_type', 'assigned_user', 'site', 'physical_location', 'notes', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -70,6 +70,33 @@ class PCModel extends Model
         ->limit(-1,1)
         ->findAll();
     }
+
+    public function getPCByID($id)
+    {
+        return $this->select('
+            pc.id,
+            pc.hostname,
+            pc.asset_no,
+            pc.serial_no,
+            pc.model,
+            pc.os,
+            pc.ip_address,
+            pc.computer_type,
+            pc.assigned_user,
+            pc.site,
+            pc.physical_location,
+            pc.notes,
+            pc.created_at,
+            pc.updated_at,
+            pc.deleted_at,
+            staff.fullname,
+            site.site_id,
+        ')
+        ->join('staff','staff.id = pc.assigned_user', 'left')
+        ->join('site','site.id = pc.site', 'left')
+        ->find($id);
+    }
+
 
     public function getPCBySite($site_id)
     {

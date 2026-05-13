@@ -1,122 +1,140 @@
+<?php
+    $session = session();
+    if ($session->getFlashData('message')) {
+        $message = $session->getFlashData('message');
+        echo "<div style=\"width:auto; height:auto; position:absolute; top:2em; place-self:center;\" class=\"w3-yellow w3-padding w3-round\">";
+        echo $message;
+        echo "</div>";
+    }
+?>
+
 <div class="w3-container">
     <h1>PC #<?= $pc['id'] ?></h1>
 
     <br>
 
-    <div class="w3-half">
-        <table>
-            <colgroup>
-                <col width="150px"></col>
-                <col></col>
-            </colgroup>
-            <tr>
-                <td>Hostname</td>
-                <td>
-                    <?= $pc['hostname'] ?>
-                </td>
-            </tr>
+    <div class="w3-third">
+        <form action="/fragment/pc/update" method="post">
+            <table>
+                <colgroup>
+                    <col width="150px"></col>
+                    <col></col>
+                </colgroup>
+                <tr>
+                    <td>Asset no</td>
+                    <td>
+                        <input type="hidden" name="id" value="<?= $pc['id'] ?>" />
+                        <input type="text" name="asset_no" class="w3-input w3-border" value="<?= $pc['asset_no'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Asset No.</td>
-                <td>
-                    <?= $pc['asset_no'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>Serial No.</td>
+                    <td>
+                        <input type="text" name="serial_no" class="w3-input w3-border" value="<?= $pc['serial_no'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Serial No.</td>
-                <td>
-                    <?= $pc['serial_no'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>
+                        <input type="text" name="model" class="w3-input w3-border" value="<?= $pc['model'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Model</td>
-                <td>
-                    <?= $pc['model'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input type="text" name="os" class="w3-input w3-border" value="<?= $pc['os'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>OS</td>
-                <td>
-                    <?= $pc['os'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>IP address</td>
+                    <td>
+                        <input type="text" name="ip_address" class="w3-input w3-border" value="<?= $pc['ip_address'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>IP address</td>
-                <td>
-                    <?= $pc['ip_address'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>computer type</td>
+                    <td>
+                        <input type="text" name="computer_type" class="w3-input w3-border" value="<?= $pc['computer_type'] ?>"></input>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td>Assigned user</td>
+                    <td>
+                        <a href="/fragment/pc/change-user/<?= $pc['id'] ?>" class="w3-button w3-light-gray w3-round w3-block" title="click to assign or change users">
+                            <?php
+                                if ($pc['assigned_user']=="") {
+                                    echo "user not assigned";
+                                } else {
+                                    echo $pc['assigned_user'];
+                                }
+                            ?>
+                        </a>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Computer type</td>
-                <td>
-                    <?= $pc['computer_type'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>Site</td>
+                    <td>
+                        <a href="/fragment/pc/change-site/<?= $pc['id'] ?>" class="w3-button w3-light-gray w3-round w3-block" title="click to change Site">
+                            <?php
+                                if ($pc['site_id']=="") {
+                                    echo "site not set";
+                                } else {
+                                    echo $pc['site_id'];
+                                }
+                            ?>
+                        </a>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Assigned user</td>
-                <td>
-                    <?= $pc['assigned_user'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>Physical location</td>
+                    <td>
+                        <input type="text" name="physical_location" class="w3-input w3-border" value="<?= $pc['physical_location'] ?>"></input>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td>Notes</td>
+                    <td>
+                        <input type="text" name="notes" class="w3-input w3-border" value="<?= $pc['notes'] ?>"></input>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Site</td>
-                <td>
-                    <?= $pc['site'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><?= $pc['created_at'] ?></td>
+                </tr>
 
-            <tr>
-                <td>Physical location</td>
-                <td>
-                    <?= $pc['physical_location'] ?>
-                </td>
-            </tr>
+                <tr>
+                    <td>updated_at</td>
+                    <td><?= $pc['updated_at'] ?></td>
+                </tr>
 
-            <tr>
-                <td>created_at</td>
-                <td><?= $pc['created_at'] ?></td>
-            </tr>
+                <tr>
+                    <td>deleted_at</td>
+                    <td><?= $pc['deleted_at'] ?></td>
+                </tr>
 
-            <tr>
-                <td>updated_at</td>
-                <td><?= $pc['updated_at'] ?></td>
-            </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
 
-            <tr>
-                <td>deleted_at</td>
-                <td><?= $pc['deleted_at'] ?></td>
-            </tr>
-
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-
-            <tr>
-                <td colspan="2">
-                    <span style="display:inline-block;">
-                        <form action="/fragment/pc/delete" method="post">
-                            <input type="hidden" name="id" value="<?= $pc['id'] ?>"></input>
-                            <button type="submit" class="w3-button w3-text-red w3-round">delete</button>
-                        </form>
-                    </span>
-                    <a href="/fragment/pc" class="w3-button w3-red w3-round">cancel</a>
-                    <a href="/fragment/pc/edit/<?= $pc['id'] ?>" class="w3-button w3-asphalt w3-round">edit</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="w3-half">
-        
+                <tr>
+                    <td colspan="2">
+                        <a href="/fragment/pc/delete/<?= $pc['id'] ?>" class="w3-button w3-text-red w3-round">delete</a>
+                        <a href="/fragment/pc/<?= $pc['id'] ?>" class="w3-button w3-red w3-round">cancel</a>
+                        <button type="submit" class="w3-button w3-asphalt w3-round">update</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
