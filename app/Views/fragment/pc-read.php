@@ -21,9 +21,16 @@
                     <col></col>
                 </colgroup>
                 <tr>
-                    <td>Asset no</td>
+                    <td>Hostname</td>
                     <td>
                         <input type="hidden" name="id" value="<?= $pc['id'] ?>" />
+                        <input type="text" name="hostname" class="w3-input w3-border" value="<?= $pc['hostname'] ?>"></input>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Asset no</td>
+                    <td>
                         <input type="text" name="asset_no" class="w3-input w3-border" value="<?= $pc['asset_no'] ?>"></input>
                     </td>
                 </tr>
@@ -130,7 +137,7 @@
                 <tr>
                     <td colspan="2">
                         <a href="/fragment/pc/delete/<?= $pc['id'] ?>" class="w3-button w3-text-red w3-round">delete</a>
-                        <a href="/fragment/pc/<?= $pc['id'] ?>" class="w3-button w3-red w3-round">cancel</a>
+                        <a href="/fragment/pc/" class="w3-button w3-red w3-round">cancel</a>
                         <button type="submit" class="w3-button w3-asphalt w3-round">update</button>
                     </td>
                 </tr>

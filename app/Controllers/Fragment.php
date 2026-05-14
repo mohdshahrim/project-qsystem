@@ -144,6 +144,7 @@ class Fragment extends BaseController
             $id = $this->request->getPost('id');
 
             $data = [
+                'hostname' => $this->request->getPost('hostname'),
                 'asset_no' => $this->request->getPost('asset_no'),
                 'serial_no' => $this->request->getPost('serial_no'),
                 'model' => $this->request->getPost('model'),

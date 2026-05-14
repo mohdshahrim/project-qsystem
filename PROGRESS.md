@@ -48,4 +48,14 @@
 
 - [x] implement PC delete
 
-- [ ] implement PC update
+- [x] implement PC update
+
+- [ ] implement disabling PC delete success message
+
+- [ ] show fragment stats on dashboard
+
+- [ ] dedicated setting to backup or export database
+
+- [ ] implement PC site change and user change
+
+- [ ] implement PC add image feature
