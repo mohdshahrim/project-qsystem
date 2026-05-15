@@ -15,3 +15,4 @@ $routes->get('/setting/database', 'Setting::pageDatabase');
 $routes->post('/setting/database/backup', 'Setting::postDatabaseBackup');
 $routes->post('/setting/database/restore', 'Setting::postDatabaseRestore');
 $routes->post('/setting/database/delete-backup', 'Setting::postDatabaseDeleteBackup');
+$routes->get('/setting/database/export', 'Setting::getDatabaseExport');

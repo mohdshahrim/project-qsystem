@@ -41,7 +41,7 @@ x-data="{
                 window.location.reload();
             }
         });
-    }
+    },
 }">
     <h1>Database management</h1>
     <br>
@@ -115,7 +115,7 @@ x-data="{
             </tr>
             <tr>
                 <td class="w3-padding">
-                    <button class="w3-button w3-red w3-block w3-round" :disabled="!btn_export">export  <i class="fa fa-download"></i></button>
+                    <a href="/setting/database/export" class="w3-button w3-red w3-block w3-round" :disabled="!btn_export">export  <i class="fa fa-download"></i></a>
                 </td>
                 <td></td>
             </tr>

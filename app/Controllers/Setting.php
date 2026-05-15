@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use \ZipArchive;
 
 use App\Models\AppModel;
 
@@ -121,5 +122,24 @@ class Setting extends BaseController
 
         $session = session();
         $session->setFlashdata(['message'=>'Backup deleted successfully']);
+    }
+
+    public function getDatabaseExport()
+    {
+        $zip = new ZipArchive();
+        $zipname = "../writable/database/qsystem-db.zip";
+
+        if ($zip->open($zipname, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
+            $session = session();
+            $session->setFlashdata(['message'=>'Failed to export database']);
+            return redirect()->to('/setting/database');
+        }
+
+        $zip->addFile('../writable/database/core.db', 'core.db');
+        $zip->addFile('../writable/database/fragment.db', 'fragment.db');
+
+        $zip->close();
+
+        return $this->response->download('../writable/database/qsystem-db.zip', null);
     }
 }
