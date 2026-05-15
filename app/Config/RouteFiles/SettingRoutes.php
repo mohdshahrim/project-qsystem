@@ -10,3 +10,8 @@ $routes->get('/setting/writable', 'Setting::pageWritable');
 $routes->post('/setting/writable/clear-logs', 'Setting::postWritableClearLogs');
 $routes->post('/setting/writable/clear-sessions', 'Setting::postWritableClearSessions');
 $routes->post('/setting/writable/clear-debugbar', 'Setting::postWritableClearDebug');
+
+$routes->get('/setting/database', 'Setting::pageDatabase');
+$routes->post('/setting/database/backup', 'Setting::postDatabaseBackup');
+$routes->post('/setting/database/restore', 'Setting::postDatabaseRestore');
+$routes->post('/setting/database/delete-backup', 'Setting::postDatabaseDeleteBackup');
