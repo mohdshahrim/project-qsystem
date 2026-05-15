@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SetupFragmentPC extends Migration
+class SetupFragment extends Migration
 {
     protected $DBGroup = 'fragment';
 

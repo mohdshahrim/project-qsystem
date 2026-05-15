@@ -13,7 +13,6 @@ x-data="{
     btn_backup:true,
     btn_restore:<?php if($backup=='exist'){echo 'true';}else{echo 'false';}?>,
     btn_export:true,
-    btn_reset:false,
     btn_delete:<?php if($backup=='exist'){echo 'true';}else{echo 'false';}?>,
     backup() {
         minAjax({
@@ -44,7 +43,6 @@ x-data="{
     },
 }">
     <h1>Database management</h1>
-    <br>
     <p>You may backup, restore, export or reset database files here.</p>
     <p>Be careful and please know what you are doing.</p>
 
@@ -113,19 +111,30 @@ x-data="{
                     <button class="w3-button w3-red w3-block w3-round" :disabled="!btn_restore" x-on:click="restore()">restore  <i class="fa fa-arrow-left"></i></button>
                 </td>
             </tr>
-            <tr>
-                <td class="w3-padding">
-                    <a href="/setting/database/export" class="w3-button w3-red w3-block w3-round" :disabled="!btn_export">export  <i class="fa fa-download"></i></a>
-                </td>
-                <td></td>
-            </tr>
+            <tr></tr>
             <tr>
                 <td>
-                    <button class="w3-button w3-red w3-block w3-round" :disabled="!btn_reset">reset database <i class="fa fa-refresh"></i></button>
+                    <a href="/setting/database/export" class="w3-button w3-red w3-block w3-round" :disabled="!btn_export">export  <i class="fa fa-download"></i></a>
                 </td>
                 <td></td>
                 <td><button class="w3-button w3-red w3-block w3-round" :disabled="!btn_delete" x-on:click="deleteBackup()">delete backup <i class="fa fa-trash-o"></i></button></td>
             </tr>
         </table>
     </div>
+
+    <br>
+    <br>
+
+    <h1>Database Reset</h1>
+    <p>You may also perform database reset in a similar way we do Qsystem First Time Setup.</p>
+    <p>This operation will:</p>
+    <ol>
+        <li>run user wizard</li>
+        <li>erase all databases except backup</li>
+        <li>run fresh migrations</li>
+    </ol>
+
+    <a href="/setting/database/reset-wizard" class="w3-button w3-red w3-round w3-large">DATABASE RESET</a>
+
+    <div class="spacer-large"></div>
 </div>

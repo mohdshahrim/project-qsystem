@@ -16,3 +16,5 @@ $routes->post('/setting/database/backup', 'Setting::postDatabaseBackup');
 $routes->post('/setting/database/restore', 'Setting::postDatabaseRestore');
 $routes->post('/setting/database/delete-backup', 'Setting::postDatabaseDeleteBackup');
 $routes->get('/setting/database/export', 'Setting::getDatabaseExport');
+$routes->get('/setting/database/reset-wizard', 'Setting::pageDatabaseResetWizard');
+$routes->post('/setting/database/reset-wizard/submit', 'Setting::postDatabaseResetWizardSubmit');

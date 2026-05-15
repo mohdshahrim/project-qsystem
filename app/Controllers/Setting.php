@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use \ZipArchive;
 
 use App\Models\AppModel;
+use App\Models\UserModel;
 
 class Setting extends BaseController
 {
@@ -141,5 +142,48 @@ class Setting extends BaseController
         $zip->close();
 
         return $this->response->download('../writable/database/qsystem-db.zip', null);
+    }
+
+    public function pageDatabaseResetWizard()
+    {
+        $header = ['navbar'=>"database",];
+
+        return view('setting/header', $header)
+            .view('setting/database-resetwizard')
+            .view('components/footer');
+    }
+
+    public function postDatabaseResetWizardSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'display_name' => 'required',
+            'password' => 'required',
+        ]))
+        {
+            $display_name = $this->request->getPost('display_name');
+            $password = $this->request->getPost('password');
+
+            $data = [
+                'display_name' => $display_name,
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+            ];
+
+            // delete all databases
+            unlink('../writable/database/core.db');
+            unlink('../writable/database/fragment.db');
+
+            // run all other migrations
+            $migrate = \Config\Services::migrations();
+            $migrate->latest();
+
+            // seed the core
+            $userModel = new UserModel();
+            $userModel->insert($data);
+
+            $session = session();
+            $session->setFlashdata(['message'=>'Database is reset successfully']);
+
+            return redirect()->to('/setting/database');
+        }
     }
 }

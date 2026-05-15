@@ -54,8 +54,10 @@
 
 - [ ] show fragment stats on dashboard
 
-- [ ] dedicated setting to backup or export database
+- [x] dedicated setting to backup or export database
 
 - [ ] implement PC site change and user change
 
 - [ ] implement PC add image feature
+
+- [ ] design Qsystem First Time Setup module

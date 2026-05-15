@@ -53,3 +53,7 @@ Events::on('pre_system', static function (): void {
         }
     }
 });
+
+//Events::on('pre_system', static function(){
+    //log_message('error', "Helloo, I'm from events!");
+//});

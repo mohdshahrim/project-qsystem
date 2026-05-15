@@ -49,6 +49,12 @@
         }
 
         /* utilities */
+        .spacer {
+            height: 100px;
+        }
+        .spacer-large {
+            height: 500px;
+        }
         .text-decoration-none {
             text-decoration: none;
         }
