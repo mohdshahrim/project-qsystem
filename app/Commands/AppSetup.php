@@ -26,71 +26,25 @@ class AppSetup extends BaseCommand
         // compare password
         if ($password === $confirm_password) {
 
-            CLI::write('creating core database...');
+            CLI::write('Running all migrations...');
 
-            $forge = \Config\Database::forge();
+            $this->runMigrations();
 
-            if ($forge->createDatabase('core')) {
-                CLI::write('core database created');
+            $data = [
+                'display_name' => $name,
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
 
-                $fields = [
-                    'id' => [
-                        'type' => 'INT',
-                        'auto_increment' => true,
-                    ],
-                    'display_name' => [
-                        'type' => 'TEXT',
-                        'default' => 'Administrator',
-                    ],
-                    'password_hash' => [
-                        'type' => 'TEXT',
-                    ],
-                    'created_at' => [
-                        'type' => 'TEXT',
-                    ],
-                    'updated_at' => [
-                        'type' => 'TEXT',
-                        'null' => true,
-                    ],
-
-                ];
-                
-                $forge->addField($fields);
-                $forge->addKey('id', true);
-                $forge->dropTable('user', true);
-
-                CLI::write('core database: creating user table...');
-
-                $forge->createTable('user');
-
-                CLI::write('core database: user table created');
-
-                CLI::write('core database: seeding user table...');
-
-                $data = [
-                    'display_name' => $name,
-                    'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-                    'created_at' => date('Y-m-d H:i:s'),
-                ];
-
-                $db = db_connect();
-                $builder = $db->table('user');
-                $builder->insert($data);
-
-                CLI::write('core database: user table seeded');
-
-                CLI::write('preparing fragment database... please wait...');
-
-                $this->runMigrations();
-
-                CLI::write('Setup finished');
-            }
-
+            $db = db_connect();
+            $builder = $db->table('user');
+            $builder->insert($data);
         } else {
-            CLI::write('password confirmation failed');
-            exit();
+            CLI::write('Password confirmation failed. Setup aborted.', 'red');
+            exit(1);
         }
 
+        CLI::write('Setup finished');
     }
 
     private function runMigrations(): void
@@ -98,10 +52,10 @@ class AppSetup extends BaseCommand
         try {
             $migrate = \Config\Services::migrations();
             $migrate->latest();
-            CLI::write('fragment database has been setup', 'green');
+            CLI::write('Migration success', 'green');
         } catch (\Throwable $e) {
             $this->showError($e);
-            CLI::error('Migration failed. Setup aborted.');
+            CLI::error('Migration failed. Setup aborted.', 'red');
             exit(1);
         }
     }

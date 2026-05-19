@@ -14,7 +14,7 @@ class PCImageModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['pc_id', 'file_path', 'image_type', 'description', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['pc_id', 'file_path', 'image_type', 'description', 'created_at',];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

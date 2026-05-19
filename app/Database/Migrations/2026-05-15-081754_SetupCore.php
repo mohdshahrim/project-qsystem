@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\CLI\CLI;
 
 class SetupCore extends Migration
 {
@@ -35,6 +36,8 @@ class SetupCore extends Migration
         $forge->addField($fields);
         $forge->addKey('id', true);
         $forge->createTable('user');
+
+        CLI::write('core migration OK', 'green');
     }
 
     public function down()

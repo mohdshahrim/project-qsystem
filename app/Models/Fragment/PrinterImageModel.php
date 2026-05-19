@@ -14,7 +14,7 @@ class PrinterImageModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['printer_id', 'file_path', 'description', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['printer_id', 'file_path', 'description', 'created_at',];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

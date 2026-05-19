@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\CLI\CLI;
 
 class SetupFragment extends Migration
 {
@@ -110,13 +111,9 @@ class SetupFragment extends Migration
             'image_type' => ['type' => 'TEXT', 'null' => true,],
             'description' => ['type' => 'TEXT', 'null' => true,],
             'created_at' => ['type' => 'TEXT',],
-            'updated_at' => ['type' => 'TEXT', 'null' => true,],
-            'deleted_at' => ['type' => 'TEXT', 'null' => true,],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('pc_images', true);
-        $data = [['pc_id' => 1, 'created_at' => date('Y-m-d H:i:s'),]];
-        $this->db->table('pc_images')->insertBatch($data);
 
         // MONITOR
         $this->forge->addField([
@@ -136,6 +133,37 @@ class SetupFragment extends Migration
         $this->forge->createTable('monitor', true);
         $data = [['asset_no' => 'DEFAULT', 'site' => 1, 'created_at' => date('Y-m-d H:i:s'),]];
         $this->db->table('monitor')->insertBatch($data);
+
+        // PRINTER
+        $this->forge->addField([
+            'id' => ['type' => 'INTEGER', 'auto_increment' => true,],
+            'asset_no' => ['type' => 'TEXT',],
+            'serial_no' => ['type' => 'TEXT', 'null' => true,],
+            'model' => ['type' => 'TEXT', 'null' => true,],
+            'printer_type' => ['type' => 'TEXT', 'null' => true,],
+            'host' => ['type' => 'INTEGER', 'null' => true,],
+            'ip_address' => ['type' => 'TEXT', 'null' => true,],
+            'is_rental' => ['type' => 'TEXT', 'null' => true,],
+            'notes' => ['type' => 'TEXT', 'null' => true,],
+            'created_at' => ['type' => 'TEXT',],
+            'updated_at' => ['type' => 'TEXT', 'null' => true,],
+            'deleted_at' => ['type' => 'TEXT', 'null' => true,],
+        ]);
+        $this->forge->addPrimaryKey('id');
+        $this->forge->createTable('printer', true);
+
+        // PRINTER IMAGE MODEL
+        $this->forge->addField([
+            'id' => ['type' => 'INTEGER', 'auto_increment' => true,],
+            'printer_id' => ['type' => 'INTEGER',],
+            'file_path' => ['type' => 'TEXT',],
+            'description' => ['type' => 'TEXT', 'null' => true,],
+            'created_at' => ['type' => 'TEXT',],
+        ]);
+        $this->forge->addPrimaryKey('id');
+        $this->forge->createTable('printer_images', true);
+
+        CLI::write('fragment migration OK', 'green');
     }
 
     public function down()
