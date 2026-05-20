@@ -1,3 +1,9 @@
+<style>
+.image-placeholder {
+
+}
+</style>
+
 <?php
     $session = session();
     if ($session->getFlashData('message')) {
@@ -143,5 +149,57 @@
                 </tr>
             </table>
         </form>
+    </div>
+
+    <div class="w3-third" x-data="fileHandler()">
+        <style>
+            .hidden{display:none;}
+        </style>
+        <input type="file" x-ref="image1" class="hidden" x-on:change="handleFile($refs.image1, 'image1')">
+        <input type="file" x-ref="image2" class="hidden" x-on:change="handleFile($refs.image2, 'image2')">
+
+        <table>
+            <tr>
+                <td class="position-relative">
+                    <span style="top:0;right:0;" class="position-absolute">
+                        <button x-on:click="$refs.image1.click()" class="w3-button w3-asphalt w3-round">+</button>
+                    </span>
+                    <img src="<?php if (isset($pcimg['file_path'])) {echo "/uploads/fragment_pcimg/".$pcimg['file_path'];} else {echo "/img/600x400.png";} ?>" class="w3-image"></img>
+                </td>
+            </tr>
+            <tr>
+                <td class="position-relative">
+                    <span style="top:0;right:0;" class="position-absolute">
+                        <button x-on:click="$refs.image2.click()" class="w3-button w3-asphalt w3-round">+</button>
+                    </span>
+                    <img src="/img/600x400.png" class="w3-image"></img>
+                </td>
+            </tr>
+        </table>
+
+        <script>
+            function fileHandler() {
+                return {
+                    async handleFile(input, source) {
+                        const file = input.files[0];
+                        if (!file) return;
+
+                        // Build form data and upload
+                        const formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('img_no', source);
+                        formData.append('id', <?= $pc['id'] ?>);
+
+                        await fetch('/fragment/pc/img/create', {
+                            method: 'POST',
+                            body: formData,
+                        });
+
+                        // Refresh the page after upload
+                        window.location.reload();
+                    }
+                }
+            }
+        </script>
     </div>
 </div>

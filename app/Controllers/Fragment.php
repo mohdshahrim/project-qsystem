@@ -7,6 +7,7 @@ use CodeIgniter\Database\RawSql;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Fragment\PCModel;
+use App\Models\Fragment\PCImageModel;
 use App\Models\Fragment\StaffModel;
 use App\Models\Fragment\PrinterModel;
 use App\Models\Fragment\SiteModel;
@@ -43,9 +44,11 @@ class Fragment extends BaseController
     public function pagePCRead($id)
     {
         $pcModel = new PCModel();
+        $pcimgModel = new PCImageModel();
 
         $data = [
             'pc' => $pcModel->getPCByID($id),
+            'pcimg' => $pcimgModel->where('pc_id', $id)->first(),
         ];
 
         $header = ['navbar'=>"pc",];
@@ -188,6 +191,30 @@ class Fragment extends BaseController
         return view('fragment/header', $header)
             .view('components/message', $message)
             .view('components/footer');
+    }
+
+    public function postPCImgCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'img_no' => 'required',
+        ]))
+        {
+            $id = $this->request->getPost('id');
+            $img_no = $this->request->getPost('img_no');
+
+            $pcimgModel = new PCImageModel();
+
+            if ($this->request->getFile('file')->move(ROOTPATH.'\\public\\uploads\\fragment_pcimg', $id.'-'.$img_no.'.png')) {
+                $data = [
+                    'pc_id' => $id,
+                    'file_path' => $id.'-'.$img_no.'.png',
+                ];
+                $pcimgModel->insert($data);
+            }
+
+            return;
+        }
     }
 
 

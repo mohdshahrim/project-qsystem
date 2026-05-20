@@ -13,6 +13,8 @@ $routes->post('/fragment/pc/api/create', 'Fragment::apiPCCreate');
 $routes->get('/fragment/pc/(:num)', 'Fragment::pagePCRead/$1');
 $routes->post('/fragment/pc/update', 'Fragment::postPCUpdate');
 $routes->get('/fragment/pc/delete/(:num)', 'Fragment::getPCDelete/$1');
+$routes->post('/fragment/pc/img/create', 'Fragment::postPCImgCreate');
+
 
 $routes->get('/fragment/monitor', 'Fragment::pageMonitor');
 $routes->get('/fragment/monitor/(:num)', 'Fragment::pageMonitorRead/$1');
