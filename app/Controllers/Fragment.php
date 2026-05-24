@@ -237,6 +237,56 @@ class Fragment extends BaseController
         }
     }
 
+    public function pagePCChangeSite($id)
+    {
+        // skip verify ID
+        $siteModel = new SiteModel();
+        $pcModel = new PCModel();
+
+        $data = [
+            'pc' => $pcModel->getPCByID($id),
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"pc",];
+        return view('fragment/header', $header)
+            .view('fragment/pc-changesite', $data)
+            .view('components/footer');
+    }
+
+    public function postPCChangeSiteSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'site' => 'required',
+        ]))
+        {
+            $pc_id = $this->request->getPost('id');
+
+            $pcModel = new PCModel();
+            $pc = $pcModel->find($pc_id);
+
+            $site_id = $this->request->getPost('site');
+
+            if ($pc['site']!=$site_id) {
+                if ($pcModel->update($pc_id, ['site'=>$site_id])) {
+                    
+                    // unhost its monitor
+                    $monitorModel = new MonitorModel();
+                    $monitors = $monitorModel->where('host', $pc_id)->findAll();
+
+                    if ($monitors) {
+                        foreach($monitors as $monitor) {
+                            $monitorModel->update($monitor['id'], ['host'=>'']);
+                        }
+                    }
+                }
+            }
+
+            return redirect()->to('/fragment/pc/'.$pc_id);
+        }   
+    }
+
 
     /* SITE */
     public function pageSite()
