@@ -1,9 +1,3 @@
-<style>
-.image-placeholder {
-
-}
-</style>
-
 <?php
     $session = session();
     if ($session->getFlashData('message')) {
@@ -151,55 +145,52 @@
         </form>
     </div>
 
-    <div class="w3-third" x-data="fileHandler()">
+    <div class="w3-third"
+        x-data="{
+            uploadImage(input){
+                const file = input.files[0];
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('id', <?= $pc['id'] ?>);
+
+                fetch('/fragment/pc/img/create', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(()=>{
+                        window.location.reload();
+                    })
+            },
+            deleteImage(imgid) {
+                minAjax({
+                    url: '/fragment/pc/img/delete',
+                    type: 'POST',
+                    data: {
+                        imgid: imgid,
+                    },
+                    success: (response) => {
+                        window.location.reload();
+                    }
+                });
+            },
+        }">
         <style>
             .hidden{display:none;}
         </style>
-        <input type="file" x-ref="image1" class="hidden" x-on:change="handleFile($refs.image1, 'image1')">
-        <input type="file" x-ref="image2" class="hidden" x-on:change="handleFile($refs.image2, 'image2')">
+        <input type="file" x-ref="pcimg" class="hidden" x-on:change="uploadImage($refs.pcimg)">
 
         <table>
-            <tr>
-                <td class="position-relative">
-                    <span style="top:0;right:0;" class="position-absolute">
-                        <button x-on:click="$refs.image1.click()" class="w3-button w3-asphalt w3-round">+</button>
-                    </span>
-                    <img src="<?php if (isset($pcimg['file_path'])) {echo "/uploads/fragment_pcimg/".$pcimg['file_path'];} else {echo "/img/600x400.png";} ?>" class="w3-image"></img>
-                </td>
-            </tr>
-            <tr>
-                <td class="position-relative">
-                    <span style="top:0;right:0;" class="position-absolute">
-                        <button x-on:click="$refs.image2.click()" class="w3-button w3-asphalt w3-round">+</button>
-                    </span>
-                    <img src="/img/600x400.png" class="w3-image"></img>
-                </td>
-            </tr>
+            <?php for($i=0; $i<2; $i++): ?>
+                <tr>
+                    <td class="position-relative">
+                        <span style="top:0;right:0;" class="position-absolute">
+                            <?php if (isset($pcimg[$i]['file_path'])) {echo "<button x-on:click=\"deleteImage(".$pcimg[$i]['id'].")\" class=\"w3-button w3-red w3-round\"><i class=\"fa fa-close\"></i></button>";} else {echo "<button x-on:click=\"\$refs.pcimg.click()\" class=\"w3-button w3-asphalt w3-round\">+</button>";} ?>
+                        </span>
+                        <img src="<?php if (isset($pcimg[$i]['file_path'])) {echo "/uploads/fragment_pcimg/".$pcimg[$i]['file_path'];} else {echo "/img/600x400.png";} ?>" class="w3-image"></img>
+                    </td>
+                </tr>
+            <?php endfor ?>
         </table>
-
-        <script>
-            function fileHandler() {
-                return {
-                    async handleFile(input, source) {
-                        const file = input.files[0];
-                        if (!file) return;
-
-                        // Build form data and upload
-                        const formData = new FormData();
-                        formData.append('file', file);
-                        formData.append('img_no', source);
-                        formData.append('id', <?= $pc['id'] ?>);
-
-                        await fetch('/fragment/pc/img/create', {
-                            method: 'POST',
-                            body: formData,
-                        });
-
-                        // Refresh the page after upload
-                        window.location.reload();
-                    }
-                }
-            }
-        </script>
     </div>
 </div>

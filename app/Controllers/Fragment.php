@@ -48,7 +48,7 @@ class Fragment extends BaseController
 
         $data = [
             'pc' => $pcModel->getPCByID($id),
-            'pcimg' => $pcimgModel->where('pc_id', $id)->first(),
+            'pcimg' => $pcimgModel->where('pc_id', $id)->findAll(),
         ];
 
         $header = ['navbar'=>"pc",];
@@ -197,20 +197,40 @@ class Fragment extends BaseController
     {
         if ($this->request->getMethod() === 'POST' && $this->validate([
             'id' => 'required',
-            'img_no' => 'required',
         ]))
         {
             $id = $this->request->getPost('id');
-            $img_no = $this->request->getPost('img_no');
+
+            $pcimgModel = new PCImageModel();
+            $randomstr = uniqid();
+
+            if ($this->request->getFile('file')->move(ROOTPATH.'\\public\\uploads\\fragment_pcimg', $id.'-'.$randomstr.'.png')) {
+                $data = [
+                    'pc_id' => $id,
+                    'file_path' => $id.'-'.$randomstr.'.png',
+                ];
+                $pcimgModel->insert($data);
+            }
+
+            return;
+        }
+    }
+
+    public function postPCImgDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'imgid' => 'required',
+        ]))
+        {
+            $imgid = $this->request->getPost('imgid');
 
             $pcimgModel = new PCImageModel();
 
-            if ($this->request->getFile('file')->move(ROOTPATH.'\\public\\uploads\\fragment_pcimg', $id.'-'.$img_no.'.png')) {
-                $data = [
-                    'pc_id' => $id,
-                    'file_path' => $id.'-'.$img_no.'.png',
-                ];
-                $pcimgModel->insert($data);
+            $img = $pcimgModel->find($imgid);
+
+            // delete the file
+            if (unlink('../public/uploads/fragment_pcimg/'.$img['file_path'])) {
+                $pcimgModel->delete($imgid);
             }
 
             return;
