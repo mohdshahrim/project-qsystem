@@ -287,6 +287,49 @@ class Fragment extends BaseController
         }   
     }
 
+    public function pagePCChangeUser($id)
+    {
+        $userModel = new StaffModel(); // NOTE: don't be confused with interchangeable term for user and staff
+        $pcModel = new PCModel();
+
+        $data = [
+            'pc' => $pcModel->getPCByID($id),
+            'users' => $userModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"pc",];
+        return view('fragment/header', $header)
+            .view('fragment/pc-changeuser', $data)
+            .view('components/footer');
+    }
+
+    public function postPCChangeUserSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'user' => 'required',
+        ]))
+        {
+            $pc_id = $this->request->getPost('id');
+
+            $pcModel = new PCModel();
+            $pc = $pcModel->find($pc_id);
+
+            $user_id = $this->request->getPost('user');
+
+            if ($pc['assigned_user']!=$user_id) {
+                if ($pcModel->update($pc_id, ['assigned_user'=>$user_id])) {
+                    
+                    // create flashdata for success message
+                    $session = session();
+                    $session->setFlashdata(['message'=>"PC user reassigned successfully"]);
+                }
+            }
+
+            return redirect()->to('/fragment/pc/'.$pc_id);
+        }  
+    }
+
 
     /* SITE */
     public function pageSite()
