@@ -14,26 +14,34 @@ x-data="{
     get testSort() {
 
         ascending = true;
-        colIndex = 'hostname'; // NOTE: will be changed to more accurate name: colName
+        colName = 'hostname';
 
         switch(this.sortBy) {
             case 'hostname-asc':
-                colIndex = 'hostname';
+                colName = 'hostname';
                 ascending = true;
                 break;
             case 'hostname-des':
-                colIndex = 'hostname';
+                colName = 'hostname';
+                ascending = false;
+                break;
+            case 'assetno-asc':
+                colName = 'asset_no';
+                ascending = true;
+                break;
+            case 'assetno-des':
+                colName = 'asset_no';
                 ascending = false;
                 break;
             default:
-                colIndex = 'hostname';
+                colName = 'hostname';
                 ascending = true;
                 break;
         }
 
         return [...this.pcs].sort((a,b) => {
-            const valA = a[colIndex];
-            const valB = b[colIndex];
+            const valA = a[colName];
+            const valB = b[colName];
 
             if (typeof valA === 'string') {
                 return ascending
@@ -106,6 +114,8 @@ x-init="loadSites()">
             <select x-ref="selsortby" x-on:change="sortBy=$refs.selsortby.value;resetPCs();loadPCs()">
                 <option value="hostname-asc">hostname (ascending)</option>
                 <option value="hostname-des">hostname (descending)</option>
+                <option value="assetno-asc">asset no (ascending)</option>
+                <option value="assetno-dec">asset no (descending)</option>
             </select>
         </span>
     </div>
