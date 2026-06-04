@@ -10,6 +10,40 @@
 
 <div class="w3-container"
 x-data="{
+    sortBy: 'hostname-asc', // default
+    get testSort() {
+
+        ascending = true;
+        colIndex = 'hostname'; // NOTE: will be changed to more accurate name: colName
+
+        switch(this.sortBy) {
+            case 'hostname-asc':
+                colIndex = 'hostname';
+                ascending = true;
+                break;
+            case 'hostname-des':
+                colIndex = 'hostname';
+                ascending = false;
+                break;
+            default:
+                colIndex = 'hostname';
+                ascending = true;
+                break;
+        }
+
+        return [...this.pcs].sort((a,b) => {
+            const valA = a[colIndex];
+            const valB = b[colIndex];
+
+            if (typeof valA === 'string') {
+                return ascending
+                ? valA.localeCompare(valB)
+                : valB.localeCompare(valA);
+            }
+
+            return ascending ? valA - valB : valB - valA;
+        });  
+    },
     newpc: <?php echo $session->getFlashData('newpc')? $session->getFlashData('newpc'):'false';?>,
     sites: [],
     pcs: [],
@@ -68,6 +102,12 @@ x-init="loadSites()">
                 </div>
             </template>
         </span>
+        <span>
+            <select x-ref="selsortby" x-on:change="sortBy=$refs.selsortby.value;resetPCs();loadPCs()">
+                <option value="hostname-asc">hostname (ascending)</option>
+                <option value="hostname-des">hostname (descending)</option>
+            </select>
+        </span>
     </div>
 
     <br>
@@ -87,7 +127,7 @@ x-init="loadSites()">
             <td>options</td>
         </tr>
 
-        <template x-for="(item, index) in pcs">
+        <template x-for="(item, index) in testSort">
             <tr :class="(newpc && item.id==newpc)? 'w3-small w3-yellow':'w3-small'">
                 <td x-text="(index+1)" class="w3-border-right"></td>
                 <td x-text="item.hostname" class="w3-border-right"></td>

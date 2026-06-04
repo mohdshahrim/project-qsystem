@@ -56,10 +56,12 @@
 
 - [x] dedicated setting to backup or export database
 
-- [ ] implement PC site change and user change
+- [x] implement PC site change and user change
 
-- [ ] implement PC add image feature
+- [x] implement PC add image feature
 
-- [ ] design Qsystem First Time Setup module
+- [x] design Qsystem First Time Setup module
 
 - [ ] database management: add datetime to backup file
+
+- [x] design column sorting for table
