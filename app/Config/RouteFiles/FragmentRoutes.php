@@ -10,6 +10,7 @@ $routes->get('/fragment/pc', 'Fragment::pagePC');
 $routes->get('/fragment/pc/new', 'Fragment::pagePCNew');
 $routes->get('/fragment/pc/api/get-by-site/(:num)', 'Fragment::apiPCGetBySite/$1');
 $routes->post('/fragment/pc/api/create', 'Fragment::apiPCCreate');
+$routes->get('/fragment/pc/api/(:num)', 'Fragment::apiPCRead/$1');
 $routes->get('/fragment/pc/(:num)', 'Fragment::pagePCRead/$1');
 $routes->post('/fragment/pc/update', 'Fragment::postPCUpdate');
 $routes->get('/fragment/pc/delete/(:num)', 'Fragment::getPCDelete/$1');
@@ -33,6 +34,20 @@ $routes->get('/fragment/monitor/change-site/(:num)', 'Fragment::pageMonitorChang
 $routes->post('/fragment/monitor/change-site/submit', 'Fragment::postMonitorChangeSiteSubmit');
 $routes->get('/fragment/monitor/change-host/(:num)', 'Fragment::pageMonitorChangeHost/$1');
 $routes->post('/fragment/monitor/change-host/submit', 'Fragment::postMonitorChangeHostSubmit');
+
+$routes->get('/fragment/printer', 'Fragment::pagePrinter');
+$routes->get('/fragment/printer/new', 'Fragment::pagePrinterNew');
+$routes->get('/fragment/printer/api/get-by-site/(:num)', 'Fragment::apiPrinterGetBySite/$1');
+$routes->post('/fragment/printer/api/create', 'Fragment::apiPrinterCreate');
+$routes->get('/fragment/printer/(:num)', 'Fragment::pagePrinterRead/$1');
+$routes->post('/fragment/printer/update', 'Fragment::postPrinterUpdate');
+$routes->get('/fragment/printer/delete/(:num)', 'Fragment::getPrinterDelete/$1');
+$routes->post('/fragment/printer/img/create', 'Fragment::postPrinterImgCreate');
+$routes->post('/fragment/printer/img/delete', 'Fragment::postPrinterImgDelete');
+$routes->get('/fragment/printer/change-site/(:num)', 'Fragment::pagePrinterChangeSite/$1');
+$routes->post('/fragment/printer/change-site/submit', 'Fragment::postPrinterChangeSiteSubmit');
+$routes->get('/fragment/printer/change-host/(:num)', 'Fragment::pagePrinterChangeHost/$1');
+$routes->post('/fragment/printer/change-host/submit', 'Fragment::postPrinterChangeHostSubmit');
 
 $routes->get('/fragment/site', 'Fragment::pageSite');
 $routes->get('/fragment/site/(:num)', 'Fragment::pageSiteRead/$1');

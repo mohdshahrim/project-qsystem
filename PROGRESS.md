@@ -65,3 +65,7 @@
 - [ ] database management: add datetime to backup file
 
 - [x] design column sorting for table
+
+- [ ] add fragment printer
+
+- [ ] refactor AlpineJS function naming and process to be more generic

@@ -137,14 +137,15 @@ class SetupFragment extends Migration
         // PRINTER
         $this->forge->addField([
             'id' => ['type' => 'INTEGER', 'auto_increment' => true,],
-            'asset_no' => ['type' => 'TEXT',],
             'serial_no' => ['type' => 'TEXT', 'null' => true,],
             'model' => ['type' => 'TEXT', 'null' => true,],
+            'nickname' => ['type' => 'TEXT', 'null' => true],
             'printer_type' => ['type' => 'TEXT', 'null' => true,],
             'host' => ['type' => 'INTEGER', 'null' => true,],
             'ip_address' => ['type' => 'TEXT', 'null' => true,],
             'is_rental' => ['type' => 'TEXT', 'null' => true,],
             'notes' => ['type' => 'TEXT', 'null' => true,],
+            'site' => ['type' => 'INTEGER',],
             'created_at' => ['type' => 'TEXT',],
             'updated_at' => ['type' => 'TEXT', 'null' => true,],
             'deleted_at' => ['type' => 'TEXT', 'null' => true,],

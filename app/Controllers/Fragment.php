@@ -137,6 +137,18 @@ class Fragment extends BaseController
         }
     }
 
+    public function apiPCRead($id)
+    {
+        //
+        $pcModel = new PCModel();
+
+        $data = [
+            'pc' => $pcModel->find($id),
+        ];
+
+        return $this->response->setJSON($data);
+    }
+
     public function postPCUpdate()
     {
         if ($this->request->getMethod() === 'POST' && $this->validate([
@@ -1201,7 +1213,96 @@ class Fragment extends BaseController
 
     public function postMonitorDelete()
     {
+        // NOTE: why is this empty?
+    }
 
+
+    /* PRINTER */
+    public function pagePrinter()
+    {
+        $printerModel = new PrinterModel();
+
+        $data = [
+            'printer' => $printerModel->getPrinter(),
+        ];
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('fragment/printer', $data)
+            .view('components/footer');
+    }
+
+    public function pagePrinterNew()
+    {
+        $siteModel = new SiteModel();
+        $printerModel = new PrinterModel();
+
+        $data = [
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+            'types' => $printerModel::PRINTER_TYPES,
+        ];
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('fragment/printer-new', $data)
+            .view('components/footer');
+    }
+
+    public function apiPrinterCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'serial_no' => 'required',
+            'model' => 'required',
+        ]))
+        {
+            $printerModel = new PrinterModel();
+            
+            $data = [
+                'serial_no' => $this->request->getPost('serial_no'),
+                'model' => $this->request->getPost('model'),
+                'nickname' => $this->request->getPost('nickname'),
+                'printer_type' => $this->request->getPost('printer_type'),
+                'host' => $this->request->getPost('host'),
+                'ip_address' => $this->request->getPost('ip_address'),
+                'is_rental' => $this->request->getPost('is_rental'),
+                'site' => $this->request->getPost('site'),
+                'notes' => $this->request->getPost('notes'),
+            ];
+
+            if ($printerModel->insert($data)) {
+                $message = [
+                    'title' => "OK",
+                    'message' => "New printer created successfully",
+                    'link' => "/fragment/printer",
+                ];
+
+                // get printer id
+                $printer_id = $printerModel->getInsertID();
+
+                // create flashdata for success message
+                $session = session();
+                $session->setFlashdata(['message'=>$message['message'], 'newprinter'=>$printer_id]);
+            } else {
+                $message = [
+                    'title' => "Error",
+                    'message' => "Failed to create new printer",
+                    'link' => "/fragment/printer",
+                ];
+            }
+
+            return $this->response->setJSON($message);
+        }
+    }
+
+    public function apiPrinterGetBySite($site_id)
+    {
+        $printerModel = new PrinterModel();
+
+        $data = [
+            'printer' => $printerModel->getPrinterBySite($site_id),
+        ];
+
+        return $this->response->setJSON($data);
     }
 
 
