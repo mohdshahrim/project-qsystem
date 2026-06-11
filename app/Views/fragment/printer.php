@@ -116,29 +116,32 @@ x-init="loadSites()">
     <table class="w3-table w3-white w3-border w3-bordered w3-hoverable">
         <tr>
             <td class="w3-border-right">no</td>
-            <td class="w3-border-right">asset no</td>
             <td class="w3-border-right">serial no</td>
             <td class="w3-border-right">model</td>
+            <td class="w3-border-right">nickname</td>
             <td class="w3-border-right">printer type</td>
+
+            <td class="w3-border-right">site</td>
             <td class="w3-border-right">host</td>
-            <td class="w3-border-right">ip address</td>
+            <td class="w3-border-right">IP address</td>
             <td class="w3-border-right">is rental?</td>
-            <td class="w3-border-right">notes</td>
+
             <td>options</td>
         </tr>
 
         <template x-for="(item, index) in testSort">
             <tr :class="(newprinter && item.id==newprinter)? 'w3-small w3-yellow':'w3-small'">
                 <td x-text="(index+1)" class="w3-border-right"></td>
-                <td x-text="item.asset_no" class="w3-border-right"></td>
                 <td x-text="item.serial_no" class="w3-border-right"></td>
                 <td x-text="item.model" class="w3-border-right"></td>
+                <td x-text="item.nickname" class="w3-border-right"></td>
                 <td x-text="item.printer_type" class="w3-border-right"></td>
 
+                <td x-text="item.site_id" class="w3-border-right"></td>
                 <td x-text="item.host" class="w3-border-right"></td>
                 <td x-text="item.ip_address" class="w3-border-right"></td>
-                <td x-text="item.is_rental" class="w3-border-right"></td>
-                <td x-text="item.notes" class="w3-border-right"></td>
+                <td x-text="Boolean(item.is_rental)==Boolean(1)?'yes':'no'" class="w3-border-right"></td>
+
                 <td class="w3-center">
                     <a :href="'/fragment/printer/' + item.id">view</a>
                     &nbsp;

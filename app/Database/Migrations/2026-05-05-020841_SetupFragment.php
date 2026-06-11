@@ -143,7 +143,7 @@ class SetupFragment extends Migration
             'printer_type' => ['type' => 'TEXT', 'null' => true,],
             'host' => ['type' => 'INTEGER', 'null' => true,],
             'ip_address' => ['type' => 'TEXT', 'null' => true,],
-            'is_rental' => ['type' => 'TEXT', 'null' => true,],
+            'is_rental' => ['type' => 'INTEGER', 'null' => true,],
             'notes' => ['type' => 'TEXT', 'null' => true,],
             'site' => ['type' => 'INTEGER',],
             'created_at' => ['type' => 'TEXT',],

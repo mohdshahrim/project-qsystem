@@ -1224,6 +1224,7 @@ class Fragment extends BaseController
 
         $data = [
             'printer' => $printerModel->getPrinter(),
+            'printer_types' => $printerModel::PRINTER_TYPES,
         ];
 
         $header = ['navbar'=>"printer",];

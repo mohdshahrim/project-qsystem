@@ -164,7 +164,7 @@ x-data="{
                 <td class="position-relative">
                     <select x-model="printer.printer_type" name="printer_type" class="w3-input w3-border">
                         <?php foreach($types as $key => $value): ?>
-                            <option value="<?= $key ?>"><?= $value ?></option>
+                            <option value="<?= $value ?>"><?= $value ?></option>
                         <?php endforeach ?> 
                     </select>
                 </td>

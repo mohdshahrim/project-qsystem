@@ -88,6 +88,7 @@ class PrinterModel extends Model
             printer.printer_type,
             printer.host,
             printer.site,
+            printer.is_rental,
             printer.notes,
             printer.created_at,
             printer.updated_at,
