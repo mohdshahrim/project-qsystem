@@ -1352,6 +1352,30 @@ class Fragment extends BaseController
         }
     }
 
+    public function getPrinterDelete($id)
+    {
+        $printerModel = new PrinterModel();
+
+        if (!$printerModel->delete($id, true)) {
+            $message = [
+                'title' => "Error!",
+                'message' => "Failed to delete Printer",
+                'link' => "/fragment/printer/".$id,
+            ];
+        } else {
+            $message = [
+                'title' => "Success!",
+                'message' => "Printer deleted successfully",
+                'link' => "/fragment/printer",
+            ];
+        }
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('components/message', $message)
+            .view('components/footer');
+    }
+
 
     /* UTILITY FUNTIONS */
     private function getStaff($id)
