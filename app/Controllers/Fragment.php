@@ -1306,6 +1306,52 @@ class Fragment extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function pagePrinterRead($id)
+    {
+        $printerModel = new PrinterModel();
+
+        $data = [
+            'printer' => $printerModel->getPrinterByID($id),
+            'printer_types' => $printerModel::PRINTER_TYPES,
+        ];
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('fragment/printer-read', $data)
+            .view('components/footer');
+    }
+
+    public function postPrinterUpdate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $printerModel = new PrinterModel();
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'model' => $this->request->getPost('model'),
+                'serial_no' => $this->request->getPost('serial_no'),
+                'nickname' => $this->request->getPost('nickname'),
+                'printer_type' => $this->request->getPost('printer_type'),
+                'ip_address' => $this->request->getPost('ip_address'),
+                'is_rental' => $this->request->getPost('is_rental'),
+                'notes' => $this->request->getPost('notes'),
+            ];
+
+            $session = session();
+
+            if (!$printerModel->update($id, $data)) {
+                $session->setFlashdata('message', "Error: failed to update Printer");
+            } else {
+                $session->setFlashdata('message', "Success: Printer updated");
+            }
+
+            return redirect()->to('/fragment/printer/'.$id);
+        }
+    }
+
 
     /* UTILITY FUNTIONS */
     private function getStaff($id)

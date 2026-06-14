@@ -101,4 +101,28 @@ class PrinterModel extends Model
         ->where('printer.site', $site_id)
         ->findAll();
     }
+
+    public function getPrinterByID($id)
+    {
+        return $this->select('
+            printer.id,
+            printer.serial_no,
+            printer.model,
+            printer.nickname,
+            printer.ip_address,
+            printer.printer_type,
+            printer.host,
+            printer.site,
+            printer.is_rental,
+            printer.notes,
+            printer.created_at,
+            printer.updated_at,
+            printer.deleted_at,
+            site.site_id,
+            pc.hostname,
+        ')
+        ->join('site','site.id = printer.site', 'left')
+        ->join('pc','pc.id = printer.host', 'left')
+        ->find($id);   
+    }
 }
