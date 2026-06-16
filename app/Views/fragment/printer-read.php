@@ -66,7 +66,7 @@
                         <a href="/fragment/printer/change-host/<?= $printer['id'] ?>" class="w3-button w3-light-gray w3-round w3-block" title="click to change Host">
                             <?php
                                 if ($printer['host']=="") {
-                                    echo "site not set";
+                                    echo "host not set";
                                 } else {
                                     echo $printer['hostname'];
                                 }

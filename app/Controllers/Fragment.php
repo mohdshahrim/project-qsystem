@@ -1376,6 +1376,39 @@ class Fragment extends BaseController
             .view('components/footer');
     }
 
+    public function pagePrinterChangeHost($id)
+    {
+        $printerModel = new PrinterModel();
+        $pcModel = new PCModel();
+
+        $data = [
+            'printer' => $printerModel->getPrinterByID($id),
+            'hosts' => $pcModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('fragment/printer-changehost', $data)
+            .view('components/footer');
+    }
+
+    public function postPrinterChangeHostSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'pc' => 'required',
+        ]))
+        {
+            $printer_id = $this->request->getPost('id');
+            $pc_id = $this->request->getPost('pc');
+
+            $printerModel = new PrinterModel();
+            $printerModel->update($printer_id, ['host'=>$pc_id]);
+
+            return redirect()->to('/fragment/printer/'.$printer_id);
+        }
+    }
+
 
     /* UTILITY FUNTIONS */
     private function getStaff($id)
