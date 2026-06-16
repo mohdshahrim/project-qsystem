@@ -8,14 +8,14 @@
         <div class="w3-asphalt statscard" style="height: 150px;">
             <a class="statscard-link" href="#">
                 <p class="statscard-name">PC</p>
-                <p class="statscard-total">59</p>
+                <p class="statscard-total"><?= $pc_count_all; ?></p>
             </a>
         </div>
 
         <div class="w3-asphalt statscard" style="height: 150px;">
             <a class="statscard-link" href="#">
                 <p class="statscard-name">Laptop</p>
-                <p class="statscard-total">2</p>
+                <p class="statscard-total"><?= $laptop_count; ?></p>
             </a>
         </div>
 

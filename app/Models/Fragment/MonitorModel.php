@@ -14,7 +14,18 @@ class MonitorModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['asset_no', 'serial_no', 'model', 'screen_size', 'site', 'host', 'notes', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = [
+        'asset_no',
+        'serial_no',
+        'model',
+        'screen_size',
+        'site',
+        'host',
+        'is_rental',
+        'notes',
+        'created_at',
+        'updated_at',
+        'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

@@ -49,6 +49,7 @@ class Fragment extends BaseController
         $data = [
             'pc' => $pcModel->getPCByID($id),
             'pcimg' => $pcimgModel->where('pc_id', $id)->findAll(),
+            'computer_types' => $pcModel::COMPUTER_TYPES,
         ];
 
         $header = ['navbar'=>"pc",];
@@ -59,10 +60,12 @@ class Fragment extends BaseController
 
     public function pagePCNew()
     {
+        $pcModel = new PCModel();
         $siteModel = new SiteModel();
 
         $data = [
             'sites' => $siteModel->limit(-1,1)->findAll(),
+            'computer_types' => $pcModel::COMPUTER_TYPES,
         ];
 
         $header = ['navbar'=>"pc",];

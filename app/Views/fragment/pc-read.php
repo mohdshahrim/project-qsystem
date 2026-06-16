@@ -66,7 +66,11 @@
                 <tr>
                     <td>computer type</td>
                     <td>
-                        <input type="text" name="computer_type" class="w3-input w3-border" value="<?= $pc['computer_type'] ?>"></input>
+                        <select name="computer_type" class="w3-input w3-border">
+                            <?php foreach($computer_types as $key => $value): ?>
+                                <option value="<?= $value ?>" <?php if($pc['computer_type']==$value){echo "selected";}?>><?= $value ?></option>
+                            <?php endforeach ?> 
+                        </select>
                     </td>
                 </tr>
 

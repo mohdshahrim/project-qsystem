@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
+use App\Models\Fragment\PCModel;
 
 class User extends BaseController
 {
@@ -48,8 +49,16 @@ class User extends BaseController
 
     public function pageHome()
     {
+        $pcModel = new PCModel();
+
+        $data = [
+            'pc_count_all' => $pcModel->getPCCountAll(),
+            'laptop_count' => $pcModel->getPCLaptopCount(),
+            'site_count' => 1,
+        ];
+
         return view('header')
-            .view('home')
+            .view('home', $data)
             .view('components/footer');
     }
 

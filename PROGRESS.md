@@ -69,3 +69,5 @@
 - [ ] add fragment printer
 
 - [ ] refactor AlpineJS function naming and process to be more generic
+
+- [ ] add "is_rental" field for PC

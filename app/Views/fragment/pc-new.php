@@ -206,7 +206,11 @@ x-data="{
                     &nbsp;
                 </td>
                 <td class="position-relative">
-                    <input x-model="pc.computer_type" type="text" name="computer_type" class="w3-input w3-border"></input>
+                    <select x-model="pc.computer_type" name="computer_type" class="w3-input w3-border">
+                        <?php foreach($computer_types as $key => $value): ?>
+                            <option value="<?= $value ?>"><?= $value ?></option>
+                        <?php endforeach ?> 
+                    </select>
                 </td>
             </tr>
             

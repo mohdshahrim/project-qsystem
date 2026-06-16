@@ -8,13 +8,34 @@ class PCModel extends Model
 {
     protected $DBGroup = 'fragment';
 
+    public const COMPUTER_TYPES = [
+        'Desktop',
+        'Laptop',
+    ];
+
     protected $table            = 'pc';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['hostname', 'asset_no', 'serial_no', 'model', 'os', 'ip_address', 'computer_type', 'assigned_user', 'site', 'physical_location', 'notes', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = [
+        'hostname',
+        'asset_no',
+        'serial_no',
+        'model',
+        'os',
+        'ip_address',
+        'computer_type',
+        'assigned_user',
+        'site',
+        'physical_location',
+        'is_rental',
+        'notes',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -134,5 +155,15 @@ class PCModel extends Model
     {
         $monitormodel = new MonitorModel();
         $monitormodel->set('host', '')->where('host', $id)->update();
+    }
+
+    public function getPCCountAll()
+    {
+        return $this->countAllResults() - 1; // NOTE: to skip the very first row
+    }
+
+    public function getPCLaptopCount()
+    {
+        return $this->where('computer_type', "Laptop")->countAllResults();
     }
 }
