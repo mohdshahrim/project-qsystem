@@ -118,4 +118,9 @@ class StaffModel extends Model
         ->where('site', $site_id)
         ->findAll();
     }
+
+    public function getStaffCount()
+    {
+        return $this->countAllResults()-1;
+    }
 }

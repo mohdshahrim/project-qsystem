@@ -52,7 +52,7 @@
 
 - [ ] implement disabling PC delete success message
 
-- [ ] show fragment stats on dashboard
+- [x] show fragment stats on dashboard
 
 - [x] dedicated setting to backup or export database
 
@@ -66,8 +66,8 @@
 
 - [x] design column sorting for table
 
-- [ ] add fragment printer
+- [x] add fragment printer
 
 - [ ] refactor AlpineJS function naming and process to be more generic
 
-- [ ] add "is_rental" field for PC
+- [x] add "is_rental" field for PC

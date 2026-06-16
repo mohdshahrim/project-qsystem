@@ -6,6 +6,9 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
 use App\Models\Fragment\PCModel;
+use App\Models\Fragment\SiteModel;
+use App\Models\Fragment\PrinterModel;
+use App\Models\Fragment\StaffModel;
 
 class User extends BaseController
 {
@@ -50,11 +53,16 @@ class User extends BaseController
     public function pageHome()
     {
         $pcModel = new PCModel();
+        $siteModel = new SiteModel();
+        $printerModel = new PrinterModel();
+        $staffModel = new StaffModel();
 
         $data = [
-            'pc_count_all' => $pcModel->getPCCountAll(),
+            'pc_count' => $pcModel->getPCCount(),
             'laptop_count' => $pcModel->getPCLaptopCount(),
-            'site_count' => 1,
+            'printer_count' => $printerModel->getPrinterCount(),
+            'site_count' => $siteModel->getSiteCount(),
+            'staff_count' => $staffModel->getStaffCount(),
         ];
 
         return view('header')

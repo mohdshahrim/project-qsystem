@@ -125,4 +125,9 @@ class PrinterModel extends Model
         ->join('pc','pc.id = printer.host', 'left')
         ->find($id);   
     }
+
+    public function getPrinterCount()
+    {
+        return $this->where('printer_type !=', "Scanner")->countAllResults(); // NOTE: to skip the very first row
+    }
 }

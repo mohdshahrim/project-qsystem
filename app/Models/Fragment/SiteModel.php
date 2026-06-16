@@ -78,4 +78,9 @@ class SiteModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getSiteCount()
+    {
+        return $this->countAllResults() - 1; // NOTE: to skip the very first row
+    }
 }

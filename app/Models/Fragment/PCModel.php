@@ -157,7 +157,7 @@ class PCModel extends Model
         $monitormodel->set('host', '')->where('host', $id)->update();
     }
 
-    public function getPCCountAll()
+    public function getPCCount()
     {
         return $this->countAllResults() - 1; // NOTE: to skip the very first row
     }

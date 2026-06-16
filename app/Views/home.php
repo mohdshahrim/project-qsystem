@@ -6,37 +6,37 @@
     <!-- section: display inventory counts -->
     <div class="w3-grid" style="grid-template-columns: repeat(auto-fill, 150px); column-gap: 20px;">
         <div class="w3-asphalt statscard" style="height: 150px;">
-            <a class="statscard-link" href="#">
+            <a class="statscard-link" href="/fragment/pc">
                 <p class="statscard-name">PC</p>
-                <p class="statscard-total"><?= $pc_count_all; ?></p>
+                <p class="statscard-total"><?= $pc_count; ?></p>
             </a>
         </div>
 
         <div class="w3-asphalt statscard" style="height: 150px;">
-            <a class="statscard-link" href="#">
+            <a class="statscard-link" href="/fragment/pc">
                 <p class="statscard-name">Laptop</p>
                 <p class="statscard-total"><?= $laptop_count; ?></p>
             </a>
         </div>
 
         <div class="w3-asphalt statscard" style="height: 150px;">
-            <a class="statscard-link" href="#">
+            <a class="statscard-link" href="/fragment/printer">
                 <p class="statscard-name">Printer</p>
-                <p class="statscard-total">15</p>
+                <p class="statscard-total"><?= $printer_count; ?></p>
             </a>
         </div>
 
         <div class="w3-asphalt statscard" style="height: 150px;">
-            <a class="statscard-link" href="#">
+            <a class="statscard-link" href="/fragment/site">
                 <p class="statscard-name">Office</p>
-                <p class="statscard-total">4</p>
+                <p class="statscard-total"><?= $site_count; ?></p>
             </a>
         </div>
 
         <div class="w3-asphalt statscard" style="height: 150px;">
-            <a class="statscard-link" href="#">
+            <a class="statscard-link" href="/fragment/staff">
                 <p class="statscard-name">Users</p>
-                <p class="statscard-total">80</p>
+                <p class="statscard-total"><?= $staff_count; ?></p>
             </a>
         </div>
     </div>
