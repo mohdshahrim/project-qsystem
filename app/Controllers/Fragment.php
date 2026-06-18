@@ -1383,10 +1383,11 @@ class Fragment extends BaseController
     {
         $printerModel = new PrinterModel();
         $pcModel = new PCModel();
+        $printer = $printerModel->getPrinterByID($id);
 
         $data = [
-            'printer' => $printerModel->getPrinterByID($id),
-            'hosts' => $pcModel->limit(-1,1)->findAll(),
+            'printer' => $printer,
+            'hosts' => $pcModel->where('site', $printer['site'])->findAll(),
         ];
 
         $header = ['navbar'=>"printer",];
@@ -1407,6 +1408,44 @@ class Fragment extends BaseController
 
             $printerModel = new PrinterModel();
             $printerModel->update($printer_id, ['host'=>$pc_id]);
+
+            return redirect()->to('/fragment/printer/'.$printer_id);
+        }
+    }
+
+    public function pagePrinterChangeSite($id)
+    {
+        $siteModel = new SiteModel();
+        $printerModel = new PrinterModel();
+
+        $data = [
+            'printer' => $printerModel->getPrinterByID($id),
+            'sites' => $siteModel->limit(-1,1)->findAll(),
+        ];
+
+        $header = ['navbar'=>"printer",];
+        return view('fragment/header', $header)
+            .view('fragment/printer-changesite', $data)
+            .view('components/footer');
+    }
+
+    public function postPrinterChangeSiteSubmit()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+            'site' => 'required',
+        ]))
+        {
+            $printer_id = $this->request->getPost('id');
+
+            $printerModel = new PrinterModel();
+            $printer = $printerModel->find($printer_id);
+
+            $site_id = $this->request->getPost('site');
+
+            if ($printer['site']!=$site_id) {
+                $printerModel->update($printer_id, ['site'=>$site_id, 'ip_address'=>'', 'host'=>'']);
+            }
 
             return redirect()->to('/fragment/printer/'.$printer_id);
         }

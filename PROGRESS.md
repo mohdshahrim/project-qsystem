@@ -71,3 +71,7 @@
 - [ ] refactor AlpineJS function naming and process to be more generic
 
 - [x] add "is_rental" field for PC
+
+- [ ] add button to unhost a printer
+
+- [x] add feature to change printer site
