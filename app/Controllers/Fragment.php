@@ -10,6 +10,7 @@ use App\Models\Fragment\PCModel;
 use App\Models\Fragment\PCImageModel;
 use App\Models\Fragment\StaffModel;
 use App\Models\Fragment\PrinterModel;
+use App\Models\Fragment\PrinterImageModel;
 use App\Models\Fragment\SiteModel;
 use App\Models\Fragment\MonitorModel;
 use App\Models\Fragment\DepartmentModel;
@@ -1312,9 +1313,11 @@ class Fragment extends BaseController
     public function pagePrinterRead($id)
     {
         $printerModel = new PrinterModel();
+        $printerimgModel = new PrinterImageModel();
 
         $data = [
             'printer' => $printerModel->getPrinterByID($id),
+            'printerimg' => $printerimgModel->where('printer_id', $id)->findAll(),
             'printer_types' => $printerModel::PRINTER_TYPES,
         ];
 
@@ -1450,6 +1453,51 @@ class Fragment extends BaseController
             return redirect()->to('/fragment/printer/'.$printer_id);
         }
     }
+
+    public function postPrinterImgCreate()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'id' => 'required',
+        ]))
+        {
+            $id = $this->request->getPost('id');
+
+            $printerimgModel = new PrinterImageModel();
+            $randomstr = uniqid();
+
+            if ($this->request->getFile('file')->move(ROOTPATH.'\\public\\uploads\\fragment_printerimg', $id.'-'.$randomstr.'.png')) {
+                $data = [
+                    'printer_id' => $id,
+                    'file_path' => $id.'-'.$randomstr.'.png',
+                ];
+                $printerimgModel->insert($data);
+            }
+
+            return;
+        }
+    }
+
+    public function postPrinterImgDelete()
+    {
+        if ($this->request->getMethod() === 'POST' && $this->validate([
+            'imgid' => 'required',
+        ]))
+        {
+            $imgid = $this->request->getPost('imgid');
+
+            $printerimgModel = new PrinterImageModel();
+
+            $img = $printerimgModel->find($imgid);
+
+            // delete the file
+            if (unlink('../public/uploads/fragment_printerimg/'.$img['file_path'])) {
+                $printerimgModel->delete($imgid);
+            }
+
+            return;
+        }
+    }
+
 
 
     /* UTILITY FUNTIONS */

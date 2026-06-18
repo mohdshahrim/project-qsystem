@@ -128,3 +128,9 @@ _modules/*
 /phpunit*.xml
 
 /public/uploads/*
+!/public/uploads/fragment_pcimg
+!/public/uploads/fragment_pcimg/index.html
+/public/uploads/fragment_pcimg/*
+!/public/uploads/fragment_printerimg
+!/public/uploads/fragment_printerimg/index.html
+/public/uploads/fragment_printerimg/*

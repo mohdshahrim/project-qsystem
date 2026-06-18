@@ -144,6 +144,55 @@
             </table>
         </form>
     </div>
+
+    <div class="w3-third"
+        x-data="{
+            uploadImage(input){
+                const file = input.files[0];
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('id', <?= $printer['id'] ?>);
+
+                fetch('/fragment/printer/img/create', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(()=>{
+                        window.location.reload();
+                    })
+            },
+            deleteImage(imgid) {
+                minAjax({
+                    url: '/fragment/printer/img/delete',
+                    type: 'POST',
+                    data: {
+                        imgid: imgid,
+                    },
+                    success: (response) => {
+                        window.location.reload();
+                    }
+                });
+            },
+        }">
+        <style>
+            .hidden{display:none;}
+        </style>
+        <input type="file" x-ref="printerimg" class="hidden" x-on:change="uploadImage($refs.printerimg)">
+
+        <table>
+            <?php for($i=0; $i<2; $i++): ?>
+                <tr>
+                    <td class="position-relative">
+                        <span style="top:0;right:0;" class="position-absolute">
+                            <?php if (isset($printerimg[$i]['file_path'])) {echo "<button x-on:click=\"deleteImage(".$printerimg[$i]['id'].")\" class=\"w3-button w3-red w3-round\"><i class=\"fa fa-trash-o\"></i></button>";} else {echo "<button x-on:click=\"\$refs.printerimg.click()\" class=\"w3-button w3-asphalt w3-round\">+</button>";} ?>
+                        </span>
+                        <img src="<?php if (isset($printerimg[$i]['file_path'])) {echo "/uploads/fragment_printerimg/".$printerimg[$i]['file_path'];} else {echo "/img/600x400.png";} ?>" class="w3-image"></img>
+                    </td>
+                </tr>
+            <?php endfor ?>
+        </table>
+    </div>
 </div>
 
 <div class="spacer-large">

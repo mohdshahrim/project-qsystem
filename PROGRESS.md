@@ -75,3 +75,5 @@
 - [ ] add button to unhost a printer
 
 - [x] add feature to change printer site
+
+- [x] add printer image feature
