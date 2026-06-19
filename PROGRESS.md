@@ -72,7 +72,7 @@
 
 - [x] add "is_rental" field for PC
 
-- [ ] add button to unhost a printer
+- [ ] add option to unhost a printer
 
 - [x] add feature to change printer site
 

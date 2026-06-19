@@ -1410,6 +1410,11 @@ class Fragment extends BaseController
             $printer_id = $this->request->getPost('id');
             $pc_id = $this->request->getPost('pc');
 
+            // 0 means no host
+            if ($pc_id==0) {
+                $pc_id = "";
+            }
+
             $printerModel = new PrinterModel();
             $printerModel->update($printer_id, ['host'=>$pc_id]);
 

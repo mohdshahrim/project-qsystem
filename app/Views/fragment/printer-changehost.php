@@ -38,6 +38,12 @@
             <tr>
                 <td colspan="2">Choose Host</td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="radio" name="pc" value="0" id="pc_0" <?php if ($printer['host']=="") {echo "disabled";} ?>/>
+                    <label for="pc_0">unhost</label>
+                </td>
+            </tr>
             <?php foreach($hosts as $key=>$row): ?>
                 <tr>
                     <td colspan="2">
