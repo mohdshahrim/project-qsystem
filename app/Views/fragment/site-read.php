@@ -29,7 +29,7 @@
         <tr>
             <td>City / Division</td>
             <td>
-                <?= $city[$site['city']] ?>
+                <?= $site['city'] ?>
             </td>
         </tr>
 
