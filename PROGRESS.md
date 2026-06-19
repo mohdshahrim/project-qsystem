@@ -77,3 +77,5 @@
 - [x] add feature to change printer site
 
 - [x] add printer image feature
+
+- [x] furnish fragment site options to have all 12 administrative regions

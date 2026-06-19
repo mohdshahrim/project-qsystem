@@ -370,6 +370,7 @@ class Fragment extends BaseController
 
         $data = [
             'staffs' => $staffModel->limit(-1, 1)->findAll(),
+            'cities' => $siteModel::CITY,
         ];
 
         $header = ['navbar'=>"site",];

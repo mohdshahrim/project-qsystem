@@ -63,15 +63,9 @@
                     </td>
                     <td>
                         <select name="city" class="w3-input w3-border">
-                            <option value="0">Kuching</option>
-                            <option value="1">Sarikei</option>
-                            <option value="2">Tanjung Manis</option>
-                            <option value="3">Sibu</option>
-                            <option value="4">Kapit</option>
-                            <option value="5">Bintulu</option>
-                            <option value="6">Miri</option>
-                            <option value="7">Limbang</option>
-                            <option value="8">Lawas</option>
+                            <?php foreach($cities as $key => $value): ?>
+                                <option value="<?= $value ?>"><?= $value ?></option>
+                            <?php endforeach ?> 
                         </select>
                     </td>
                 </tr>
