@@ -57,6 +57,22 @@ class Database extends Config
                 ],
             ];
 
+        public array $pulseman = [
+                'database'    => WRITEPATH.'database\pulseman.db',
+                'DBDriver'    => 'SQLite3',
+                'DBPrefix'    => '',
+                'DBDebug'     => true,
+                'swapPre'     => '',
+                'failover'    => [],
+                'foreignKeys' => false,
+                'busyTimeout' => 1000,
+                'dateFormat'  => [
+                    'date'     => 'Y-m-d',
+                    'datetime' => 'Y-m-d H:i:s',
+                    'time'     => 'H:i:s',
+                ],
+            ];
+
     //    /**
     //     * Sample database connection for Postgre.
     //     *

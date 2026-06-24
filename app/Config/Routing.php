@@ -34,6 +34,7 @@ class Routing extends BaseRouting
         APPPATH . 'Config/RouteFiles/SettingRoutes.php',
         APPPATH . 'Config/RouteFiles/HomeRoutes.php',
         APPPATH . 'Config/RouteFiles/FragmentRoutes.php',
+        APPPATH . 'Config/RouteFiles/PulsemanRoutes.php',
     ];
 
     /**

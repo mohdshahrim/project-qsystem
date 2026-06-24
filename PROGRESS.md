@@ -79,3 +79,13 @@
 - [x] add printer image feature
 
 - [x] furnish fragment site options to have all 12 administrative regions
+
+- [ ] standardize item view for Site, Staff, Monitor (follow PC, Printer)
+
+- [ ] standardize adding new item for Staff (follow PC style when selecting Site)
+
+- [ ] standardize message status for Staff, Monitor (follow PC)
+
+- [ ] add sorting rule for Monitor, Staff (follow PC)
+
+- [ ] design app for network monitoring

@@ -171,6 +171,7 @@ class Setting extends BaseController
             // delete all databases
             unlink('../writable/database/core.db');
             unlink('../writable/database/fragment.db');
+            unlink('../writable/database/pulseman.db');
 
             // run all other migrations
             $migrate = \Config\Services::migrations();
