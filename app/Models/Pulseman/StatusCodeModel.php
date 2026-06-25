@@ -8,20 +8,23 @@ class StatusCodeModel extends Model
 {
     protected $DBGroup = 'pulseman';
 
+    // STATUS CODES
+    public const CODES = [
+        [0, 'UNKNOWN', 'Not checked yet'],
+        [1, 'UP', 'Host is up'],
+        [2, 'DOWN', 'Host is down'],
+        [3, 'TIMEOUT', 'No response within the allowed time window'],
+        [4, 'UNREACHABLE', 'Network-level failure (routing issue)'],
+        [5, 'ERROR', 'The check itself failed'],
+    ];
+
     protected $table            = 'statuscode';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'id',
-        'status_code',
-        'description',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $allowedFields    = [];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

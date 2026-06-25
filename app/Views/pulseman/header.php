@@ -23,5 +23,5 @@
 
 <?= $this->section('sidebar') ?>
     <p class="margin-0 <?php if($navbar=="ip"){ echo "w3-asphalt";} ?>"><a href="/pulseman/ip" class="w3-button display-block">IP address</a></p>
-    <p class="margin-0 <?php if($navbar=="status_code"){ echo "w3-asphalt";} ?>"><a href="/pulseman/status-code" class="w3-button display-block">status code</a></p>
+    <p class="margin-0 <?php if($navbar=="statuscode"){ echo "w3-asphalt";} ?>"><a href="/pulseman/statuscode" class="w3-button display-block">status code</a></p>
 <?= $this->endSection() ?>

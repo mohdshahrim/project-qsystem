@@ -9,6 +9,8 @@ use App\Models\Fragment\PCModel;
 use App\Models\Fragment\SiteModel;
 use App\Models\Fragment\PrinterModel;
 use App\Models\Fragment\StaffModel;
+use App\Models\Pulseman\IPModel;
+use App\Models\Pulseman\StatusCodeModel;
 
 class User extends BaseController
 {
@@ -56,6 +58,11 @@ class User extends BaseController
         $siteModel = new SiteModel();
         $printerModel = new PrinterModel();
         $staffModel = new StaffModel();
+        $ipModel = new IPModel();
+        $statuscodeModel = new StatusCodeModel();
+
+        // routine Pulseman check
+        $ipModel->checkIPAll();
 
         $data = [
             'pc_count' => $pcModel->getPCCount(),
@@ -63,6 +70,8 @@ class User extends BaseController
             'printer_count' => $printerModel->getPrinterCount(),
             'site_count' => $siteModel->getSiteCount(),
             'staff_count' => $staffModel->getStaffCount(),
+            'ips' => $ipModel->findAll(),
+            'statuscodes' => $statuscodeModel::CODES,
         ];
 
         return view('header')

@@ -122,4 +122,18 @@ class Pulseman extends BaseController
 
         return redirect()->to('/pulseman/ip');
     }
+
+    public function pageStatusCode()
+    {
+        $statuscodeModel = new StatusCodeModel();
+
+        $data = [
+            'statuscodes' => $statuscodeModel::CODES,
+        ];
+
+        $header = ['navbar'=>"statuscode",];
+        return view('pulseman/header', $header)
+            .view('pulseman/statuscode', $data)
+            .view('components/footer');
+    }
 }

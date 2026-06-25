@@ -2,6 +2,8 @@
 
 namespace App\Models\Pulseman;
 
+use CodeIgniter\I18n\Time;
+
 use CodeIgniter\Model;
 
 class IPModel extends Model
@@ -72,5 +74,23 @@ class IPModel extends Model
         ')
         ->join('statuscode','statuscode.id = ip.status', 'left')
         ->findAll();
+    }
+
+    public function checkIPAll()
+    {
+        $ips = $this->findAll();
+
+        foreach($ips as $key=>$row) {
+            $output = shell_exec("ping -n 1 -w 1000 " . escapeshellarg($row['ip_address']));
+            $checked_at = Time::now('Asia/Kuala_Lumpur', 'en_US');
+
+            if (str_contains($output, 'Received = 1')) {    
+                $this->update($row['id'], ['status'=>1, 'checked_at'=>$checked_at->toDateTimeString()]);
+            } else {
+                $this->update($row['id'], ['status'=>2, 'checked_at'=>$checked_at->toDateTimeString()]);
+            }
+
+            log_message('error', $output);
+        }
     }
 }

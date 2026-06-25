@@ -47,31 +47,19 @@
     <h1>Network Status</h1>
 
     <div class="">
-        <!-- networkstatus -->
-        <div class="networkstatus-bar w3-grid w3-margin-bottom">
-            <div class="networkstatus-name w3-green w3-padding w3-border-left w3-border-top w3-border-bottom">
-                <p class="margin-0">HTSB05</p>
-                <p class="margin-0">172.16.1.10</p>
+        <?php foreach($ips as $key=>$row): ?>
+            <div class="networkstatus-bar w3-grid w3-margin-bottom">
+                <div class="networkstatus-name <?php if($row['status']==1){echo 'w3-green';} else{echo 'w3-red';} ?> w3-padding w3-border-left w3-border-top w3-border-bottom">
+                    <p class="margin-0"><?= $row['label'] ?></p>
+                    <p class="margin-0"><?= $row['ip_address'] ?></p>
+                </div>
+                <div class="networkstatus-status <?php if($row['status']==1){echo 'w3-green';} else{echo 'w3-red';} ?> w3-padding w3-border-right w3-border-top w3-border-bottom">
+                    <p>
+                        <?= $statuscodes[$row['status']][2] ?>
+                        <i class="fa <?php if($statuscodes[$row['status']]==1){echo 'fa-check';} else{echo 'fa-times';} ?>"></i>                       
+                    </p>
+                </div>
             </div>
-            <div class="networkstatus-status w3-green w3-padding w3-border-right w3-border-top w3-border-bottom">
-                <p>
-                    Operational
-                    <i class="fa fa-check"></i>
-                </p>
-            </div>
-        </div>
-
-        <div class="networkstatus-bar w3-grid w3-margin-bottom">
-            <div class="networkstatus-name w3-red w3-padding w3-border-left w3-border-top w3-border-bottom">
-                <p class="margin-0">HTSB05</p>
-                <p class="margin-0">172.16.1.10</p>
-            </div>
-            <div class="networkstatus-status w3-red w3-padding w3-border-right w3-border-top w3-border-bottom">
-                <p>
-                    Down
-                    <i class="fa fa-times"></i>
-                </p>
-            </div>
-        </div>
+        <?php endforeach ?>
     </div>
 </div>

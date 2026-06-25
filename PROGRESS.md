@@ -88,4 +88,4 @@
 
 - [ ] add sorting rule for Monitor, Staff (follow PC)
 
-- [ ] design app for network monitoring
+- [x] design app for network monitoring
