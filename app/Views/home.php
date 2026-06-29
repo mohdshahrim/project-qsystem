@@ -56,7 +56,7 @@
                 <div class="networkstatus-status <?php if($row['status']==1){echo 'w3-green';} else{echo 'w3-red';} ?> w3-padding w3-border-right w3-border-top w3-border-bottom">
                     <p>
                         <?= $statuscodes[$row['status']][2] ?>
-                        <i class="fa <?php if($statuscodes[$row['status']]==1){echo 'fa-check';} else{echo 'fa-times';} ?>"></i>                       
+                        <i class="fa <?php if($row['status']==1){echo 'fa-check';} else{echo 'fa-times';} ?>"></i>
                     </p>
                 </div>
             </div>
